@@ -1,0 +1,101 @@
+---
+alwaysApply: true
+---
+
+# Pixelto AI 项目指南
+
+## 项目简介
+
+Pixelto AI 是一款 AI 图像处理 SaaS 应用，基于 supastarter.dev 模板构建。
+
+## 目录结构
+
+```
+ai-pixelto/
+├── apps/web/                    # Next.js 主应用
+│   ├── app/                     # App Router 路由
+│   │   ├── (marketing)/         # 营销页面（首页、关于等）
+│   │   ├── (saas)/              # SaaS 应用页面
+│   │   ├── auth/                # 认证页面
+│   │   └── api/                 # API 路由
+│   ├── modules/                 # 业务模块 ⭐
+│   │   ├── ai-image-editor/     # AI 图像编辑器
+│   │   ├── marketing/           # 营销组件
+│   │   ├── saas/                # SaaS 组件
+│   │   ├── shared/              # 共享组件
+│   │   └── ui/                  # UI 基础组件
+│   └── content/                 # MDX 内容
+│
+├── packages/                    # 后端/共享包
+│   ├── api/                     # oRPC API 路由
+│   ├── ai/                      # AI 功能
+│   ├── auth/                    # better-auth 配置
+│   ├── database/                # Prisma schema 和查询
+│   ├── i18n/                    # 国际化（en/de/zh）
+│   ├── mail/                    # 邮件模板和发送
+│   ├── payments/                # 支付集成
+│   ├── storage/                 # 文件存储
+│   └── utils/                   # 工具函数
+│
+├── config/                      # 应用配置
+├── tooling/                     # 工具配置（Tailwind、TypeScript）
+└── docs/specs/                  # 技术规格文档
+```
+
+## 关键路径
+
+| 用途 | 路径 |
+|------|------|
+| 主题变量 | `tooling/tailwind/theme.css` |
+| 应用配置 | `config/index.ts` |
+| 数据库 Schema | `packages/database/prisma/schema.prisma` |
+| API 路由 | `packages/api/modules/` |
+| 翻译文件 | `packages/i18n/translations/` |
+
+## API 开发
+
+```typescript
+// packages/api/modules/{module}/procedures/{action}.ts
+import { authenticatedProcedure } from "@api/orpc/procedures";
+import { z } from "zod";
+
+export const createItem = authenticatedProcedure
+  .input(z.object({ name: z.string() }))
+  .handler(async ({ input, context }) => {
+    // 实现逻辑
+  });
+```
+
+## 国际化
+
+```typescript
+// 组件中使用
+import { useTranslations } from "next-intl";
+
+export function MyComponent() {
+  const t = useTranslations("namespace");
+  return <p>{t("key")}</p>;
+}
+
+// 翻译文件：packages/i18n/translations/{locale}.json
+```
+
+## 数据库操作
+
+```typescript
+// packages/database/prisma/queries/{entity}.ts
+import { db } from "../client";
+
+export async function findUserById(id: string) {
+  return db.user.findUnique({ where: { id } });
+}
+```
+
+## 常用命令
+
+```bash
+pnpm dev          # 启动开发服务器
+pnpm build        # 构建生产版本
+pnpm db:push      # 推送数据库变更
+pnpm db:studio    # 打开 Prisma Studio
+```

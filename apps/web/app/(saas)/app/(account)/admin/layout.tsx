@@ -3,8 +3,7 @@ import { getSession } from "@saas/auth/lib/server";
 import { SettingsMenu } from "@saas/settings/components/SettingsMenu";
 import { PageHeader } from "@saas/shared/components/PageHeader";
 import { SidebarContentLayout } from "@saas/shared/components/SidebarContentLayout";
-import { Logo } from "@shared/components/Logo";
-import { Building2Icon, UsersIcon } from "lucide-react";
+import { Building2Icon, UserIcon, UsersIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import type { PropsWithChildren } from "react";
@@ -33,10 +32,9 @@ export default async function AdminLayout({ children }: PropsWithChildren) {
 						menuItems={[
 							{
 								avatar: (
-									<Logo
-										className="size-8"
-										withLabel={false}
-									/>
+									<div className="flex size-8 items-center justify-center rounded-full bg-primary/10 text-primary">
+										<UserIcon className="size-5" />
+									</div>
 								),
 								title: t("admin.title"),
 								items: [

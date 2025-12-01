@@ -60,16 +60,8 @@ export function NavBar() {
 			href: "/#pricing",
 		},
 		{
-			label: t("common.menu.faq"),
-			href: "/#faq",
-		},
-		{
 			label: t("common.menu.blog"),
 			href: "/blog",
-		},
-		{
-			label: t("common.menu.changelog"),
-			href: "/changelog",
 		},
 		...(config.contactForm.enabled
 			? [
@@ -80,8 +72,8 @@ export function NavBar() {
 				]
 			: []),
 		{
-			label: t("common.menu.docs"),
-			href: "/docs",
+			label: t("common.menu.about"),
+			href: "/about",
 		},
 	];
 
@@ -101,13 +93,13 @@ export function NavBar() {
 				<div
 					className={cn(
 						"flex items-center justify-stretch gap-6 transition-[padding] duration-200",
-						!isTop || isDocsPage ? "py-4" : "py-6",
+						!isTop || isDocsPage ? "py-3" : "py-3",
 					)}
 				>
-					<div className="flex flex-1 justify-start">
+					<div className="flex flex-1 justify-start items-center">
 						<LocaleLink
 							href="/"
-							className="block hover:no-underline active:no-underline"
+							className="flex items-center gap-3 hover:no-underline active:no-underline transition-opacity hover:opacity-80"
 						>
 							<Logo />
 						</LocaleLink>

@@ -10,7 +10,9 @@
 			"@i18n": ["./modules/i18n"],
 			"@i18n/*": ["./modules/i18n/*"],
 			"@shared/*": ["./modules/shared/*"],
-			"content-collections": ["./.content-collections/generated"]
+			"@ai-image-editor/*": ["./modules/ai-image-editor/*"],
+			"content-collections": ["./.content-collections/generated"],
+			"@/*": ["./*"]
 		}
 	},
 	"include": [

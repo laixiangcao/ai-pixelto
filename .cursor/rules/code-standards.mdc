@@ -1,0 +1,104 @@
+---
+alwaysApply: true
+---
+
+# 代码标准
+
+## 技术栈
+
+- **框架**：Next.js 15 App Router + React 19
+- **语言**：TypeScript（严格模式）
+- **UI**：Shadcn UI + Radix UI + Tailwind CSS
+- **数据库**：Prisma ORM
+- **认证**：better-auth
+- **API**：oRPC
+- **验证**：Zod
+- **格式化**：Biome
+
+## TypeScript
+
+```typescript
+// ✅ 使用 interface 定义对象类型
+interface UserProps {
+  id: string;
+  name: string;
+  isActive: boolean;  // 布尔值使用 is/has 前缀
+}
+
+// ✅ 使用 const 对象替代 enum
+const UserRole = {
+  ADMIN: "admin",
+  USER: "user",
+} as const;
+type UserRole = (typeof UserRole)[keyof typeof UserRole];
+
+// ✅ 使用 Zod 进行运行时验证
+const userSchema = z.object({
+  email: z.string().email(),
+  name: z.string().min(1),
+});
+```
+
+## React 组件
+
+```typescript
+// ✅ 函数组件 + 具名导出
+export function UserCard({ user }: UserCardProps) {
+  return <div>{user.name}</div>;
+}
+
+// ✅ 文件结构：导出组件 → 子组件 → 工具函数 → 类型
+```
+
+### 性能优化
+
+- 优先使用 React Server Components（RSC）
+- 最小化 `"use client"`、`useEffect`、`useState`
+- 客户端组件使用 `<Suspense>` 包裹
+- 非关键组件使用 `dynamic()` 懒加载
+
+## 命名规范
+
+| 类型 | 规范 | 示例 |
+|------|------|------|
+| 目录 | kebab-case | `auth-wizard/` |
+| 组件 | PascalCase | `UserCard.tsx` |
+| 函数/变量 | camelCase | `getUserById` |
+| 常量 | SCREAMING_SNAKE | `MAX_RETRY_COUNT` |
+| 类型/接口 | PascalCase | `UserProps` |
+
+## 样式
+
+```tsx
+// ✅ 使用 cn() 合并类名
+import { cn } from "@ui/lib";
+
+<div className={cn(
+  "base-class",
+  isActive && "active-class",
+  className
+)} />
+
+// ✅ 移动优先响应式
+<div className="p-4 md:p-6 lg:p-8" />
+```
+
+## 错误处理
+
+```typescript
+// ✅ 使用卫语句尽早返回
+function processUser(user: User | null) {
+  if (!user) {
+    throw new Error("用户不存在");
+  }
+  // 正常逻辑
+}
+
+// ✅ 捕获异常必须记录日志
+try {
+  await riskyOperation();
+} catch (error) {
+  logger.error("操作失败", { error });
+  throw new BusinessError("操作失败，请重试");
+}
+```

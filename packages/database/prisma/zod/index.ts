@@ -52,6 +52,10 @@ export const PurchaseScalarFieldEnumSchema = z.enum(['id', 'organizationId', 'us
 
 export const AiChatScalarFieldEnumSchema = z.enum(['id', 'organizationId', 'userId', 'title', 'messages', 'createdAt', 'updatedAt'])
 
+// File: ContactSubmissionScalarFieldEnum.schema.ts
+
+export const ContactSubmissionScalarFieldEnumSchema = z.enum(['id', 'name', 'email', 'subject', 'message', 'status', 'createdAt', 'updatedAt'])
+
 // File: SortOrder.schema.ts
 
 export const SortOrderSchema = z.enum(['asc', 'desc'])
@@ -258,4 +262,20 @@ export const AiChatSchema = z.object({
 });
 
 export type AiChatType = z.infer<typeof AiChatSchema>;
+
+
+// File: ContactSubmission.schema.ts
+
+export const ContactSubmissionSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  email: z.string(),
+  subject: z.string(),
+  message: z.string(),
+  status: z.string().default("pending"),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type ContactSubmissionType = z.infer<typeof ContactSubmissionSchema>;
 

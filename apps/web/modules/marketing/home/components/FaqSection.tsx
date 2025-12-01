@@ -1,58 +1,58 @@
-import { cn } from "@ui/lib";
+"use client";
+
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "@ui/components/accordion";
 import { useTranslations } from "next-intl";
 
-export function FaqSection({ className }: { className?: string }) {
-	const t = useTranslations();
+export function FaqSection() {
+	const t = useTranslations("home.faq");
 
 	const items = [
 		{
-			question: "What is the refund policy?",
-			answer: "We offer a 30-day money-back guarantee if you're not happy with our product.",
+			id: "item-1",
+			question: t("q1.question"),
+			answer: t("q1.answer"),
 		},
 		{
-			question: "How do I cancel my subscription?",
-			answer: "You can cancel your subscription by visiting the billing page.",
+			id: "item-2",
+			question: t("q2.question"),
+			answer: t("q2.answer"),
 		},
 		{
-			question: "Can I change my plan?",
-			answer: "Yes, you can change your plan at any time by visiting the billing page.",
+			id: "item-3",
+			question: t("q3.question"),
+			answer: t("q3.answer"),
 		},
 		{
-			question: "Do you offer a free trial?",
-			answer: "Yes, we offer a 14-day free trial.",
+			id: "item-4",
+			question: t("q4.question"),
+			answer: t("q4.answer"),
 		},
 	];
 
-	if (!items) {
-		return null;
-	}
-
 	return (
-		<section
-			className={cn("scroll-mt-20 border-t py-12 lg:py-16", className)}
-			id="faq"
-		>
-			<div className="container max-w-5xl">
-				<div className="mb-12 lg:text-center">
-					<h1 className="mb-2 font-bold text-4xl lg:text-5xl">
-						{t("faq.title")}
-					</h1>
-					<p className="text-lg opacity-50">{t("faq.description")}</p>
-				</div>
-				<div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-					{items.map((item, i) => (
-						<div
-							key={`faq-item-${i}`}
-							className="rounded-lg bg-card border p-4 lg:p-6"
-						>
-							<h4 className="mb-2 font-semibold text-lg">
-								{item.question}
-							</h4>
-							<p className="text-foreground/60">{item.answer}</p>
-						</div>
-					))}
-				</div>
+		<section id="faq" className="container max-w-4xl mx-auto px-4">
+			<div className="text-center mb-16">
+				<h2 className="text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
+				<p className="text-muted-foreground text-lg">{t("subtitle")}</p>
 			</div>
+
+			<Accordion type="single" collapsible className="w-full">
+				{items.map((item) => (
+					<AccordionItem key={item.id} value={item.id}>
+						<AccordionTrigger className="text-left text-lg">
+							{item.question}
+						</AccordionTrigger>
+						<AccordionContent className="text-muted-foreground text-base leading-relaxed">
+							{item.answer}
+						</AccordionContent>
+					</AccordionItem>
+				))}
+			</Accordion>
 		</section>
 	);
 }

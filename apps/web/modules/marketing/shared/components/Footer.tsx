@@ -7,13 +7,12 @@ export function Footer() {
 		<footer className="border-t py-8 text-foreground/60 text-sm">
 			<div className="container grid grid-cols-1 gap-6 lg:grid-cols-3">
 				<div>
-					<Logo className="opacity-70 grayscale" />
+					<div className="flex items-center gap-2 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300">
+						<Logo />
+					</div>
 					<p className="mt-3 text-sm opacity-70">
 						© {new Date().getFullYear()} {config.appName}.{" "}
-						<a href="https://supastarter.dev">
-							Built with supastarter
-						</a>
-						.
+						<a href="https://supastarter.dev">Built with supastarter</a>.
 					</p>
 				</div>
 
