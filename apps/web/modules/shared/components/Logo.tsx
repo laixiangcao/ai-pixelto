@@ -32,7 +32,9 @@ export function Logo({
 							<div className="absolute top-1/2 right-1/4 w-1 h-1 bg-slate-900 dark:bg-white animate-[drop_2.5s_infinite_0.5s]" />
 							<div className="absolute top-2/3 right-1/3 w-1 h-1 bg-slate-900 dark:bg-white animate-[drop_1.8s_infinite_1s]" />
 						</div>
-						<style>{`@keyframes drop { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(20px); opacity:0; } }`}</style>
+						<style>
+							{"@keyframes drop { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(20px); opacity:0; } }"}
+						</style>
 					</div>
 				</div>
 			</div>

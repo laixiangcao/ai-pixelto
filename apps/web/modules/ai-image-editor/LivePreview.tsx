@@ -107,7 +107,9 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 			// Smooth progress bar (target 95% over 10s)
 			const progressInterval = setInterval(() => {
 				setProgress((prev) => {
-					if (prev >= 95) return prev;
+					if (prev >= 95) {
+						return prev;
+					}
 					// Slow down as it gets closer to 95%
 					const remaining = 95 - prev;
 					const increment = Math.max(0.1, remaining * 0.02);
@@ -149,12 +151,15 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 		return () => window.removeEventListener("keydown", handleKeyDown);
 	}, [isFocused, onReset]);
 
-	if (!mounted) return null;
+	if (!mounted) {
+		return null;
+	}
 
 	return createPortal(
 		<div className={`relative z-[9999] ${isFocused ? "pointer-events-auto" : "pointer-events-none"}`}>
 			{/* Backdrop */}
-			<div
+			<button
+				type="button"
 				className={`
 					fixed inset-0 bg-black/80 backdrop-blur-sm
 					transition-opacity duration-700
@@ -166,6 +171,8 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 						onReset();
 					}
 				}}
+				tabIndex={0}
+				aria-label={t("preview.close")}
 			/>
 
 			<div

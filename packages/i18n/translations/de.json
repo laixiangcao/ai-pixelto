@@ -82,7 +82,10 @@
 			"colorMode": "Farbmodus",
 			"documentation": "Dokumentation",
 			"home": "Startseite",
-			"logout": "Abmelden"
+			"logout": "Abmelden",
+			"currentPlan": "Aktueller Plan",
+			"credits": "Credits",
+			"freePlan": "Gratis"
 		}
 	},
 	"auth": {
@@ -818,6 +821,152 @@
 	},
 	"documentation": {
 		"title": "Dokumentation"
+	},
+	"home": {
+		"hero": {
+			"badge": {
+				"label": "Instant Access",
+				"sublabel": "Free Forever"
+			},
+			"title": {
+				"prefix": "Generate",
+				"highlight": "Stunning AI Art",
+				"suffix": "in Seconds"
+			},
+			"subtitle": "Turn text into stunning visuals in seconds. Powered by premium Gemini models for photorealistic results.",
+			"features": {
+				"unlimited": "Unlimited Generation",
+				"fast": "Fast Speed",
+				"styles": "All Styles",
+				"noRestrictions": "No Restrictions"
+			}
+		},
+		"showcase": {
+			"title": "More AI Image Ideas",
+			"subtitle": "Explore the limitless possibilities of AI-powered editing.",
+			"original": "Original",
+			"enhanced": "Enhanced",
+			"inspiration": {
+				"title": "More AI Image Inspiration",
+				"cta": "More Inspiration",
+				"tabs": {
+					"latest": "Latest",
+					"christmas": "Christmas",
+					"poster": "Poster",
+					"packing": "Packing",
+					"ai_image": "AI Image",
+					"brand_identity": "Brand Identity"
+				}
+			}
+		},
+		"features": {
+			"title": "Pixelto AI - Ultra Fast AI Image Editing",
+			"subtitle": "Experience the next generation of image editing.",
+			"items": {
+				"speed": {
+					"title": "Lightning Fast Generation",
+					"description": "Officially powered by advanced AI models, Pixelto lets you create stunning images in seconds. Just use text or image prompts and watch your ideas come to life instantly, making creativity faster than ever.",
+					"cta": "Start Creating"
+				},
+				"figures": {
+					"title": "AI Figure Maker with Pixelto",
+					"description": "Use Pixelto to create the trendiest collectible figures from any image - people, pets, or anime characters - instantly brought to life in 1/7 scale.",
+					"cta": "Generate Your Figure"
+				},
+				"freedom": {
+					"title": "Unlimited Creative Freedom",
+					"description": "Change backgrounds, merge shots, and experiment with new styles in seconds. From anime-inspired art to cinematic realism, Pixelto delivers versatile results, perfect for game designers, marketers, and digital creators.",
+					"cta": "Create with Pixelto"
+				}
+			}
+		},
+		"pricing": {
+			"title": "Simple Pricing",
+			"description": "Choose the plan that works best for you.",
+			"monthly": "Monthly",
+			"yearly": "Yearly",
+			"save": "Save {discount}%",
+			"popular": "Most Popular"
+		},
+		"faq": {
+			"title": "Frequently Asked Questions",
+			"subtitle": "Find answers to the most common questions about Pixelto AI.",
+			"q1": {
+				"question": "What is Pixelto AI?",
+				"answer": "Pixelto AI is an advanced image editing platform powered by artificial intelligence, designed to help you transform your images with ease and precision."
+			},
+			"q2": {
+				"question": "How does the AI editor work?",
+				"answer": "Simply upload your image and describe the changes you want to make using natural language. Our AI models will then process your request and generate the edited image."
+			},
+			"q3": {
+				"question": "What file formats are supported?",
+				"answer": "We currently support JPG, PNG, and WebP formats for both upload and download."
+			},
+			"q4": {
+				"question": "Is there a free trial available?",
+				"answer": "Yes, we offer a generous free tier that allows you to try out most of our core features without any cost."
+			}
+		},
+		"cta": {
+			"title": "Ready to Transform Your Images?",
+			"subtitle": "Join thousands of creators who are already using Pixelto AI to bring their visions to life.",
+			"startCreating": "Start Creating for Free",
+			"viewPricing": "View Pricing"
+		}
+	},
+	"editor": {
+		"title": "AI Magic Editor",
+		"subtitle": "Upload an image and describe how you want to change it. Our AI will handle the rest.",
+		"systemReady": "System Ready",
+		"upload": {
+			"title": "Upload Source Image",
+			"dragDrop": "Drag & drop or click to browse system files",
+			"supportedFormats": "Supported Formats: JPG, PNG",
+			"orDemo": "Or initialize with demo"
+		},
+		"input": {
+			"placeholder": "Enter edit instructions...",
+			"placeholderWaiting": "Waiting for image upload...",
+			"generate": "Generate",
+			"processing": "Processing"
+		},
+		"history": {
+			"title": "Recent Creations",
+			"label": "History",
+			"edited": "Edited",
+			"original": "Original",
+			"delete": "Delete"
+		},
+		"errors": {
+			"generationFailed": "Could not edit image. Please try again. (Note: Very large files may fail)",
+			"comingSoon": "is coming soon",
+			"authRequired": "Please sign in",
+			"insufficientCredits": "You have run out of credits. Please upgrade or add balance."
+		},
+		"preview": {
+			"processing": "Processing Image...",
+			"defaultTitle": "Editor Preview",
+			"showResult": "Show Result Only",
+			"compare": "Compare with Original",
+			"download": "Download Image",
+			"newEdit": "New Edit",
+			"startOver": "Start Over",
+			"close": "Close",
+			"new": "New",
+			"original": "Original",
+			"editedResult": "Edited Result"
+		},
+		"loading": {
+			"title": "Editing Image",
+			"processing": "{model} is processing your request...",
+			"steps": {
+				"analyzing": "Analyzing image structure",
+				"understanding": "Understanding prompt instructions",
+				"diffusion": "Applying diffusion transformation",
+				"finalizing": "Finalizing pixel data"
+			}
+		}
 	},
 	"choosePlan": {
 		"title": "Wähle einen Plan",

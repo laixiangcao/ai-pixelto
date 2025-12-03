@@ -42,7 +42,19 @@ const formSchema = z.object({
 	password: z.string(),
 });
 
-export function SignupForm({ prefillEmail }: { prefillEmail?: string }) {
+type SignupFormProps = {
+	prefillEmail?: string;
+	redirectPathOverride?: string;
+	onSuccess?: () => void;
+	onSwitchToLogin?: () => void;
+};
+
+export function SignupForm({
+	prefillEmail,
+	redirectPathOverride,
+	onSuccess,
+	onSwitchToLogin,
+}: SignupFormProps) {
 	const t = useTranslations();
 	const router = useRouter();
 	const { getAuthErrorMessage } = useAuthErrorMessages();
@@ -66,7 +78,9 @@ export function SignupForm({ prefillEmail }: { prefillEmail?: string }) {
 
 	const redirectPath = invitationId
 		? `/organization-invitation/${invitationId}`
-		: (redirectTo ?? config.auth.redirectAfterSignIn);
+		: redirectPathOverride ??
+			redirectTo ??
+			config.auth.redirectAfterSignIn;
 
 	const onSubmit = form.handleSubmit(async ({ email, password, name }) => {
 		try {
@@ -86,6 +100,8 @@ export function SignupForm({ prefillEmail }: { prefillEmail?: string }) {
 			if (error) {
 				throw error;
 			}
+
+			onSuccess?.();
 
 			if (invitationOnlyMode) {
 				const { error } =
@@ -264,15 +280,26 @@ export function SignupForm({ prefillEmail }: { prefillEmail?: string }) {
 				<span className="text-foreground/60">
 					{t("auth.signup.alreadyHaveAccount")}{" "}
 				</span>
-				<Link
-					href={withQuery(
-						"/auth/login",
-						Object.fromEntries(searchParams.entries()),
-					)}
-				>
-					{t("auth.signup.signIn")}
-					<ArrowRightIcon className="ml-1 inline size-4 align-middle" />
-				</Link>
+				{onSwitchToLogin ? (
+					<button
+						type="button"
+						onClick={onSwitchToLogin}
+						className="inline-flex items-center text-primary hover:underline"
+					>
+						{t("auth.signup.signIn")}
+						<ArrowRightIcon className="ml-1 inline size-4 align-middle" />
+					</button>
+				) : (
+					<Link
+						href={withQuery(
+							"/auth/login",
+							Object.fromEntries(searchParams.entries()),
+						)}
+					>
+						{t("auth.signup.signIn")}
+						<ArrowRightIcon className="ml-1 inline size-4 align-middle" />
+					</Link>
+				)}
 			</div>
 		</div>
 	);

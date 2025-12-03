@@ -107,11 +107,14 @@
 			"start": "Start"
 		},
 		"userMenu": {
-			"accountSettings": "Account settings",
-			"colorMode": "Color mode",
-			"documentation": "Documentation",
-			"home": "Home",
-			"logout": "Logout"
+			"accountSettings": "账户管理",
+			"colorMode": "配色模式",
+			"documentation": "使用指南",
+			"home": "首页",
+			"logout": "退出登录",
+			"currentPlan": "当前计划",
+			"credits": "积分",
+			"freePlan": "免费版"
 		}
 	},
 	"auth": {
@@ -851,30 +854,60 @@
 	},
 	"home": {
 		"hero": {
-			"badge": "从像素到万物",
-			"title": "用 AI 变革你的图像",
-			"subtitle": "由先进 AI 驱动的专业图像编辑。几秒钟内创造惊艳的视觉效果。"
+			"badge": {
+				"label": "即时访问",
+				"sublabel": "永久免费"
+			},
+			"title": {
+				"prefix": "生成",
+				"highlight": "惊艳的 AI 作品",
+				"suffix": "只需几秒"
+			},
+			"subtitle": "将文本或图片在数秒内转换为视觉作品，依托高级 Gemini 模型提供高质量写实效果。",
+			"features": {
+				"unlimited": "无限生成",
+				"fast": "极速响应",
+				"styles": "全风格覆盖",
+				"noRestrictions": "无额外限制"
+			}
 		},
 		"showcase": {
-			"title": "见证魔法时刻",
-			"subtitle": "探索 Pixelto AI 的无限创作可能。",
+			"title": "更多 AI 图像灵感",
+			"subtitle": "探索 AI 驱动编辑的无限可能。",
 			"original": "原图",
-			"enhanced": "增强后"
+			"enhanced": "增强后",
+			"inspiration": {
+				"title": "更多 AI 图像灵感",
+				"cta": "查看更多灵感",
+				"tabs": {
+					"latest": "最新",
+					"christmas": "圣诞",
+					"poster": "海报",
+					"packing": "包装",
+					"ai_image": "AI 图像",
+					"brand_identity": "品牌形象"
+				}
+			}
 		},
 		"features": {
-			"title": "释放你的创意潜能",
-			"subtitle": "探索旨在提升你图像编辑体验的强大功能。",
-			"feature1": {
-				"title": "AI 驱动的增强",
-				"description": "通过智能 AI 算法自动提升图像质量、色彩和细节。"
-			},
-			"feature2": {
-				"title": "轻松背景移除",
-				"description": "在几秒钟内精确移除任何图像的背景，为新构图做好准备。"
-			},
-			"feature3": {
-				"title": "创意风格转换",
-				"description": "将你的照片转换为令人惊叹的艺术作品，拥有各种艺术风格。"
+			"title": "Pixelto AI - 极速 AI 图像编辑",
+			"subtitle": "体验下一代图像编辑能力。",
+			"items": {
+				"speed": {
+					"title": "闪电般的生成速度",
+					"description": "基于高级 AI 模型，数秒即可生成出色图像。输入文本或图片提示，创意即刻呈现。",
+					"cta": "开始创作"
+				},
+				"figures": {
+					"title": "AI 造型师",
+					"description": "从人物、宠物到动漫角色，快速生成潮流收藏造型或形象设计。",
+					"cta": "生成你的造型"
+				},
+				"freedom": {
+					"title": "无限创作自由",
+					"description": "替换背景、融合场景、尝试新风格，从动漫到电影级写实，快速得到满意效果。",
+					"cta": "用 Pixelto 创作"
+				}
 			}
 		},
 		"pricing": {
@@ -936,11 +969,14 @@
 			"title": "最近创作",
 			"label": "历史记录",
 			"edited": "已编辑",
-			"original": "原图"
+			"original": "原图",
+			"delete": "删除"
 		},
 		"errors": {
 			"generationFailed": "无法编辑图片。请重试。（注意：超大文件可能会失败）",
-			"comingSoon": "即将推出"
+			"comingSoon": "即将推出",
+			"authRequired": "请先登录",
+			"insufficientCredits": "额度不足，请前往充值或升级"
 		},
 		"preview": {
 			"processing": "正在处理图片...",

@@ -7,11 +7,17 @@ import {
 	XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { BoltIcon, LockClosedIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 interface AIImageEditProps {
-	onGenerate: (prompt: string, file: File, modelId: string) => void;
+	onGenerate: (
+		prompt: string,
+		file: File,
+		modelId: string,
+		modelCost: number,
+	) => void;
 	isGenerating: boolean;
 	disabled?: boolean;
 }
@@ -50,32 +56,40 @@ const SAMPLE_IMAGES = [
 // Custom Logos
 
 const NanoLogo = () => (
-	<img
+	<Image
 		src="/images/icons/ai/gemini.webp"
 		alt="NanoBanana"
+		width={64}
+		height={64}
 		className="w-full h-full object-contain"
 	/>
 );
 
 const FluxLogo = () => (
 	<>
-		<img
+		<Image
 			src="/images/icons/ai/flux-light.webp"
 			alt="Flux"
+			width={64}
+			height={64}
 			className="w-full h-full object-contain dark:hidden"
 		/>
-		<img
+		<Image
 			src="/images/icons/ai/flux-dark.webp"
 			alt="Flux"
+			width={64}
+			height={64}
 			className="w-full h-full object-contain hidden dark:block"
 		/>
 	</>
 );
 
 const SeedreamLogo = () => (
-	<img
+	<Image
 		src="/images/icons/ai/seedream.webp"
 		alt="Seedream"
+		width={64}
+		height={64}
 		className="w-full h-full object-contain"
 	/>
 );
@@ -236,8 +250,16 @@ export const AIImageEdit: React.FC<AIImageEditProps> = ({
 	};
 
 	const handleSubmit = () => {
-		if (selectedFile && prompt) {
-			onGenerate(prompt, selectedFile, selectedModel);
+		const selectedModelConfig = MODELS.find(
+			(model) => model.id === selectedModel,
+		);
+		if (selectedFile && prompt && selectedModelConfig) {
+			onGenerate(
+				prompt,
+				selectedFile,
+				selectedModelConfig.id,
+				selectedModelConfig.cost,
+			);
 		}
 	};
 

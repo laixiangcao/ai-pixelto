@@ -39,6 +39,15 @@ docs/specs/
 
 ---
 
+## 📑 文档索引
+
+| 业务域 | 功能 | 路径 |
+| --- | --- | --- |
+| 01-marketing | 首页重设计 | [01-marketing/001-homepage-redesign](./01-marketing/001-homepage-redesign) |
+| 02-features | AI 图片编辑接口与积分扣费 | [02-features/001-ai-image-edit-credits](./02-features/001-ai-image-edit-credits) |
+
+---
+
 ## 📋 文档规范
 
 ### 1. 功能文档结构

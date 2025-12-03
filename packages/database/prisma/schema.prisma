@@ -39,6 +39,7 @@ model User {
     members            Member[]
     twofactors         TwoFactor[]
     aiChats            AiChat[]
+    creditTransactions CreditTransaction[]
 
     @@unique([email])
     @@unique([username])
@@ -136,6 +137,7 @@ model Organization {
     invitations        Invitation[]
     purchases          Purchase[]
     aiChats            AiChat[]
+    creditTransactions CreditTransaction[]
 
     @@unique([slug])
     @@map("organization")
@@ -217,4 +219,20 @@ model ContactSubmission {
     updatedAt DateTime @updatedAt
 
     @@map("contact_submission")
+}
+
+model CreditTransaction {
+    id             String        @id @default(cuid())
+    userId         String?
+    user           User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    organizationId String?
+    organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+    amount         Int
+    reason         String?
+    metadata       Json?
+    createdAt      DateTime      @default(now())
+
+    @@index([userId])
+    @@index([organizationId])
+    @@map("credit_transaction")
 }

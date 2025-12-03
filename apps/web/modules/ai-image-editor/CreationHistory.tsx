@@ -47,97 +47,100 @@ const HistoryCard = ({
 	}, []);
 
 	return (
-		<button
-			type="button"
-			onClick={onClick}
-			className="group relative flex-shrink-0 w-72 h-48 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
-		>
-			{/* Image Container */}
-			<div className="absolute inset-0 w-full h-full bg-zinc-950">
-				{/* Original Image Layer */}
-				{item.originalImage && (
-					// biome-ignore lint/performance/noImgElement: We need instant display for history
-					<img
-						src={item.originalImage}
-						alt="Original"
-						className="absolute inset-0 w-full h-full object-cover"
-					/>
-				)}
+		<div className="relative flex-shrink-0 w-72 h-48 group">
+			<button
+				type="button"
+				onClick={onClick}
+				className="relative w-full h-full rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+				aria-label={item.name}
+			>
+				{/* Image Container */}
+				<div className="absolute inset-0 w-full h-full bg-zinc-950">
+					{/* Original Image Layer */}
+					{item.originalImage && (
+						// biome-ignore lint/performance/noImgElement: We need instant display for history
+						<img
+							src={item.originalImage}
+							alt="Original"
+							className="absolute inset-0 w-full h-full object-cover"
+						/>
+					)}
 
-				{/* Result Image Layer (Fades in/out) */}
-				{item.resultImage && (
-					// biome-ignore lint/performance/noImgElement: We need instant display for history
-					<img
-						src={item.resultImage}
-						alt="Edited"
-						className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${showResult ? "opacity-100" : "opacity-0"}`}
-					/>
-				)}
+					{/* Result Image Layer (Fades in/out) */}
+					{item.resultImage && (
+						// biome-ignore lint/performance/noImgElement: We need instant display for history
+						<img
+							src={item.resultImage}
+							alt="Edited"
+							className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${showResult ? "opacity-100" : "opacity-0"}`}
+						/>
+					)}
 
-				{/* Overlay Gradient for text readability */}
-				<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
-			</div>
-
-			{/* Status Badge (Top Left) */}
-			<div className="absolute top-3 left-3 z-10">
-				<div
-					className={`
-						inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide shadow-sm border transition-all duration-500 backdrop-blur
-						${
-							showResult
-								? "bg-sky-500/80 border-white/30 text-white"
-								: "bg-slate-700/80 border-white/20 text-slate-100"
-						}
-					`}
-				>
-					<span className="h-1.5 w-1.5 rounded-full bg-white/90" />
-					{showResult ? t("history.edited") : t("history.original")}
+					{/* Overlay Gradient for text readability */}
+					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
 				</div>
-			</div>
 
-			{/* Delete Button */}
-			{onDelete && (
-				<div className="absolute top-2 right-2 z-10 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-					<button
-						type="button"
-						onClick={(e) => {
-							e.stopPropagation();
-							onDelete();
-						}}
-						className="flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 backdrop-blur border border-white/20 shadow-md hover:bg-red-500 hover:text-white hover:border-red-200 transition-colors"
-						aria-label={t("history.delete")}
+				{/* Status Badge (Top Left) */}
+				<div className="absolute top-3 left-3 z-10">
+					<div
+						className={`
+							inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide shadow-sm border transition-all duration-500 backdrop-blur
+							${
+								showResult
+									? "bg-sky-500/80 border-white/30 text-white"
+									: "bg-slate-700/80 border-white/20 text-slate-100"
+							}
+						`}
 					>
-						<TrashIcon className="h-4 w-4" />
-					</button>
-				</div>
-			)}
-
-			{/* Content Overlay (Bottom) */}
-			<div className="absolute bottom-0 left-0 w-full p-3 text-left z-10">
-				<div className="flex items-center justify-between mb-1 opacity-80">
-					<div className="flex items-center space-x-1.5 text-[10px] text-zinc-400 font-mono">
-						<ClockIcon className="w-3 h-3" />
-						<span>
-							{item.timestamp.toLocaleDateString([], {
-								month: "short",
-								day: "numeric",
-							})}{" "}
-							•{" "}
-							{item.timestamp.toLocaleTimeString([], {
-								hour: "2-digit",
-								minute: "2-digit",
-							})}
-						</span>
+						<span className="h-1.5 w-1.5 rounded-full bg-white/90" />
+						{showResult
+							? t("history.edited")
+							: t("history.original")}
 					</div>
 				</div>
-				<h3 className="text-sm font-medium text-zinc-100 line-clamp-1 group-hover:text-blue-200 transition-colors">
-					{item.name}
-				</h3>
-			</div>
 
-			{/* Hover Effect Border Glow */}
-			<div className="absolute inset-0 border-2 border-blue-500/0 group-hover:border-blue-500/50 rounded-xl transition-all duration-300 pointer-events-none" />
-		</button>
+				{/* Content Overlay (Bottom) */}
+				<div className="absolute bottom-0 left-0 w-full p-3 text-left z-10">
+					<div className="flex items-center justify-between mb-1 opacity-80">
+						<div className="flex items-center space-x-1.5 text-[10px] text-zinc-400 font-mono">
+							<ClockIcon className="w-3 h-3" />
+							<span>
+								{item.timestamp.toLocaleDateString([], {
+									month: "short",
+									day: "numeric",
+								})}{" "}
+								•{" "}
+								{item.timestamp.toLocaleTimeString([], {
+									hour: "2-digit",
+									minute: "2-digit",
+								})}
+							</span>
+						</div>
+					</div>
+					<h3 className="text-sm font-medium text-zinc-100 line-clamp-1 group-hover:text-blue-200 transition-colors">
+						{item.name}
+					</h3>
+				</div>
+
+				{/* Hover Effect Border Glow */}
+				<div className="absolute inset-0 border-2 border-blue-500/0 group-hover:border-blue-500/50 rounded-xl transition-all duration-300 pointer-events-none" />
+			</button>
+
+			{/* Delete Button (sibling to avoid nested buttons) */}
+			{onDelete && (
+				<button
+					type="button"
+					onClick={(e) => {
+						e.stopPropagation();
+						onDelete();
+					}}
+					className="absolute top-2 right-2 z-20 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 backdrop-blur border border-white/20 shadow-md hover:bg-red-500 hover:text-white hover:border-red-200 transition-colors opacity-0 group-hover:opacity-100"
+					aria-label={t("history.delete")}
+				>
+					<TrashIcon className="h-4 w-4" />
+				</button>
+			)}
+		</div>
 	);
 };
 

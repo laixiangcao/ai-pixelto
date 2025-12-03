@@ -56,7 +56,17 @@ const formSchema = z.union([
 
 type FormValues = z.infer<typeof formSchema>;
 
-export function LoginForm() {
+type LoginFormProps = {
+	redirectPathOverride?: string;
+	onSuccess?: () => void;
+	onSwitchToSignup?: () => void;
+};
+
+export function LoginForm({
+	redirectPathOverride,
+	onSuccess,
+	onSwitchToSignup,
+}: LoginFormProps) {
 	const t = useTranslations();
 	const { getAuthErrorMessage } = useAuthErrorMessages();
 	const router = useRouter();
@@ -80,13 +90,16 @@ export function LoginForm() {
 
 	const redirectPath = invitationId
 		? `/organization-invitation/${invitationId}`
-		: (redirectTo ?? config.auth.redirectAfterSignIn);
+		: redirectPathOverride ??
+			redirectTo ??
+			config.auth.redirectAfterSignIn;
 
 	useEffect(() => {
 		if (sessionLoaded && user) {
+			onSuccess?.();
 			router.replace(redirectPath);
 		}
-	}, [user, sessionLoaded]);
+	}, [user, sessionLoaded, redirectPath, onSuccess, router]);
 
 	const onSubmit: SubmitHandler<FormValues> = async (values) => {
 		try {
@@ -113,6 +126,7 @@ export function LoginForm() {
 					queryKey: sessionQueryKey,
 				});
 
+				onSuccess?.();
 				router.replace(redirectPath);
 			} else {
 				const { error } = await authClient.signIn.magicLink({
@@ -139,6 +153,7 @@ export function LoginForm() {
 		try {
 			await authClient.signIn.passkey();
 
+			onSuccess?.();
 			router.replace(redirectPath);
 		} catch (e) {
 			form.setError("root", {
@@ -339,15 +354,28 @@ export function LoginForm() {
 							<span className="text-foreground/60">
 								{t("auth.login.dontHaveAnAccount")}{" "}
 							</span>
-							<Link
-								href={withQuery(
-									"/auth/signup",
-									Object.fromEntries(searchParams.entries()),
-								)}
-							>
-								{t("auth.login.createAnAccount")}
-								<ArrowRightIcon className="ml-1 inline size-4 align-middle" />
-							</Link>
+							{onSwitchToSignup ? (
+								<button
+									type="button"
+									onClick={onSwitchToSignup}
+									className="inline-flex items-center text-primary hover:underline"
+								>
+									{t("auth.login.createAnAccount")}
+									<ArrowRightIcon className="ml-1 inline size-4 align-middle" />
+								</button>
+							) : (
+								<Link
+									href={withQuery(
+										"/auth/signup",
+										Object.fromEntries(
+											searchParams.entries(),
+										),
+									)}
+								>
+									{t("auth.login.createAnAccount")}
+									<ArrowRightIcon className="ml-1 inline size-4 align-middle" />
+								</Link>
+							)}
 						</div>
 					)}
 				</>

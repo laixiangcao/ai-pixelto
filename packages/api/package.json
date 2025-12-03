@@ -17,6 +17,7 @@
 		"@repo/utils": "workspace:*",
 		"@scalar/hono-api-reference": "^0.9.13",
 		"@sindresorhus/slugify": "^2.2.1",
+		"@google/genai": "^0.3.0",
 		"cookie": "^1.0.2",
 		"hono": "^4.9.4",
 		"nanoid": "^5.1.5",

@@ -1,7 +1,5 @@
-"use client";
-
-import { setRequestLocale } from "next-intl/server";
 import Image from "next/image";
+import { setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
 	params,
@@ -9,7 +7,9 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const t = await import(`../../../../../packages/i18n/translations/${locale}.json`).then((m) => m.about);
+	const t = await import(`@repo/i18n/translations/${locale}.json`).then(
+		(m: any) => m.about || m.default?.about,
+	);
 
 	return {
 		title: t.title,
@@ -24,7 +24,9 @@ export default async function AboutPage({
 }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
-	const t = await import(`../../../../../packages/i18n/translations/${locale}.json`).then((m) => m.about);
+	const t = await import(`@repo/i18n/translations/${locale}.json`).then(
+		(m: any) => m.about || m.default?.about,
+	);
 
 	return (
 		<main className="flex-1">
@@ -46,7 +48,9 @@ export default async function AboutPage({
 				<div className="container px-4">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
 						<div className="space-y-6">
-							<h2 className="text-3xl font-bold">{t.mission.title}</h2>
+							<h2 className="text-3xl font-bold">
+								{t.mission.title}
+							</h2>
 							<p className="text-lg text-muted-foreground leading-relaxed">
 								{t.mission.description}
 							</p>
@@ -67,7 +71,9 @@ export default async function AboutPage({
 			<section className="py-16 md:py-24">
 				<div className="container px-4 max-w-6xl mx-auto">
 					<div className="text-center mb-16">
-						<h2 className="text-3xl font-bold mb-4">{t.values.title}</h2>
+						<h2 className="text-3xl font-bold mb-4">
+							{t.values.title}
+						</h2>
 						<p className="text-lg text-muted-foreground">
 							{t.values.subtitle}
 						</p>
@@ -112,7 +118,9 @@ export default async function AboutPage({
 			<section className="py-24 text-center">
 				<div className="container px-4">
 					<div className="bg-primary/5 border border-primary/10 rounded-3xl p-12 max-w-4xl mx-auto">
-						<h2 className="text-3xl font-bold mb-4">{t.cta.title}</h2>
+						<h2 className="text-3xl font-bold mb-4">
+							{t.cta.title}
+						</h2>
 						<p className="text-lg text-muted-foreground mb-8">
 							{t.cta.description}
 						</p>
@@ -128,4 +136,3 @@ export default async function AboutPage({
 		</main>
 	);
 }
-

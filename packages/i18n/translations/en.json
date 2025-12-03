@@ -111,7 +111,11 @@
 			"colorMode": "Color mode",
 			"documentation": "Documentation",
 			"home": "Home",
-			"logout": "Logout"
+			"logout": "Logout",
+			"currentPlan": "Current plan",
+			"upgradePlan": "Upgrade",
+			"credits": "Credits",
+			"freePlan": "Free"
 		}
 	},
 	"auth": {
@@ -967,11 +971,14 @@
 			"title": "Recent Creations",
 			"label": "History",
 			"edited": "Edited",
-			"original": "Original"
+			"original": "Original",
+			"delete": "Delete"
 		},
 		"errors": {
 			"generationFailed": "Could not edit image. Please try again. (Note: Very large files may fail)",
-			"comingSoon": "is coming soon"
+			"comingSoon": "is coming soon",
+			"authRequired": "Please sign in",
+			"insufficientCredits": "You have run out of credits. Please upgrade or add balance."
 		},
 		"preview": {
 			"processing": "Processing Image...",

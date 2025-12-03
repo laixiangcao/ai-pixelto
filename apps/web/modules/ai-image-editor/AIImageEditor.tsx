@@ -1,8 +1,13 @@
 "use client";
 
+import { AuthDialog } from "@saas/auth/components/AuthDialog";
+import { useSession } from "@saas/auth/hooks/use-session";
+import { useActiveOrganization } from "@saas/organizations/hooks/use-active-organization";
+import { useBillingSummary } from "@saas/payments/hooks/billing-summary";
+import { orpcClient } from "@shared/lib/orpc-client";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useState } from "react";
-import { editImageAction } from "@/app/actions/image-editor";
+import { toast } from "sonner";
 import { AIImageEdit } from "./AIImageEdit";
 import { type Creation, CreationHistory } from "./CreationHistory";
 import { LivePreview } from "./LivePreview";
@@ -13,6 +18,14 @@ export const AIImageEditor: React.FC = () => {
 	const [currentModelId, setCurrentModelId] = useState<string | null>(null);
 	const [history, setHistory] = useState<Creation[]>([]);
 	const t = useTranslations("editor");
+	const { user } = useSession();
+	const { activeOrganization } = useActiveOrganization();
+	const [authDialogOpen, setAuthDialogOpen] = useState(false);
+	const { data: billingSummary, refetch: refetchBillingSummary } =
+		useBillingSummary(activeOrganization?.id ?? null, {
+			enabled: !!user,
+			staleTime: 60 * 1000,
+		});
 
 	// Load history
 	useEffect(() => {
@@ -51,6 +64,12 @@ export const AIImageEditor: React.FC = () => {
 			console.warn("Local storage full or error saving history", e);
 		}
 	}, [history]);
+
+	useEffect(() => {
+		if (user && authDialogOpen) {
+			setAuthDialogOpen(false);
+		}
+	}, [user, authDialogOpen]);
 
 	// Resize and compress image before sending to API to avoid RPC/Payload errors
 	const resizeImage = (file: File, maxWidth = 1536): Promise<string> => {
@@ -105,7 +124,22 @@ export const AIImageEditor: React.FC = () => {
 		promptText: string,
 		file: File,
 		modelId: string,
+		modelCost: number,
 	) => {
+		if (!user) {
+			setAuthDialogOpen(true);
+			return;
+		}
+
+		const summary =
+			billingSummary ?? (await refetchBillingSummary()).data ?? null;
+		const availableCredits = summary?.credits ?? 0;
+
+		if (availableCredits < modelCost) {
+			toast.error(t("errors.insufficientCredits"));
+			return;
+		}
+
 		setIsGenerating(true);
 		setActiveCreation(null);
 		setCurrentModelId(modelId);
@@ -118,33 +152,58 @@ export const AIImageEditor: React.FC = () => {
 			const apiBase64 = await resizeImage(file);
 			const mimeType = "image/jpeg"; // We convert to JPEG in resizeImage
 
-			// Call the Server Action
-			const result = await editImageAction(
-				promptText,
-				apiBase64,
+			const response = await orpcClient.ai.images.edit({
+				prompt: promptText,
+				fileBase64: apiBase64,
 				mimeType,
 				modelId,
-			);
+			});
 
-			if (result.success && result.data) {
-				const newCreation: Creation = {
-					id: crypto.randomUUID(),
-					name:
-						promptText.slice(0, 20) +
-						(promptText.length > 20 ? "..." : ""),
-					originalImage: originalDisplayBase64,
-					resultImage: `data:image/png;base64,${result.data}`,
-					html: "", // No HTML involved
-					timestamp: new Date(),
-				};
-				setActiveCreation(newCreation);
-				setHistory((prev) => [newCreation, ...prev]);
-			} else {
-				throw new Error(result.error || "Unknown error");
+			const imageBase64 = (response as any)?.data?.imageBase64;
+
+			if (!imageBase64) {
+				throw new Error("No image returned from API");
+			}
+
+			const newCreation: Creation = {
+				id: crypto.randomUUID(),
+				name:
+					promptText.slice(0, 20) +
+					(promptText.length > 20 ? "..." : ""),
+				originalImage: originalDisplayBase64,
+				resultImage: `data:image/png;base64,${imageBase64}`,
+				html: "", // No HTML involved
+				timestamp: new Date(),
+			};
+			setActiveCreation(newCreation);
+			setHistory((prev) => [newCreation, ...prev]);
+			if (user) {
+				refetchBillingSummary();
 			}
 		} catch (error) {
 			console.error("Failed to generate:", error);
-			alert(t("errors.generationFailed"));
+			const errorData =
+				typeof error === "object" && error !== null
+					? (error as { code?: string; data?: { code?: string } })
+					: undefined;
+			const errorCode = errorData?.data?.code ?? errorData?.code;
+
+			if (
+				errorCode === "INSUFFICIENT_CREDITS" ||
+				errorCode === "PAYMENT_REQUIRED"
+			) {
+				toast.error(
+					t("errors.insufficientCredits", {
+						defaultMessage: "额度不足，请前往充值或升级",
+					}),
+				);
+			} else {
+				toast.error(
+					error instanceof Error
+						? error.message
+						: t("errors.generationFailed"),
+				);
+			}
 		} finally {
 			setIsGenerating(false);
 		}
@@ -216,6 +275,11 @@ export const AIImageEditor: React.FC = () => {
 				isFocused={isFocused}
 				onReset={handleReset}
 				modelId={currentModelId}
+			/>
+
+			<AuthDialog
+				open={authDialogOpen}
+				onOpenChange={setAuthDialogOpen}
 			/>
 		</div>
 	);

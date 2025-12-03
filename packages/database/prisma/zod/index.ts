@@ -56,6 +56,10 @@ export const AiChatScalarFieldEnumSchema = z.enum(['id', 'organizationId', 'user
 
 export const ContactSubmissionScalarFieldEnumSchema = z.enum(['id', 'name', 'email', 'subject', 'message', 'status', 'createdAt', 'updatedAt'])
 
+// File: CreditTransactionScalarFieldEnum.schema.ts
+
+export const CreditTransactionScalarFieldEnumSchema = z.enum(['id', 'userId', 'organizationId', 'amount', 'reason', 'metadata', 'createdAt'])
+
 // File: SortOrder.schema.ts
 
 export const SortOrderSchema = z.enum(['asc', 'desc'])
@@ -63,6 +67,10 @@ export const SortOrderSchema = z.enum(['asc', 'desc'])
 // File: JsonNullValueInput.schema.ts
 
 export const JsonNullValueInputSchema = z.enum(['JsonNull'])
+
+// File: NullableJsonNullValueInput.schema.ts
+
+export const NullableJsonNullValueInputSchema = z.enum(['DbNull', 'JsonNull'])
 
 // File: QueryMode.schema.ts
 
@@ -278,4 +286,19 @@ export const ContactSubmissionSchema = z.object({
 });
 
 export type ContactSubmissionType = z.infer<typeof ContactSubmissionSchema>;
+
+
+// File: CreditTransaction.schema.ts
+
+export const CreditTransactionSchema = z.object({
+  id: z.string(),
+  userId: z.string().nullish(),
+  organizationId: z.string().nullish(),
+  amount: z.number().int(),
+  reason: z.string().nullish(),
+  metadata: z.unknown().refine((val) => { const getDepth = (obj: unknown, depth: number = 0): number => { if (depth > 10) return depth; if (obj === null || typeof obj !== 'object') return depth; const values = Object.values(obj as Record<string, unknown>); if (values.length === 0) return depth; return Math.max(...values.map(v => getDepth(v, depth + 1))); }; return getDepth(val) <= 10; }, "JSON nesting depth exceeds maximum of 10").nullish(),
+  createdAt: z.date(),
+});
+
+export type CreditTransactionType = z.infer<typeof CreditTransactionSchema>;
 

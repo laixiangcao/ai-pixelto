@@ -17,6 +17,7 @@ export const protectedProcedure = publicProcedure.use(
 
 		return await next({
 			context: {
+				...context,
 				session: session.session,
 				user: session.user,
 			},
