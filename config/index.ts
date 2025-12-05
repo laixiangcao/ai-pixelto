@@ -109,13 +109,16 @@ export const config = {
 			avatars: process.env.NEXT_PUBLIC_AVATARS_BUCKET_NAME ?? "avatars",
 		},
 	},
-	contactForm: {
-		// whether the contact form should be enabled
-		enabled: true,
-		// the email to which the contact form messages should be sent
-		to: "hello@your-domain.com",
-		// the subject of the email
-		subject: "Contact form message",
+	contact: {
+		email: "hello@pixelto.ai",
+		twitter: "https://x.com/pixelto",
+		discord: "https://discord.gg/pixelto",
+		telegram: "https://t.me/pixelto",
+		form: {
+			enabled: true,
+			to: "hello@pixelto.ai",
+			subject: "Contact form message",
+		},
 	},
 	// Payments
 	payments: {

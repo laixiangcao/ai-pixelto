@@ -13,7 +13,11 @@ function ContentMenuItem({
 			{isPage ? (
 				<LocaleLink
 					key={path}
-					className={`block rounded-full px-4 py-1 ${path === activePath ? "bg-primary/5 font-bold" : ""}`}
+					className={`block rounded-lg px-4 py-1.5 text-sm transition-colors ${
+						path === activePath
+							? "bg-primary/10 text-primary font-medium"
+							: "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+					}`}
 					href={`/docs/${path}`}
 				>
 					{label}

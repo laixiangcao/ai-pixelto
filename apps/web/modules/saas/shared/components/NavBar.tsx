@@ -147,14 +147,14 @@ export function NavBar() {
 							<Link
 								href={menuItem.href}
 								className={cn(
-									"flex items-center gap-2 whitespace-nowrap border-b-2 px-1 pb-3",
+									"flex items-center gap-2 whitespace-nowrap rounded-md px-3 py-2 transition-colors",
 									[
 										menuItem.isActive
-											? "border-primary font-bold"
-											: "border-transparent",
+											? "bg-primary/10 text-primary font-medium"
+											: "text-muted-foreground hover:bg-muted hover:text-foreground",
 									],
 									{
-										"md:-mx-6 md:border-b-0 md:border-l-2 md:px-6 md:py-2":
+										"md:mx-0 md:px-3 md:py-2":
 											useSidebarLayout,
 									},
 								)}

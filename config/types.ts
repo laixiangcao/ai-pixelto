@@ -49,10 +49,16 @@ export type Config = {
 			enabled: boolean;
 		};
 	};
-	contactForm: {
-		enabled: boolean;
-		to: string;
-		subject: string;
+	contact: {
+		email: string;
+		twitter?: string;
+		discord?: string;
+		telegram?: string;
+		form: {
+			enabled: boolean;
+			to: string;
+			subject: string;
+		};
 	};
 	payments: {
 		plans: {

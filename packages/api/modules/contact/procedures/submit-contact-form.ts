@@ -19,9 +19,9 @@ export const submitContactForm = publicProcedure
 		async ({ input: { email, name, message }, context: { locale } }) => {
 			try {
 				await sendEmail({
-					to: config.contactForm.to,
+					to: config.contact.form.to,
 					locale,
-					subject: config.contactForm.subject,
+					subject: config.contact.form.subject,
 					text: `Name: ${name}\n\nEmail: ${email}\n\nMessage: ${message}`,
 				});
 			} catch (error) {

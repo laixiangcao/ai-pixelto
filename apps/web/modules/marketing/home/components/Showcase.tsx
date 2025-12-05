@@ -1,14 +1,11 @@
 "use client";
 
-import { CompareSlider } from "@shared/components/CompareSlider";
-import { Badge } from "@ui/components/badge";
 import { cn } from "@ui/lib";
 import { AnimatePresence, motion } from "framer-motion";
+import { ChevronLeftIcon, ChevronRightIcon, SparklesIcon } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useCallback, useState } from "react";
-
-const TAB_CONTAINER_CLASS =
-	"inline-flex flex-wrap items-center justify-center gap-2 rounded-2xl border border-slate-200/80 bg-white/95 px-3 py-2 backdrop-blur-md ring-1 ring-slate-100/80 dark:border-white/10 dark:bg-slate-900/70 dark:ring-white/5";
+import { useCallback, useEffect, useState } from "react";
 
 // Mock Data for Showcase Scenarios
 const SHOWCASE_SCENARIOS = [
@@ -16,28 +13,24 @@ const SHOWCASE_SCENARIOS = [
 		id: "background",
 		label: "Background Replacement",
 		description:
-			"Instantly swap backgrounds for professional product photography or creative compositions.",
-		items: [
+			"Separate the subject from the original background and replace it with a new, more creative scene.",
+		original:
+			"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
+		variants: [
 			{
 				id: "bg-1",
-				original:
-					"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&q=80", // Camera
-				edited: "https://images.unsplash.com/photo-1505739998589-00fc191ce01d?w=600&q=80", // Product shot
-				label: "Product Studio",
+				image: "https://images.unsplash.com/photo-1505739998589-00fc191ce01d?w=800&q=80",
+				prompt: "Place in a professional studio with soft lighting",
 			},
 			{
 				id: "bg-2",
-				original:
-					"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", // Portrait
-				edited: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80", // Abstract bg
-				label: "Creative Portrait",
+				image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80",
+				prompt: "Transform to a cyberpunk neon city scene",
 			},
 			{
 				id: "bg-3",
-				original:
-					"https://images.unsplash.com/photo-1612178537253-bccd437b730e?w=600&q=80", // Toy
-				edited: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600&q=80", // Neon bg
-				label: "Cyberpunk Scene",
+				image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
+				prompt: "Set against a serene mountain landscape",
 			},
 		],
 	},
@@ -46,27 +39,23 @@ const SHOWCASE_SCENARIOS = [
 		label: "Lighting Adjustment",
 		description:
 			"Correct exposure, add dramatic lighting, or change the time of day in seconds.",
-		items: [
+		original:
+			"https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
+		variants: [
 			{
 				id: "light-1",
-				original:
-					"https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=80", // Nature dark
-				edited: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80", // Bright
-				label: "Golden Hour",
+				image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
+				prompt: "Apply golden hour warm lighting",
 			},
 			{
 				id: "light-2",
-				original:
-					"https://images.unsplash.com/photo-1504805572947-34fad45aed93?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=600&q=80",
-				label: "Studio Lighting",
+				image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80",
+				prompt: "Add dramatic studio rim lighting",
 			},
 			{
 				id: "light-3",
-				original:
-					"https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=80",
-				label: "Soft Glow",
+				image: "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=800&q=80",
+				prompt: "Create soft diffused glow effect",
 			},
 		],
 	},
@@ -75,27 +64,23 @@ const SHOWCASE_SCENARIOS = [
 		label: "Style Conversion",
 		description:
 			"Transform photos into paintings, sketches, 3D renders, or anime style art.",
-		items: [
+		original:
+			"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
+		variants: [
 			{
 				id: "style-1",
-				original:
-					"https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80",
-				label: "Fashion Illustration",
+				image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80",
+				prompt: "Convert to fashion illustration style",
 			},
 			{
 				id: "style-2",
-				original:
-					"https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80",
-				label: "Cyberpunk City",
+				image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80",
+				prompt: "Transform into oil painting artwork",
 			},
 			{
 				id: "style-3",
-				original:
-					"https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600&q=80",
-				label: "Neon Art",
+				image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80",
+				prompt: "Apply anime character style",
 			},
 		],
 	},
@@ -103,28 +88,24 @@ const SHOWCASE_SCENARIOS = [
 		id: "color",
 		label: "Color Change",
 		description:
-			"Precisely change the color of specific objects in the image, such as turning green leaves red.",
-		items: [
+			"Precisely change the color of specific objects in the image.",
+		original:
+			"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80",
+		variants: [
 			{
 				id: "color-1",
-				original:
-					"https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80", // Yellow -> Greenish
-				label: "Object Recolor",
+				image: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800&q=80",
+				prompt: "Change fur color to orange tabby",
 			},
 			{
 				id: "color-2",
-				original:
-					"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=600&q=80",
-				label: "Coat Color",
+				image: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=800&q=80",
+				prompt: "Transform to black and white coat",
 			},
 			{
 				id: "color-3",
-				original:
-					"https://images.unsplash.com/photo-1612178537253-bccd437b730e?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1505739998589-00fc191ce01d?w=600&q=80",
-				label: "Product Variant",
+				image: "https://images.unsplash.com/photo-1511044568932-338cba0ad803?w=800&q=80",
+				prompt: "Apply calico pattern coloring",
 			},
 		],
 	},
@@ -133,27 +114,23 @@ const SHOWCASE_SCENARIOS = [
 		label: "Age Transformation",
 		description:
 			"Visualize age progression or regression with realistic AI aging effects.",
-		items: [
+		original:
+			"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+		variants: [
 			{
 				id: "age-1",
-				original:
-					"https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80", // Just swapping for demo
-				label: "Younger Self",
+				image: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=800&q=80",
+				prompt: "Show younger version at age 25",
 			},
 			{
 				id: "age-2",
-				original:
-					"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=600&q=80",
-				label: "Aging Effect",
+				image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80",
+				prompt: "Apply aging effect to age 60",
 			},
 			{
 				id: "age-3",
-				original:
-					"https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80",
-				edited: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80",
-				label: "Time Travel",
+				image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80",
+				prompt: "Visualize as a child version",
 			},
 		],
 	},
@@ -162,121 +139,299 @@ const SHOWCASE_SCENARIOS = [
 export function Showcase() {
 	const t = useTranslations("home.showcase");
 	const [activeTab, setActiveTab] = useState(0);
-	const [isHovering, setIsHovering] = useState(false);
+	const [activeVariant, setActiveVariant] = useState(0);
+	const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-	const handleCycleComplete = useCallback(() => {
-		if (isHovering) {
+	const currentScenario = SHOWCASE_SCENARIOS[activeTab];
+
+	// Auto-rotate variants
+	useEffect(() => {
+		if (!isAutoPlaying) {
 			return;
 		}
-		setActiveTab((prev) => (prev + 1) % SHOWCASE_SCENARIOS.length);
-	}, [isHovering]);
+
+		const interval = setInterval(() => {
+			setActiveVariant(
+				(prev) => (prev + 1) % currentScenario.variants.length,
+			);
+		}, 4000);
+
+		return () => clearInterval(interval);
+	}, [isAutoPlaying, currentScenario.variants.length]);
+
+	// Reset variant when tab changes
+	useEffect(() => {
+		setActiveVariant(0);
+	}, [activeTab]);
+
+	const handlePrevVariant = useCallback(() => {
+		setIsAutoPlaying(false);
+		setActiveVariant((prev) =>
+			prev === 0 ? currentScenario.variants.length - 1 : prev - 1,
+		);
+	}, [currentScenario.variants.length]);
+
+	const handleNextVariant = useCallback(() => {
+		setIsAutoPlaying(false);
+		setActiveVariant(
+			(prev) => (prev + 1) % currentScenario.variants.length,
+		);
+	}, [currentScenario.variants.length]);
 
 	return (
-		<section id="showcase" className="overflow-hidden">
-			<div className="container mx-auto px-4 max-w-7xl space-y-5 md:space-y-8 lg:space-y-10">
+		<section id="showcase" className="overflow-hidden py-16 md:py-20">
+			<div className="container mx-auto px-4 max-w-6xl">
 				{/* Header */}
 				<motion.div
-					className="text-center space-y-3 md:space-y-4"
+					className="text-center mb-10 md:mb-14"
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
+					transition={{ duration: 0.5 }}
 				>
-					<h2 className="text-3xl md:text-4xl font-bold">
+					<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
 						{t("title")}
 					</h2>
-					<p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+					<p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
 						{t("subtitle")}
 					</p>
 				</motion.div>
 
-				{/* Tabs Navigation + Description */}
-				<div className="flex flex-col items-center gap-3.5 md:gap-4">
-					<div className={TAB_CONTAINER_CLASS}>
+				{/* Tabs Navigation */}
+				<motion.div
+					className="flex justify-center mb-8"
+					initial={{ opacity: 0, y: 10 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5, delay: 0.1 }}
+				>
+					<div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 rounded-full bg-muted/50 dark:bg-muted/30 border border-border/50">
 						{SHOWCASE_SCENARIOS.map((scenario, index) => (
 							<button
 								key={scenario.id}
 								type="button"
 								onClick={() => setActiveTab(index)}
 								className={cn(
-									"relative z-10 max-w-[180px] overflow-hidden truncate rounded-xl px-5 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 dark:text-slate-200",
+									"relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300",
 									activeTab === index
-										? "text-white shadow-[0_12px_35px_-22px_rgba(56,189,248,0.8)]"
-										: "hover:text-slate-900 dark:hover:text-white",
+										? "text-primary-foreground"
+										: "text-muted-foreground hover:text-foreground hover:bg-muted/50",
 								)}
-								title={scenario.label}
 							>
-								<span className="pointer-events-none absolute inset-[-1px] -z-10 rounded-xl border border-white/20 bg-gradient-to-r from-slate-200/40 via-white/10 to-slate-200/40 opacity-90 blur-[0.5px] dark:border-white/10 dark:from-white/10 dark:via-white/5 dark:to-white/5" />
 								{activeTab === index && (
 									<motion.div
-										layoutId="activeTab"
-										className="absolute inset-0 -z-10 rounded-xl bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 opacity-90"
+										layoutId="showcase-active-tab"
+										className="absolute inset-0 rounded-full bg-primary shadow-md"
 										transition={{
 											type: "spring",
-											bounce: 0.2,
-											duration: 0.6,
+											bounce: 0.15,
+											duration: 0.5,
 										}}
 									/>
 								)}
-								{scenario.label}
+								<span className="relative z-10">
+									{scenario.label}
+								</span>
 							</button>
 						))}
 					</div>
+				</motion.div>
 
-					<div className="text-center min-h-[2rem] flex items-center justify-center">
-						<AnimatePresence mode="wait">
-							<motion.p
-								key={activeTab}
-								initial={{ opacity: 0, y: 10 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: -10 }}
-								className="text-muted-foreground text-base md:text-lg max-w-2xl line-clamp-1"
-								title={
-									SHOWCASE_SCENARIOS[activeTab].description
-								}
-							>
-								{SHOWCASE_SCENARIOS[activeTab].description}
-							</motion.p>
-						</AnimatePresence>
-					</div>
-				</div>
-
-				{/* Fixed Grid of 3 Items */}
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-					{SHOWCASE_SCENARIOS[activeTab].items.map((item, index) => (
-						<motion.div
-							key={`${activeTab}-${item.id}`}
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ duration: 0.4, delay: index * 0.1 }}
-							className="space-y-4"
+				{/* Description */}
+				<div className="text-center mb-10 min-h-[3rem] flex items-center justify-center">
+					<AnimatePresence mode="wait">
+						<motion.p
+							key={activeTab}
+							initial={{ opacity: 0, y: 8 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -8 }}
+							transition={{ duration: 0.25 }}
+							className="text-muted-foreground text-base md:text-lg max-w-2xl"
 						>
-							<CompareSlider
-								original={item.original}
-								edited={item.edited}
-								aspectRatio="square"
-								className="rounded-2xl shadow-lg"
-								autoSpeed={0.6}
-								onCycleComplete={
-									index === 0
-										? handleCycleComplete
-										: undefined
-								}
-								onHoverChange={setIsHovering}
-							/>
-							<div className="flex items-center justify-between px-1">
-								<span className="font-medium text-sm">
-									{item.label}
-								</span>
-								<Badge
-									status="info"
-									className="text-[10px] h-6 bg-primary/10 text-primary hover:bg-primary/20 border border-primary/20 transition-colors cursor-pointer lowercase first-letter:uppercase"
-								>
-									Try with AI
-								</Badge>
-							</div>
-						</motion.div>
-					))}
+							{currentScenario.description}
+						</motion.p>
+					</AnimatePresence>
 				</div>
+
+				{/* Main Display Area */}
+				<motion.div
+					className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start"
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+				>
+					{/* Left: Original Image */}
+					<div className="relative">
+						<div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-card shadow-lg">
+							<AnimatePresence mode="wait">
+								<motion.div
+									key={`original-${activeTab}`}
+									initial={{ opacity: 0 }}
+									animate={{ opacity: 1 }}
+									exit={{ opacity: 0 }}
+									transition={{ duration: 0.3 }}
+									className="absolute inset-0"
+								>
+									<Image
+										src={currentScenario.original}
+										alt="Original"
+										fill
+										className="object-cover"
+										sizes="(max-width: 1024px) 100vw, 50vw"
+										priority
+									/>
+								</motion.div>
+							</AnimatePresence>
+
+							{/* Original Label */}
+							<div className="absolute top-3 left-3 z-10">
+								<div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-semibold uppercase tracking-wide bg-black/70 text-white backdrop-blur-sm">
+									<span className="h-1.5 w-1.5 rounded-full bg-white/60" />
+									<span>Original</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					{/* Right: AI Generated Variants */}
+					<div className="relative">
+						{/* Main Variant Display */}
+						<section
+							className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-primary/30 bg-card shadow-xl shadow-primary/10"
+							onMouseEnter={() => setIsAutoPlaying(false)}
+							onMouseLeave={() => setIsAutoPlaying(true)}
+							aria-label="Image Preview"
+						>
+							<AnimatePresence mode="wait">
+								<motion.div
+									key={`variant-${activeTab}-${activeVariant}`}
+									initial={{ opacity: 0, scale: 1.02 }}
+									animate={{ opacity: 1, scale: 1 }}
+									exit={{ opacity: 0, scale: 0.98 }}
+									transition={{ duration: 0.4 }}
+									className="absolute inset-0"
+								>
+									<Image
+										src={
+											currentScenario.variants[
+												activeVariant
+											].image
+										}
+										alt="AI Generated"
+										fill
+										className="object-cover"
+										sizes="(max-width: 1024px) 100vw, 50vw"
+										priority
+									/>
+								</motion.div>
+							</AnimatePresence>
+
+							{/* AI Edit Label */}
+							<div className="absolute top-3 right-3 z-10">
+								<div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-semibold uppercase tracking-wide bg-gradient-to-r from-primary to-emerald-500 text-white shadow-lg shadow-primary/30">
+									<SparklesIcon className="h-3 w-3" />
+									<span>AI Edit</span>
+								</div>
+							</div>
+
+							{/* Bottom Prompt Bar */}
+							<div className="absolute inset-x-0 bottom-0 z-10">
+								<div className="bg-gradient-to-t from-black/90 via-black/60 to-transparent pt-12 pb-4 px-4">
+									{/* Navigation Arrows */}
+									<div className="flex items-center justify-between mb-3">
+										<button
+											type="button"
+											onClick={handlePrevVariant}
+											className="p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
+											aria-label="Previous variant"
+										>
+											<ChevronLeftIcon className="w-4 h-4" />
+										</button>
+
+										{/* Prompt Text */}
+										<AnimatePresence mode="wait">
+											<motion.p
+												key={`prompt-${activeVariant}`}
+												initial={{ opacity: 0, y: 5 }}
+												animate={{ opacity: 1, y: 0 }}
+												exit={{ opacity: 0, y: -5 }}
+												transition={{ duration: 0.2 }}
+												className="text-white text-sm font-medium text-center flex-1 px-4 line-clamp-1"
+											>
+												{
+													currentScenario.variants[
+														activeVariant
+													].prompt
+												}
+											</motion.p>
+										</AnimatePresence>
+
+										<button
+											type="button"
+											onClick={handleNextVariant}
+											className="p-2 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors"
+											aria-label="Next variant"
+										>
+											<ChevronRightIcon className="w-4 h-4" />
+										</button>
+									</div>
+
+									{/* Dot Indicators */}
+									<div className="flex items-center justify-center gap-2">
+										{currentScenario.variants.map(
+											(_, index) => (
+												<button
+													key={index}
+													type="button"
+													onClick={() => {
+														setIsAutoPlaying(false);
+														setActiveVariant(index);
+													}}
+													className={cn(
+														"h-1.5 rounded-full transition-all duration-300",
+														activeVariant === index
+															? "w-6 bg-primary"
+															: "w-1.5 bg-white/50 hover:bg-white/80",
+													)}
+													aria-label={`View variant ${index + 1}`}
+												/>
+											),
+										)}
+									</div>
+								</div>
+							</div>
+						</section>
+
+						{/* Variant Thumbnails */}
+						<div className="flex gap-3 mt-4 justify-center">
+							{currentScenario.variants.map((variant, index) => (
+								<button
+									key={variant.id}
+									type="button"
+									onClick={() => {
+										setIsAutoPlaying(false);
+										setActiveVariant(index);
+									}}
+									className={cn(
+										"relative w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200",
+										activeVariant === index
+											? "border-primary ring-2 ring-primary/30 scale-105"
+											: "border-border hover:border-primary/50 opacity-70 hover:opacity-100",
+									)}
+								>
+									<Image
+										src={variant.image}
+										alt={variant.prompt}
+										fill
+										className="object-cover"
+										sizes="64px"
+									/>
+								</button>
+							))}
+						</div>
+					</div>
+				</motion.div>
 			</div>
 		</section>
 	);

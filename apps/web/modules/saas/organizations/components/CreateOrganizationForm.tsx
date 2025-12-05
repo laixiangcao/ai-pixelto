@@ -71,15 +71,15 @@ export function CreateOrganizationForm({
 
 	return (
 		<div className="mx-auto w-full max-w-md">
-			<h1 className="font-bold text-xl md:text-2xl">
+			<h1 className="font-bold text-2xl md:text-3xl text-center bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/70">
 				{t("organizations.createForm.title")}
 			</h1>
-			<p className="mt-2 mb-6 text-foreground/60">
+			<p className="mt-2 mb-8 text-center text-muted-foreground">
 				{t("organizations.createForm.subtitle")}
 			</p>
 
 			<Form {...form}>
-				<form onSubmit={onSubmit}>
+				<form onSubmit={onSubmit} className="space-y-6">
 					<FormField
 						control={form.control}
 						name="name"
@@ -89,7 +89,11 @@ export function CreateOrganizationForm({
 									{t("organizations.createForm.name")}
 								</FormLabel>
 								<FormControl>
-									<Input {...field} autoComplete="email" />
+									<Input
+										{...field}
+										autoComplete="off"
+										className="bg-background/50 border-border/50 focus:border-primary/50 h-11"
+									/>
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -97,8 +101,9 @@ export function CreateOrganizationForm({
 					/>
 
 					<Button
-						className="mt-6 w-full"
+						className="w-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all h-11"
 						type="submit"
+						variant="primary"
 						loading={form.formState.isSubmitting}
 					>
 						{t("organizations.createForm.submit")}

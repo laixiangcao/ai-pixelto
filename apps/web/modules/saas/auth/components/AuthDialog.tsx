@@ -37,7 +37,7 @@ export function AuthDialog({
 
 	return (
 		<Dialog open={open} onOpenChange={onOpenChange}>
-			<DialogContent className="w-full max-w-md overflow-hidden border-0 p-0 shadow-2xl">
+			<DialogContent className="w-full max-w-md overflow-hidden border border-border/50 bg-background/95 backdrop-blur-xl p-0 shadow-2xl sm:rounded-3xl">
 				<DialogTitle className="sr-only">
 					{activeTab === "login"
 						? t("auth.login.title")

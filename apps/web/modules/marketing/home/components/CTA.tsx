@@ -1,48 +1,80 @@
 "use client";
 
-import { Button } from "@ui/components/button";
-import { useTranslations } from "next-intl";
+import { motion } from "framer-motion";
+import { ArrowRightIcon, SparklesIcon } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export function CTA() {
 	const t = useTranslations("home.cta");
 
 	return (
-		<section>
-			<div className="container max-w-5xl mx-auto px-4">
-				<div className="relative overflow-hidden rounded-3xl bg-slate-900 dark:bg-slate-800 border border-slate-800 dark:border-slate-700 shadow-2xl">
-					{/* Gradient Effects */}
-					<div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl pointer-events-none" />
-					<div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-blue-500/30 rounded-full blur-3xl pointer-events-none" />
+		<section id="cta" className="py-12 md:py-16">
+			<div className="container max-w-4xl mx-auto px-4">
+				<motion.div
+					className="relative overflow-hidden rounded-2xl"
+					initial={{ opacity: 0, y: 16 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true }}
+					transition={{ duration: 0.5 }}
+				>
+					{/* Background */}
+					<div className="absolute inset-0 bg-gradient-to-br from-primary via-emerald-600 to-teal-600 dark:from-primary/90 dark:via-emerald-700 dark:to-teal-700" />
 
-					<div className="relative z-10 p-12 md:p-16 text-center">
-						<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 tracking-tight">
+					{/* Glow effects */}
+					<div className="absolute top-0 left-0 -translate-x-1/3 -translate-y-1/3 w-64 h-64 bg-white/20 rounded-full blur-3xl pointer-events-none" />
+					<div className="absolute bottom-0 right-0 translate-x-1/4 translate-y-1/4 w-48 h-48 bg-teal-300/25 rounded-full blur-2xl pointer-events-none" />
+
+					{/* Content */}
+					<div className="relative z-10 px-6 py-10 md:px-12 md:py-12 text-center">
+						<motion.h2
+							className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 tracking-tight"
+							initial={{ opacity: 0, y: 8 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.4, delay: 0.1 }}
+						>
 							{t("title")}
-						</h2>
-						<p className="text-slate-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+						</motion.h2>
+
+						<motion.p
+							className="text-white/80 text-base md:text-lg mb-8 max-w-xl mx-auto"
+							initial={{ opacity: 0, y: 8 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.4, delay: 0.15 }}
+						>
 							{t("subtitle")}
-						</p>
-						<div className="flex flex-col sm:flex-row justify-center gap-4 w-full sm:w-auto">
-							<Link href="/#editor" className="w-full sm:w-auto">
-								<Button
-									size="lg"
-									className="w-full sm:w-auto min-w-[160px] bg-white text-slate-900 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-base h-12"
+						</motion.p>
+
+						<motion.div
+							className="flex flex-col sm:flex-row justify-center gap-3"
+							initial={{ opacity: 0, y: 8 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							viewport={{ once: true }}
+							transition={{ duration: 0.4, delay: 0.2 }}
+						>
+							<Link href="/#editor">
+								<button
+									type="button"
+									className="group inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-primary font-semibold text-sm hover:bg-white/95 transition-all duration-200 shadow-lg min-w-[160px]"
 								>
+									<SparklesIcon className="w-4 h-4" />
 									{t("startCreating")}
-								</Button>
+									<ArrowRightIcon className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+								</button>
 							</Link>
-							<Link href="/pricing" className="w-full sm:w-auto">
-								<Button
-									size="lg"
-									variant="outline"
-									className="w-full sm:w-auto min-w-[160px] border-slate-700 text-white hover:bg-white/10 hover:text-white hover:border-white/30 transition-all duration-300 font-semibold text-base h-12 bg-transparent"
+							<Link href="/pricing">
+								<button
+									type="button"
+									className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white/10 border border-white/30 text-white font-semibold text-sm hover:bg-white/20 transition-all duration-200 min-w-[160px]"
 								>
 									{t("viewPricing")}
-								</Button>
+								</button>
 							</Link>
-						</div>
+						</motion.div>
 					</div>
-				</div>
+				</motion.div>
 			</div>
 		</section>
 	);

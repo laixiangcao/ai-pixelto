@@ -116,7 +116,11 @@ export function ForgotPasswordForm() {
 							)}
 						/>
 
-						<Button loading={form.formState.isSubmitting}>
+						<Button
+							loading={form.formState.isSubmitting}
+							variant="primary"
+							className="w-full shadow-lg shadow-primary/20"
+						>
 							{t("auth.forgotPassword.submit")}
 						</Button>
 					</form>

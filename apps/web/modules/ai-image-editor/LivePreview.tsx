@@ -28,7 +28,7 @@ interface LivePreviewProps {
 const MODEL_NAMES: Record<string, string> = {
 	"gemini-2.5-flash-image": "Nano Banana🍌",
 	"flux-context": "Flux Context",
-	"seedream": "Seedream",
+	seedream: "Seedream",
 };
 
 const LoadingStep = ({
@@ -44,7 +44,7 @@ const LoadingStep = ({
 		className={`flex items-center space-x-3 transition-all duration-500 ${active || completed ? "opacity-100 translate-x-0" : "opacity-30 translate-x-4"}`}
 	>
 		<div
-			className={`w-4 h-4 flex items-center justify-center ${completed ? "text-green-400" : active ? "text-orange-400" : "text-zinc-700"}`}
+			className={`w-4 h-4 flex items-center justify-center ${completed ? "text-primary" : active ? "text-primary/70" : "text-muted-foreground"}`}
 		>
 			{completed ? (
 				<svg
@@ -63,13 +63,13 @@ const LoadingStep = ({
 					/>
 				</svg>
 			) : active ? (
-				<div className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-pulse" />
+				<div className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
 			) : (
-				<div className="w-1.5 h-1.5 bg-zinc-700 rounded-full" />
+				<div className="w-1.5 h-1.5 bg-muted-foreground rounded-full" />
 			)}
 		</div>
 		<span
-			className={`font-mono text-xs tracking-wide uppercase ${active ? "text-zinc-200" : completed ? "text-zinc-400 line-through" : "text-zinc-600"}`}
+			className={`font-mono text-xs tracking-wide uppercase ${active ? "text-foreground" : completed ? "text-muted-foreground line-through" : "text-muted-foreground/50"}`}
 		>
 			{text}
 		</span>
@@ -156,7 +156,9 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 	}
 
 	return createPortal(
-		<div className={`relative z-[9999] ${isFocused ? "pointer-events-auto" : "pointer-events-none"}`}>
+		<div
+			className={`relative z-[9999] ${isFocused ? "pointer-events-auto" : "pointer-events-none"}`}
+		>
 			{/* Backdrop */}
 			<button
 				type="button"
@@ -178,7 +180,7 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 			<div
 				className={`
         fixed z-50 flex flex-col
-        rounded-lg overflow-hidden border border-zinc-800 bg-[#0E0E10] shadow-2xl
+        rounded-lg overflow-hidden border border-border bg-card shadow-2xl
         transition-all duration-700 cubic-bezier(0.2, 0.8, 0.2, 1)
         ${
 			isFocused
@@ -188,21 +190,23 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
       `}
 			>
 				{/* Minimal Technical Header */}
-				<div className="bg-[#121214] px-4 py-3 flex items-center justify-between border-b border-zinc-800 shrink-0">
+				<div className="bg-background/95 backdrop-blur-md px-4 py-2.5 flex items-center justify-between border-b border-border/50 shrink-0">
 					{/* Left: Close Button */}
 					<div className="flex items-center w-32">
 						<button
 							type="button"
 							onClick={onReset}
-							className="group flex items-center space-x-1.5 text-zinc-400 hover:text-white transition-colors px-2 py-1.5 rounded-md hover:bg-zinc-800"
+							className="group flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded hover:bg-muted/50"
 						>
 							<XMarkIcon className="w-4 h-4" />
-							<span className="text-xs font-medium">{t("preview.close")}</span>
+							<span className="text-xs">
+								{t("preview.close")}
+							</span>
 						</button>
 					</div>
 
 					{/* Center: Title */}
-					<div className="flex-1 flex items-center justify-center min-w-0 px-4 text-zinc-500">
+					<div className="flex-1 flex items-center justify-center min-w-0 px-4 text-muted-foreground">
 						<PhotoIcon className="w-3 h-3 mr-2 flex-shrink-0" />
 						<span className="text-[11px] font-mono uppercase tracking-wider truncate">
 							{isLoading
@@ -228,7 +232,7 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 												? t("preview.showResult")
 												: t("preview.compare")
 										}
-										className="bg-zinc-800 text-zinc-100 hover:text-zinc-300 transition-colors p-1.5 rounded-md"
+										className="bg-muted text-foreground hover:text-muted-foreground transition-colors p-1.5 rounded-md"
 									>
 										<ViewColumnsIcon className="w-4 h-4" />
 									</button>
@@ -238,7 +242,7 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 									type="button"
 									onClick={handleExport}
 									title={t("preview.download")}
-									className="bg-zinc-800 text-zinc-100 hover:text-zinc-300 transition-colors p-1.5 rounded-md"
+									className="bg-muted text-foreground hover:text-muted-foreground transition-colors p-1.5 rounded-md"
 								>
 									<ArrowDownTrayIcon className="w-4 h-4" />
 								</button>
@@ -247,7 +251,7 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 									type="button"
 									onClick={onReset}
 									title={t("preview.newEdit")}
-									className="ml-2 flex items-center space-x-1 text-xs font-bold bg-zinc-100 text-black hover:bg-white px-3 py-1.5 rounded-md transition-colors shadow-lg hover:shadow-white/25"
+									className="ml-2 flex items-center space-x-1 text-xs font-bold bg-primary text-primary-foreground hover:bg-primary/90 px-3 py-1.5 rounded-md transition-colors shadow-lg hover:shadow-primary/25"
 								>
 									<PlusIcon className="w-3 h-3" />
 									<span className="hidden sm:inline">
@@ -260,20 +264,20 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 				</div>
 
 				{/* Main Content Area */}
-				<div className="relative w-full flex-1 bg-[#09090b] flex overflow-hidden">
+				<div className="relative w-full flex-1 bg-background flex overflow-hidden">
 					{isLoading ? (
 						<div className="absolute inset-0 flex flex-col items-center justify-center p-8 w-full">
 							{/* Technical Loading State */}
 							<div className="w-full max-w-md space-y-8">
 								<div className="flex flex-col items-center">
-									<div className="relative w-16 h-16 mb-6 text-orange-500">
-										<div className="absolute inset-0 animate-ping opacity-20 rounded-full bg-orange-500" />
+									<div className="relative w-16 h-16 mb-6 text-primary">
+										<div className="absolute inset-0 animate-ping opacity-20 rounded-full bg-primary" />
 										<SparklesIcon className="w-full h-full animate-[spin_3s_linear_infinite]" />
 									</div>
-									<h3 className="text-zinc-100 font-mono text-lg tracking-tight">
+									<h3 className="text-foreground font-mono text-lg tracking-tight">
 										{t("loading.title")}
 									</h3>
-									<p className="text-zinc-500 text-sm mt-2">
+									<p className="text-muted-foreground text-sm mt-2">
 										{t("loading.processing", {
 											model: modelName,
 										})}
@@ -281,15 +285,15 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 								</div>
 
 								{/* Progress Bar */}
-								<div className="w-full h-1 bg-zinc-800 rounded-full overflow-hidden relative">
+								<div className="w-full h-1 bg-muted rounded-full overflow-hidden relative">
 									<div
-										className="h-full bg-orange-500 transition-all duration-300 ease-out"
+										className="h-full bg-primary transition-all duration-300 ease-out"
 										style={{ width: `${progress}%` }}
 									/>
 								</div>
 
 								{/* Terminal Steps */}
-								<div className="border border-zinc-800 bg-black/50 rounded-lg p-4 space-y-3 font-mono text-sm">
+								<div className="border border-border bg-card/50 rounded-lg p-4 space-y-3 font-mono text-sm">
 									<LoadingStep
 										text={t("loading.steps.analyzing")}
 										active={loadingStep === 0}
@@ -317,36 +321,32 @@ export const LivePreview: React.FC<LivePreviewProps> = ({
 						<div className="w-full h-full flex">
 							{/* Split View: Left Panel (Original Image) */}
 							{showSplitView && creation.originalImage && (
-								<div className="w-1/2 h-full border-r border-zinc-800 bg-[#0c0c0e] relative flex flex-col shrink-0">
-									<div className="absolute top-4 left-4 z-10 bg-black/80 backdrop-blur text-zinc-400 text-[10px] font-mono uppercase px-2 py-1 rounded border border-zinc-800">
+								<div className="w-1/2 h-full border-r border-border/30 relative flex items-center justify-center shrink-0 p-4">
+									<div className="absolute top-3 left-3 z-10 bg-black/50 backdrop-blur-sm text-white/80 text-[10px] font-mono uppercase px-2 py-0.5 rounded">
 										{t("preview.original")}
 									</div>
-									<div className="w-full h-full p-6 flex items-center justify-center overflow-hidden">
-										{/* biome-ignore lint/performance/noImgElement: We need instant display for preview */}
-										<img
-											src={creation.originalImage}
-											alt="Original Input"
-											className="w-full h-full object-contain shadow-xl rounded"
-										/>
-									</div>
+									{/* biome-ignore lint/performance/noImgElement: We need instant display for preview */}
+									<img
+										src={creation.originalImage}
+										alt="Original Input"
+										className="max-w-full max-h-full object-contain rounded-lg"
+									/>
 								</div>
 							)}
 
 							{/* Result Preview Panel */}
 							<div
-								className={`relative h-full bg-[#09090b] flex flex-col items-center justify-center overflow-hidden transition-all duration-500 ${showSplitView && creation.originalImage ? "w-1/2" : "w-full"}`}
+								className={`relative h-full flex items-center justify-center overflow-hidden transition-all duration-500 p-4 ${showSplitView && creation.originalImage ? "w-1/2" : "w-full"}`}
 							>
-								<div className="absolute top-4 left-4 z-10 bg-orange-500/10 backdrop-blur text-orange-400 text-[10px] font-mono uppercase px-2 py-1 rounded border border-orange-500/20">
+								<div className="absolute top-3 left-3 z-10 bg-primary/80 backdrop-blur-sm text-primary-foreground text-[10px] font-mono uppercase px-2 py-0.5 rounded">
 									{t("preview.editedResult")}
 								</div>
-								<div className="w-full h-full p-6 flex items-center justify-center overflow-hidden">
-									{/* biome-ignore lint/performance/noImgElement: We need instant display for preview */}
-									<img
-										src={creation.resultImage}
-										alt="Edited Result"
-										className="w-full h-full object-contain shadow-xl rounded"
-									/>
-								</div>
+								{/* biome-ignore lint/performance/noImgElement: We need instant display for preview */}
+								<img
+									src={creation.resultImage}
+									alt="Edited Result"
+									className="max-w-full max-h-full object-contain rounded-lg"
+								/>
 							</div>
 						</div>
 					) : null}

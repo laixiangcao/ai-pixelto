@@ -10,6 +10,8 @@ interface CompareSliderProps {
 	edited: string;
 	originalLabel?: string;
 	editedLabel?: string;
+	/** Optional item label displayed at bottom overlay */
+	itemLabel?: string;
 	/** Controls how quickly the handle moves during auto-play (higher = faster). */
 	autoSpeed?: number;
 	/** Called when the handle completes a full back-and-forth auto-play loop. */
@@ -25,6 +27,7 @@ export function CompareSlider({
 	edited,
 	originalLabel = "Original",
 	editedLabel = "AI Edited",
+	itemLabel,
 	autoSpeed = 0.6,
 	onCycleComplete,
 	onHoverChange,
@@ -144,7 +147,7 @@ export function CompareSlider({
 		<div
 			ref={containerRef}
 			className={cn(
-				"relative w-full overflow-hidden select-none group cursor-ew-resize rounded-2xl border border-white/10 shadow-xl touch-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background",
+				"relative w-full overflow-hidden select-none group cursor-ew-resize rounded-2xl border border-border shadow-lg dark:shadow-xl touch-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background",
 				aspectRatio === "square" && "aspect-square",
 				aspectRatio === "video" && "aspect-video",
 				aspectRatio === "portrait" && "aspect-[3/4]",
@@ -181,10 +184,11 @@ export function CompareSlider({
 					sizes="(max-width: 768px) 100vw, 50vw"
 					priority
 				/>
+				{/* AI Edited Label - Small rounded style like History item */}
 				{editedLabel && (
-					<div className="absolute top-4 right-4 z-10 pointer-events-none">
-						<div className="flex items-center gap-1 rounded-full border border-white/20 bg-gradient-to-r from-primary to-rose-500 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-white shadow-lg shadow-primary/30 backdrop-blur">
-							<SparklesIcon className="h-3 w-3" />
+					<div className="absolute top-3 right-3 z-10 pointer-events-none">
+						<div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wide bg-primary/90 text-white backdrop-blur-sm">
+							<SparklesIcon className="h-2.5 w-2.5" />
 							<span>{editedLabel}</span>
 						</div>
 					</div>
@@ -204,19 +208,46 @@ export function CompareSlider({
 					sizes="(max-width: 768px) 100vw, 50vw"
 					priority
 				/>
+				{/* Original Label - Small rounded style like History item */}
 				{originalLabel && (
-					<div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur-md rounded-full text-xs font-medium text-white/90 border border-white/10 z-10 pointer-events-none">
-						{originalLabel}
+					<div className="absolute top-3 left-3 z-10 pointer-events-none">
+						<div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wide bg-black/60 text-white/90 backdrop-blur-sm">
+							<span className="h-1.5 w-1.5 rounded-full bg-white/60" />
+							<span>{originalLabel}</span>
+						</div>
 					</div>
 				)}
 			</div>
+
+			{/* Bottom Gradient Overlay with Label and Button */}
+			{itemLabel && (
+				<div className="absolute inset-x-0 bottom-0 z-10 pointer-events-none">
+					{/* Gradient background */}
+					<div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+
+					{/* Content */}
+					<div className="relative px-4 py-3 flex items-center justify-between pointer-events-auto">
+						<span className="font-medium text-sm text-white">
+							{itemLabel}
+						</span>
+						<button
+							type="button"
+							className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+							onClick={(e) => e.stopPropagation()}
+						>
+							<SparklesIcon className="w-3 h-3" />
+							<span>Try it</span>
+						</button>
+					</div>
+				</div>
+			)}
 
 			{/* Slider Handle */}
 			<div
 				className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize shadow-[0_0_10px_rgba(0,0,0,0.5)] z-20"
 				style={{ left: `${sliderPosition}%` }}
 			>
-				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-slate-900">
+				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center text-muted-foreground">
 					<MoveHorizontalIcon className="w-4 h-4" />
 				</div>
 			</div>

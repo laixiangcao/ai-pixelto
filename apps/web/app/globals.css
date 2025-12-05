@@ -8,6 +8,13 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+@layer base {
+	:root {
+		--font-sans: var(--font-geist-sans);
+		--font-mono: var(--font-geist-mono);
+	}
+}
+
 pre.shiki {
 	@apply mb-4 rounded-lg p-6;
 }
@@ -39,4 +46,34 @@ div[role="tablist"].bg-secondary {
 
 input[cmdk-input] {
 	@apply border-none focus-visible:ring-0;
+}
+
+/* Theme toggle animations - Premium feel */
+@keyframes theme-spin-out {
+	0% {
+		transform: rotate(0deg) scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: rotate(90deg) scale(0.3);
+		opacity: 0;
+	}
+}
+
+@keyframes theme-spin-in {
+	0% {
+		transform: rotate(-90deg) scale(0.3);
+		opacity: 0;
+	}
+	60% {
+		transform: rotate(10deg) scale(1.1);
+		opacity: 1;
+	}
+	80% {
+		transform: rotate(-5deg) scale(0.95);
+	}
+	100% {
+		transform: rotate(0deg) scale(1);
+		opacity: 1;
+	}
 }

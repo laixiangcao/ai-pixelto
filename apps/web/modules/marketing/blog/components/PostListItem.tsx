@@ -2,6 +2,7 @@
 
 import { LocaleLink } from "@i18n/routing";
 import type { Post } from "@marketing/blog/types";
+import { Badge } from "@ui/components/badge";
 import Image from "next/image";
 
 export function PostListItem({ post }: { post: Post }) {
@@ -9,71 +10,84 @@ export function PostListItem({ post }: { post: Post }) {
 		post;
 
 	return (
-		<div className="rounded-2xl border bg-card/50 p-6">
+		<div className="group flex flex-col rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:border-primary/20">
 			{image && (
-				<div className="-mx-4 -mt-4 relative mb-4 aspect-16/9 overflow-hidden rounded-xl">
+				<div className="-mx-4 -mt-4 relative mb-6 aspect-16/9 overflow-hidden rounded-xl">
 					<Image
 						src={image}
 						alt={title}
 						fill
 						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-						className="object-cover object-center"
+						className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
 					/>
 					<LocaleLink
 						href={`/blog/${path}`}
-						className="absolute inset-0"
+						className="absolute inset-0 z-10"
 					/>
+					<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 				</div>
 			)}
 
-			{tags && (
-				<div className="mb-2 flex flex-wrap gap-2">
-					{tags.map((tag) => (
-						<span
-							key={tag}
-							className="font-semibold text-primary text-xs uppercase tracking-wider"
-						>
-							#{tag}
-						</span>
-					))}
+			<div className="flex-1 space-y-4">
+				{tags && tags.length > 0 && (
+					<div className="flex flex-wrap gap-2">
+						{tags.map((tag) => (
+							<Badge
+								key={tag}
+								status="info"
+								className="bg-primary/10 text-primary hover:bg-primary/20 border-transparent"
+							>
+								#{tag}
+							</Badge>
+						))}
+					</div>
+				)}
+
+				<div className="space-y-2">
+					<LocaleLink
+						href={`/blog/${path}`}
+						className="block font-bold text-2xl tracking-tight hover:text-primary transition-colors line-clamp-2"
+					>
+						{title}
+					</LocaleLink>
+					{excerpt && (
+						<p className="text-muted-foreground leading-relaxed line-clamp-3">
+							{excerpt}
+						</p>
+					)}
 				</div>
-			)}
+			</div>
 
-			<LocaleLink
-				href={`/blog/${path}`}
-				className="font-semibold text-xl"
-			>
-				{title}
-			</LocaleLink>
-			{excerpt && <p className="opacity-50">{excerpt}</p>}
-
-			<div className="mt-4 flex items-center justify-between">
+			<div className="mt-6 flex items-center justify-between border-t border-border/50 pt-4">
 				{authorName && (
-					<div className="flex items-center">
+					<div className="flex items-center gap-3">
 						{authorImage && (
-							<div className="relative mr-2 size-8 overflow-hidden rounded-full">
+							<div className="relative size-8 overflow-hidden rounded-full ring-2 ring-background">
 								<Image
 									src={authorImage}
 									alt={authorName}
 									fill
-									sizes="96px"
+									sizes="32px"
 									className="object-cover object-center"
 								/>
 							</div>
 						)}
-						<div>
-							<p className="font-semibold text-sm opacity-50">
-								{authorName}
-							</p>
-						</div>
+						<span className="text-sm font-medium text-muted-foreground">
+							{authorName}
+						</span>
 					</div>
 				)}
 
-				<div className="mr-0 ml-auto">
-					<p className="text-sm opacity-30">
-						{Intl.DateTimeFormat("en-US").format(new Date(date))}
-					</p>
-				</div>
+				<time
+					dateTime={date}
+					className="text-sm text-muted-foreground/60 font-medium"
+				>
+					{Intl.DateTimeFormat("en-US", {
+						month: "short",
+						day: "numeric",
+						year: "numeric",
+					}).format(new Date(date))}
+				</time>
 			</div>
 		</div>
 	);

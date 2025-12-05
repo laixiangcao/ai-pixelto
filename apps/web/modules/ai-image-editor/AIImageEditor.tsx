@@ -228,7 +228,10 @@ export const AIImageEditor: React.FC = () => {
 	const isFocused = !!activeCreation || isGenerating;
 
 	return (
-		<div className="w-full flex flex-col items-center">
+		<section
+			id="editor"
+			className="w-full flex flex-col items-center mt-20 md:mt-32 scroll-mt-24"
+		>
 			<div
 				className={`
 					w-full max-w-[1126px] px-4 sm:px-6
@@ -240,31 +243,30 @@ export const AIImageEditor: React.FC = () => {
 					}
 				`}
 			>
-				<div className="flex flex-col justify-start items-center w-full">
-					{/* Input Section */}
-					<div className="w-full flex justify-center">
-						<AIImageEdit
-							onGenerate={handleGenerate}
-							isGenerating={isGenerating}
-							disabled={isFocused}
-						/>
-					</div>
-
-					{/* History Section */}
-					{history.length > 0 && (
-						<div className="w-full mt-8 flex flex-col items-center gap-6">
-							{/* <h3 className="text-2xl font-semibold text-foreground">
-								{t("history.title")}
-							</h3> */}
-							<div className="w-full px-2 md:px-0 max-w-6xl mx-auto">
-								<CreationHistory
-									history={history}
-									onSelect={handleSelectCreation}
-									onDelete={handleDeleteCreation}
-								/>
-							</div>
+				<div className="relative w-full rounded-3xl border border-border/40 bg-card/30 backdrop-blur-sm shadow-2xl shadow-primary/5 p-1 md:p-2">
+					<div className="flex flex-col justify-start items-center w-full">
+						{/* Input Section */}
+						<div className="w-full flex justify-center">
+							<AIImageEdit
+								onGenerate={handleGenerate}
+								isGenerating={isGenerating}
+								disabled={isFocused}
+							/>
 						</div>
-					)}
+
+						{/* History Section */}
+						{history.length > 0 && (
+							<div className="w-full mt-8 flex flex-col items-center gap-6">
+								<div className="w-full px-2 md:px-0 max-w-6xl mx-auto">
+									<CreationHistory
+										history={history}
+										onSelect={handleSelectCreation}
+										onDelete={handleDeleteCreation}
+									/>
+								</div>
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 
@@ -281,6 +283,6 @@ export const AIImageEditor: React.FC = () => {
 				open={authDialogOpen}
 				onOpenChange={setAuthDialogOpen}
 			/>
-		</div>
+		</section>
 	);
 };

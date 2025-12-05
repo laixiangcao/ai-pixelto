@@ -78,9 +78,9 @@ export function SignupForm({
 
 	const redirectPath = invitationId
 		? `/organization-invitation/${invitationId}`
-		: redirectPathOverride ??
+		: (redirectPathOverride ??
 			redirectTo ??
-			config.auth.redirectAfterSignIn;
+			config.auth.redirectAfterSignIn);
 
 	const onSubmit = form.handleSubmit(async ({ email, password, name }) => {
 		try {
@@ -243,7 +243,11 @@ export function SignupForm({
 								/>
 							)}
 
-							<Button loading={form.formState.isSubmitting}>
+							<Button
+								className="w-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
+								loading={form.formState.isSubmitting}
+								variant="primary"
+							>
 								{t("auth.signup.submit")}
 							</Button>
 						</form>
@@ -252,11 +256,12 @@ export function SignupForm({
 					{config.auth.enableSignup &&
 						config.auth.enableSocialLogin && (
 							<>
-								<div className="relative my-6 h-4">
-									<hr className="relative top-2" />
-									<p className="-translate-x-1/2 absolute top-0 left-1/2 mx-auto inline-block h-4 bg-card px-2 text-center font-medium text-foreground/60 text-sm leading-tight">
+								<div className="relative my-6 flex items-center gap-4">
+									<div className="h-px flex-1 bg-border/50" />
+									<span className="text-xs font-medium text-muted-foreground">
 										{t("auth.login.continueWith")}
-									</p>
+									</span>
+									<div className="h-px flex-1 bg-border/50" />
 								</div>
 
 								<div className="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-2">

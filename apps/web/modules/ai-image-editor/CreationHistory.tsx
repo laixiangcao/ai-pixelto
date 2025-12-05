@@ -51,7 +51,7 @@ const HistoryCard = ({
 			<button
 				type="button"
 				onClick={onClick}
-				className="relative w-full h-full rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-lg hover:shadow-blue-500/20 hover:border-blue-500/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+				className="relative w-full h-full rounded-xl overflow-hidden border border-border bg-card shadow-lg hover:shadow-primary/20 hover:border-primary/50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary"
 				aria-label={item.name}
 			>
 				{/* Image Container */}
@@ -80,19 +80,21 @@ const HistoryCard = ({
 					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
 				</div>
 
-				{/* Status Badge (Top Left) */}
-				<div className="absolute top-3 left-3 z-10">
+				{/* Status Badge (Top Left) - Minimalist design */}
+				<div className="absolute top-2.5 left-2.5 z-10">
 					<div
 						className={`
-							inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-wide shadow-sm border transition-all duration-500 backdrop-blur
+							inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wide
 							${
 								showResult
-									? "bg-sky-500/80 border-white/30 text-white"
-									: "bg-slate-700/80 border-white/20 text-slate-100"
+									? "bg-black/60 text-white backdrop-blur-sm"
+									: "bg-black/40 text-white/70 backdrop-blur-sm"
 							}
 						`}
 					>
-						<span className="h-1.5 w-1.5 rounded-full bg-white/90" />
+						<span
+							className={`h-1.5 w-1.5 rounded-full ${showResult ? "bg-primary" : "bg-white/60"}`}
+						/>
 						{showResult
 							? t("history.edited")
 							: t("history.original")}
@@ -101,8 +103,8 @@ const HistoryCard = ({
 
 				{/* Content Overlay (Bottom) */}
 				<div className="absolute bottom-0 left-0 w-full p-3 text-left z-10">
-					<div className="flex items-center justify-between mb-1 opacity-80">
-						<div className="flex items-center space-x-1.5 text-[10px] text-zinc-400 font-mono">
+					<div className="flex items-center justify-between mb-1">
+						<div className="flex items-center space-x-1.5 text-[10px] text-white/70 font-mono">
 							<ClockIcon className="w-3 h-3" />
 							<span>
 								{item.timestamp.toLocaleDateString([], {
@@ -117,13 +119,13 @@ const HistoryCard = ({
 							</span>
 						</div>
 					</div>
-					<h3 className="text-sm font-medium text-zinc-100 line-clamp-1 group-hover:text-blue-200 transition-colors">
+					<h3 className="text-sm font-medium text-white line-clamp-1 transition-colors">
 						{item.name}
 					</h3>
 				</div>
 
 				{/* Hover Effect Border Glow */}
-				<div className="absolute inset-0 border-2 border-blue-500/0 group-hover:border-blue-500/50 rounded-xl transition-all duration-300 pointer-events-none" />
+				<div className="absolute inset-0 border-2 border-primary/0 group-hover:border-primary/50 rounded-xl transition-all duration-300 pointer-events-none" />
 			</button>
 
 			{/* Delete Button (sibling to avoid nested buttons) */}
@@ -185,11 +187,11 @@ export const CreationHistory: React.FC<CreationHistoryProps> = ({
 	return (
 		<div className="w-full animate-in fade-in slide-in-from-bottom-8 duration-700 group/history">
 			<div className="flex items-center space-x-3 mb-4 px-1">
-				<SparklesIcon className="w-4 h-4 text-blue-500 dark:text-blue-400" />
-				<h2 className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+				<SparklesIcon className="w-4 h-4 text-primary" />
+				<h2 className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
 					{t("history.label")}
 				</h2>
-				<div className="h-px flex-1 bg-gradient-to-r from-zinc-200 to-transparent dark:from-zinc-800" />
+				<div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
 			</div>
 
 			<div className="relative">
@@ -199,7 +201,7 @@ export const CreationHistory: React.FC<CreationHistoryProps> = ({
 						<button
 							type="button"
 							onClick={() => scroll("left")}
-							className="pointer-events-auto h-8 w-8 flex items-center justify-center bg-white/90 dark:bg-zinc-800/90 backdrop-blur border border-zinc-200 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 rounded-full shadow-lg hover:text-blue-600 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-500 transition-all duration-200 active:scale-95"
+							className="pointer-events-auto h-8 w-8 flex items-center justify-center bg-card/90 backdrop-blur border border-border text-muted-foreground rounded-full shadow-lg hover:text-primary hover:bg-muted hover:border-primary/30 transition-all duration-200 active:scale-95"
 						>
 							<ChevronLeftIcon className="w-4 h-4" />
 						</button>
@@ -232,7 +234,7 @@ export const CreationHistory: React.FC<CreationHistoryProps> = ({
 						<button
 							type="button"
 							onClick={() => scroll("right")}
-							className="pointer-events-auto h-8 w-8 flex items-center justify-center bg-white/90 dark:bg-zinc-800/90 backdrop-blur border border-zinc-200 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 rounded-full shadow-lg hover:text-blue-600 dark:hover:text-white hover:bg-zinc-50 dark:hover:bg-zinc-700 hover:border-zinc-300 dark:hover:border-zinc-500 transition-all duration-200 active:scale-95"
+							className="pointer-events-auto h-8 w-8 flex items-center justify-center bg-card/90 backdrop-blur border border-border text-muted-foreground rounded-full shadow-lg hover:text-primary hover:bg-muted hover:border-primary/30 transition-all duration-200 active:scale-95"
 						>
 							<ChevronRightIcon className="w-4 h-4" />
 						</button>

@@ -52,13 +52,27 @@ export default async function Home({
 		<div className="relative min-h-screen">
 			<ParticleBackground />
 
-			<div className="relative z-10 space-y-24 md:space-y-32  py-24 md:py-32">
+			{/* Main content with consistent spacing */}
+			<div className="relative z-10 pt-24 md:pt-32 pb-8">
+				{/* Hero - no extra spacing needed, first element */}
 				<Hero />
+
+				{/* Main Editor Section */}
 				<AIImageEditor />
+
+				{/* Showcase */}
 				<Showcase />
+
+				{/* Inspiration Gallery */}
 				<Inspiration />
+
+				{/* Features - has its own background */}
 				<Features />
+
+				{/* FAQ */}
 				<FaqSection />
+
+				{/* CTA - Final call to action */}
 				<CTA />
 			</div>
 		</div>

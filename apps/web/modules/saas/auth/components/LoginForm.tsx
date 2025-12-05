@@ -18,6 +18,7 @@ import {
 	FormLabel,
 } from "@ui/components/form";
 import { Input } from "@ui/components/input";
+import { cn } from "@ui/lib";
 import {
 	AlertTriangleIcon,
 	ArrowRightIcon,
@@ -90,9 +91,9 @@ export function LoginForm({
 
 	const redirectPath = invitationId
 		? `/organization-invitation/${invitationId}`
-		: redirectPathOverride ??
+		: (redirectPathOverride ??
 			redirectTo ??
-			config.auth.redirectAfterSignIn;
+			config.auth.redirectAfterSignIn);
 
 	useEffect(() => {
 		if (sessionLoaded && user) {
@@ -298,9 +299,9 @@ export function LoginForm({
 								)}
 
 							<Button
-								className="w-full"
+								className="w-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all"
 								type="submit"
-								variant="secondary"
+								variant="primary"
 								loading={form.formState.isSubmitting}
 							>
 								{signinMode === "magic-link"
@@ -314,11 +315,12 @@ export function LoginForm({
 						(config.auth.enableSignup &&
 							config.auth.enableSocialLogin)) && (
 						<>
-							<div className="relative my-6 h-4">
-								<hr className="relative top-2" />
-								<p className="-translate-x-1/2 absolute top-0 left-1/2 mx-auto inline-block h-4 bg-card px-2 text-center font-medium text-foreground/60 text-sm leading-tight">
+							<div className="relative my-6 flex items-center gap-4">
+								<div className="h-px flex-1 bg-border/50" />
+								<span className="text-xs font-medium text-muted-foreground">
 									{t("auth.login.continueWith")}
-								</p>
+								</span>
+								<div className="h-px flex-1 bg-border/50" />
 							</div>
 
 							<div className="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-2">
@@ -337,8 +339,14 @@ export function LoginForm({
 
 								{config.auth.enablePasskeys && (
 									<Button
-										variant="light"
-										className="w-full sm:col-span-2"
+										variant="outline"
+										className={cn(
+											"w-full sm:col-span-2 transition-all duration-200",
+											// Light Mode
+											"bg-slate-50/50 border border-slate-200 hover:bg-white hover:border-slate-300 hover:shadow-sm text-slate-600 hover:text-slate-900 shadow-none",
+											// Dark Mode
+											"dark:bg-card/50 dark:border-border/50 dark:hover:bg-card/80 dark:text-foreground dark:shadow-none",
+										)}
 										onClick={() => signInWithPasskey()}
 									>
 										<KeyIcon className="mr-1.5 size-4 text-primary" />

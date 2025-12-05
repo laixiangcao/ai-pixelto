@@ -3,9 +3,9 @@
 import { LocaleLink, useLocalePathname } from "@i18n/routing";
 import { config } from "@repo/config";
 import { useSession } from "@saas/auth/hooks/use-session";
-import { ColorModeToggle } from "@shared/components/ColorModeToggle";
-import { LocaleSwitch } from "@shared/components/LocaleSwitch";
+import { LanguageSwitch } from "@shared/components/LanguageSwitch";
 import { Logo } from "@shared/components/Logo";
+import { ThemeToggle } from "@shared/components/ThemeToggle";
 import { Button } from "@ui/components/button";
 import {
 	Sheet,
@@ -57,13 +57,13 @@ export function NavBar() {
 	}[] = [
 		{
 			label: t("common.menu.pricing"),
-			href: "/#pricing",
+			href: "/pricing",
 		},
 		{
 			label: t("common.menu.blog"),
 			href: "/blog",
 		},
-		...(config.contactForm.enabled
+		...(config.contact?.form?.enabled
 			? [
 					{
 						label: t("common.menu.contact"),
@@ -82,24 +82,24 @@ export function NavBar() {
 	return (
 		<nav
 			className={cn(
-				"fixed top-0 left-0 z-50 w-full transition-shadow duration-200",
+				"fixed top-0 left-0 z-50 w-full transition-all duration-300",
 				!isTop || isDocsPage
-					? "bg-card/80 shadow-sm backdrop-blur-lg"
-					: "shadow-none",
+					? "bg-background/80 border-b border-border/50 shadow-sm backdrop-blur-xl"
+					: "bg-transparent",
 			)}
 			data-test="navigation"
 		>
 			<div className="container">
 				<div
 					className={cn(
-						"flex items-center justify-stretch gap-6 transition-[padding] duration-200",
-						!isTop || isDocsPage ? "py-3" : "py-3",
+						"flex items-center justify-stretch gap-6 transition-[padding] duration-300",
+						!isTop || isDocsPage ? "py-3" : "py-4",
 					)}
 				>
 					<div className="flex flex-1 justify-start items-center">
 						<LocaleLink
 							href="/"
-							className="flex items-center gap-3 hover:no-underline active:no-underline transition-opacity hover:opacity-80"
+							className="flex items-center gap-3 hover:no-underline active:no-underline transition-all duration-200 hover:opacity-80"
 						>
 							<Logo />
 						</LocaleLink>
@@ -111,25 +111,28 @@ export function NavBar() {
 								key={menuItem.href}
 								href={menuItem.href}
 								className={cn(
-									"block px-3 py-2 font-medium text-foreground/80 text-sm",
+									"relative block px-4 py-2 font-medium text-sm transition-colors duration-200",
 									isMenuItemActive(menuItem.href)
-										? "font-bold text-foreground"
-										: "",
+										? "text-primary font-semibold"
+										: "text-foreground/70 hover:text-primary",
 								)}
 								prefetch
 							>
 								{menuItem.label}
+								{isMenuItemActive(menuItem.href) && (
+									<span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
+								)}
 							</LocaleLink>
 						))}
 					</div>
 
 					<div className="flex flex-1 items-center justify-end gap-3">
-						<ColorModeToggle />
 						{config.i18n.enabled && (
 							<Suspense>
-								<LocaleSwitch />
+								<LanguageSwitch />
 							</Suspense>
 						)}
+						<ThemeToggle />
 
 						<Sheet
 							open={mobileMenuOpen}
@@ -139,24 +142,29 @@ export function NavBar() {
 								<Button
 									className="lg:hidden"
 									size="icon"
-									variant="light"
+									variant="ghost"
 									aria-label="Menu"
 								>
-									<MenuIcon className="size-4" />
+									<MenuIcon className="size-5" />
 								</Button>
 							</SheetTrigger>
-							<SheetContent className="w-[280px]" side="right">
-								<SheetTitle />
-								<div className="flex flex-col items-start justify-center">
+							<SheetContent
+								className="w-[280px] bg-background/95 backdrop-blur-xl"
+								side="right"
+							>
+								<SheetTitle className="sr-only">
+									Navigation Menu
+								</SheetTitle>
+								<div className="flex flex-col items-start justify-center pt-8 space-y-1">
 									{menuItems.map((menuItem) => (
 										<LocaleLink
 											key={menuItem.href}
 											href={menuItem.href}
 											className={cn(
-												"block px-3 py-2 font-medium text-base text-foreground/80",
+												"block w-full px-4 py-3 rounded-lg font-medium text-base transition-colors duration-200",
 												isMenuItemActive(menuItem.href)
-													? "font-bold text-foreground"
-													: "",
+													? "bg-primary/10 text-primary font-semibold"
+													: "text-foreground/80 hover:bg-muted hover:text-foreground",
 											)}
 											prefetch
 										>
@@ -164,10 +172,15 @@ export function NavBar() {
 										</LocaleLink>
 									))}
 
+									<div className="w-full h-px bg-border my-4" />
+
 									<NextLink
 										key={user ? "start" : "login"}
 										href={user ? "/app" : "/auth/login"}
-										className="block px-3 py-2 text-base"
+										className={cn(
+											"block w-full px-4 py-3 rounded-lg font-medium text-base transition-colors duration-200",
+											"bg-primary text-primary-foreground hover:bg-primary/90",
+										)}
 										prefetch={!user}
 									>
 										{user
@@ -182,9 +195,8 @@ export function NavBar() {
 							(user ? (
 								<Button
 									key="dashboard"
-									className="hidden lg:flex"
+									className="hidden lg:flex bg-primary text-primary-foreground hover:bg-primary/90"
 									asChild
-									variant="secondary"
 								>
 									<NextLink href="/app">
 										{t("common.menu.dashboard")}
@@ -193,9 +205,8 @@ export function NavBar() {
 							) : (
 								<Button
 									key="login"
-									className="hidden lg:flex"
+									className="hidden lg:flex bg-primary text-primary-foreground hover:bg-primary/90"
 									asChild
-									variant="secondary"
 								>
 									<NextLink href="/auth/login" prefetch>
 										{t("common.menu.login")}

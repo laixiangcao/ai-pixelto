@@ -1,22 +1,25 @@
 "use client";
 
-import { Button } from "@ui/components/button";
 import { cn } from "@ui/lib";
 import { motion, useInView } from "framer-motion";
-import { ArrowRightIcon } from "lucide-react";
+import {
+	ArrowRightIcon,
+	PaletteIcon,
+	SparklesIcon,
+	ZapIcon,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useRef } from "react";
 
 const FEATURE_IMAGES = [
-	// Freedom / Nature
-	"/images/feature/nano-banana1.png",
-	// Figures / Toys
-	"/images/feature/nano-banana2.png",
-	// Speed / Yellow
-	"/images/feature/nano-banana3.gif",
+	"/images/feature/speed.png",
+	"/images/feature/quality.png",
+	"/images/feature/creative.png",
 ];
+
+const FEATURE_ICONS = [ZapIcon, SparklesIcon, PaletteIcon];
 
 const FeatureBlock = ({
 	title,
@@ -24,12 +27,14 @@ const FeatureBlock = ({
 	cta,
 	image,
 	index,
+	icon: Icon,
 }: {
 	title: string;
 	description: string;
 	cta: string;
 	image: string;
 	index: number;
+	icon: React.ComponentType<{ className?: string }>;
 }) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -39,22 +44,22 @@ const FeatureBlock = ({
 		<div
 			ref={ref}
 			className={cn(
-				"flex flex-col gap-8 md:gap-16 items-center",
+				"flex flex-col gap-10 md:gap-16 items-center",
 				isEven ? "md:flex-row" : "md:flex-row-reverse",
 			)}
 		>
 			{/* Image Side */}
 			<motion.div
 				className="w-full md:w-1/2"
-				initial={{ opacity: 0, x: isEven ? -50 : 50 }}
+				initial={{ opacity: 0, x: isEven ? -40 : 40 }}
 				animate={
 					isInView
 						? { opacity: 1, x: 0 }
-						: { opacity: 0, x: isEven ? -50 : 50 }
+						: { opacity: 0, x: isEven ? -40 : 40 }
 				}
-				transition={{ duration: 0.8, ease: "easeOut" }}
+				transition={{ duration: 0.7, ease: "easeOut" }}
 			>
-				<div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/10 group">
+				<div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-card shadow-lg group">
 					<Image
 						src={image}
 						alt={title}
@@ -62,35 +67,46 @@ const FeatureBlock = ({
 						className="object-cover transition-transform duration-700 group-hover:scale-105"
 						sizes="(max-width: 768px) 100vw, 50vw"
 					/>
-					{/* Overlay Gradient */}
-					<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+					{/* Subtle gradient overlay */}
+					<div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 				</div>
 			</motion.div>
 
 			{/* Text Side */}
 			<motion.div
-				className="w-full md:w-1/2 text-left space-y-6"
-				initial={{ opacity: 0, y: 30 }}
+				className="w-full md:w-1/2 text-left space-y-5"
+				initial={{ opacity: 0, y: 24 }}
 				animate={
-					isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
+					isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }
 				}
-				transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+				transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
 			>
-				<h3 className="text-3xl md:text-4xl font-bold leading-tight">
+				{/* Feature Number & Icon */}
+				<div className="flex items-center gap-3">
+					<div className="flex items-center justify-center w-10 h-10 rounded-xl bg-primary/10 text-primary">
+						<Icon className="w-5 h-5" />
+					</div>
+					<span className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+						Feature {String(index + 1).padStart(2, "0")}
+					</span>
+				</div>
+
+				<h3 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight text-foreground">
 					{title}
 				</h3>
-				<p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+
+				<p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-lg">
 					{description}
 				</p>
-				<Link href="/#editor">
-					<Button
-						variant="secondary"
-						size="lg"
-						className="group bg-secondary/80 hover:bg-secondary backdrop-blur-sm border border-primary/10 mt-2"
+
+				<Link href="/#editor" className="inline-block pt-2">
+					<button
+						type="button"
+						className="group/btn inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all duration-200 shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30"
 					>
 						{cta}
-						<ArrowRightIcon className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-					</Button>
+						<ArrowRightIcon className="w-4 h-4 transition-transform group-hover/btn:translate-x-0.5" />
+					</button>
 				</Link>
 			</motion.div>
 		</div>
@@ -104,32 +120,44 @@ export function Features() {
 		{
 			key: "speed",
 			image: FEATURE_IMAGES[0],
+			icon: FEATURE_ICONS[0],
 		},
 		{
 			key: "figures",
 			image: FEATURE_IMAGES[1],
+			icon: FEATURE_ICONS[1],
 		},
 		{
 			key: "freedom",
 			image: FEATURE_IMAGES[2],
+			icon: FEATURE_ICONS[2],
 		},
 	];
 
 	return (
 		<section
 			id="features"
-			className="bg-zinc-50/50 dark:bg-zinc-900/20 overflow-hidden"
+			className="py-16 md:py-20 bg-muted/30 overflow-hidden"
 		>
 			<div className="container px-4 max-w-6xl mx-auto">
 				{/* Section Header */}
 				<motion.div
-					className="text-center mb-20 space-y-4"
+					className="text-center mb-16 md:mb-20"
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					transition={{ duration: 0.6 }}
+					transition={{ duration: 0.5 }}
 				>
-					<h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-slate-700 dark:from-white dark:to-slate-300">
+					<motion.span
+						className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4"
+						initial={{ opacity: 0, scale: 0.9 }}
+						whileInView={{ opacity: 1, scale: 1 }}
+						viewport={{ once: true }}
+						transition={{ duration: 0.4 }}
+					>
+						Why Choose Us
+					</motion.span>
+					<h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
 						{t("title")}
 					</h2>
 					<p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
@@ -138,7 +166,7 @@ export function Features() {
 				</motion.div>
 
 				{/* Feature Blocks */}
-				<div className="space-y-24 md:space-y-32">
+				<div className="space-y-20 md:space-y-28">
 					{features.map((feature, i) => (
 						<FeatureBlock
 							key={feature.key}
@@ -147,6 +175,7 @@ export function Features() {
 							description={t(`items.${feature.key}.description`)}
 							cta={t(`items.${feature.key}.cta`)}
 							image={feature.image}
+							icon={feature.icon}
 						/>
 					))}
 				</div>

@@ -1,5 +1,7 @@
+import { CTA } from "@marketing/home/components/CTA";
+import { HeartIcon, RocketIcon, ShieldCheckIcon } from "lucide-react";
 import Image from "next/image";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
 	params,
@@ -7,13 +9,11 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const t = await import(`@repo/i18n/translations/${locale}.json`).then(
-		(m: any) => m.about || m.default?.about,
-	);
+	const t = await getTranslations({ locale, namespace: "about" });
 
 	return {
-		title: t.title,
-		description: t.description,
+		title: t("title"),
+		description: t("description"),
 	};
 }
 
@@ -24,21 +24,43 @@ export default async function AboutPage({
 }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
-	const t = await import(`@repo/i18n/translations/${locale}.json`).then(
-		(m: any) => m.about || m.default?.about,
-	);
+	const t = await getTranslations({ locale, namespace: "about" });
+
+	const values = [
+		{
+			title: t("values.innovation.title"),
+			desc: t("values.innovation.description"),
+			icon: RocketIcon,
+			color: "text-blue-500",
+			bg: "bg-blue-500/10",
+		},
+		{
+			title: t("values.quality.title"),
+			desc: t("values.quality.description"),
+			icon: ShieldCheckIcon,
+			color: "text-emerald-500",
+			bg: "bg-emerald-500/10",
+		},
+		{
+			title: t("values.community.title"),
+			desc: t("values.community.description"),
+			icon: HeartIcon,
+			color: "text-rose-500",
+			bg: "bg-rose-500/10",
+		},
+	];
 
 	return (
-		<main className="flex-1">
+		<main className="flex-1 pt-24 md:pt-32">
 			{/* Hero Section */}
-			<section className="relative py-24 md:py-32 overflow-hidden">
-				<div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-blue-500/10 via-transparent to-transparent opacity-50 dark:opacity-30" />
+			<section className="relative pb-16 md:pb-24 overflow-hidden">
+				<div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,var(--tw-gradient-stops))] from-emerald-500/10 via-transparent to-transparent opacity-50 dark:opacity-30" />
 				<div className="container px-4 text-center max-w-4xl mx-auto space-y-8">
-					<h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 dark:from-white dark:to-white/60">
-						{t.title}
+					<h1 className="text-4xl md:text-6xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 dark:from-white dark:to-white/60 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+						{t("title")}
 					</h1>
-					<p className="text-xl text-muted-foreground leading-relaxed">
-						{t.description}
+					<p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
+						{t("description")}
 					</p>
 				</div>
 			</section>
@@ -47,21 +69,23 @@ export default async function AboutPage({
 			<section className="py-16 md:py-24 bg-muted/30">
 				<div className="container px-4">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-						<div className="space-y-6">
-							<h2 className="text-3xl font-bold">
-								{t.mission.title}
+						<div className="space-y-6 animate-in fade-in slide-in-from-left-8 duration-1000 delay-300">
+							<h2 className="text-3xl font-bold tracking-tight">
+								{t("mission.title")}
 							</h2>
 							<p className="text-lg text-muted-foreground leading-relaxed">
-								{t.mission.description}
+								{t("mission.description")}
 							</p>
 						</div>
-						<div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+						<div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-white/10 animate-in fade-in slide-in-from-right-8 duration-1000 delay-300">
 							<Image
 								src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
 								alt="Team working together"
 								fill
-								className="object-cover"
+								sizes="(max-width: 768px) 100vw, 50vw"
+								className="object-cover hover:scale-105 transition-transform duration-700"
 							/>
+							<div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
 						</div>
 					</div>
 				</div>
@@ -70,38 +94,26 @@ export default async function AboutPage({
 			{/* Values Section */}
 			<section className="py-16 md:py-24">
 				<div className="container px-4 max-w-6xl mx-auto">
-					<div className="text-center mb-16">
-						<h2 className="text-3xl font-bold mb-4">
-							{t.values.title}
+					<div className="text-center mb-16 space-y-4">
+						<h2 className="text-3xl font-bold tracking-tight">
+							{t("values.title")}
 						</h2>
-						<p className="text-lg text-muted-foreground">
-							{t.values.subtitle}
+						<p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+							{t("values.subtitle")}
 						</p>
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-						{[
-							{
-								title: t.values.innovation.title,
-								desc: t.values.innovation.description,
-								icon: "🚀",
-							},
-							{
-								title: t.values.quality.title,
-								desc: t.values.quality.description,
-								icon: "✨",
-							},
-							{
-								title: t.values.community.title,
-								desc: t.values.community.description,
-								icon: "🤝",
-							},
-						].map((item, i) => (
+						{values.map((item, i) => (
 							<div
 								key={i}
-								className="bg-card border rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow"
+								className="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-8 shadow-sm hover:shadow-xl hover:border-primary/20 transition-all duration-300 hover:-translate-y-1"
 							>
-								<div className="text-4xl mb-4">{item.icon}</div>
+								<div
+									className={`w-12 h-12 rounded-xl ${item.bg} ${item.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+								>
+									<item.icon className="size-6" />
+								</div>
 								<h3 className="text-xl font-semibold mb-3">
 									{item.title}
 								</h3>
@@ -115,24 +127,7 @@ export default async function AboutPage({
 			</section>
 
 			{/* CTA Section */}
-			<section className="py-24 text-center">
-				<div className="container px-4">
-					<div className="bg-primary/5 border border-primary/10 rounded-3xl p-12 max-w-4xl mx-auto">
-						<h2 className="text-3xl font-bold mb-4">
-							{t.cta.title}
-						</h2>
-						<p className="text-lg text-muted-foreground mb-8">
-							{t.cta.description}
-						</p>
-						<a
-							href="/app"
-							className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 px-8"
-						>
-							{t.cta.button}
-						</a>
-					</div>
-				</div>
-			</section>
+			<CTA />
 		</main>
 	);
 }

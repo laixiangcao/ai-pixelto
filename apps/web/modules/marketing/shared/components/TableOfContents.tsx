@@ -29,7 +29,7 @@ export function TableOfContents({
 	}, []);
 
 	return (
-		<div className="w-full max-w-64 self-start rounded-lg border p-4">
+		<div className="w-full max-w-64 self-start rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm p-4 shadow-sm">
 			<h3 className="mb-2 font-semibold text-base">
 				{t("common.tableOfContents.title")}
 			</h3>
