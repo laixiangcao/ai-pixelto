@@ -12,40 +12,19 @@ export function usePlanData() {
 		{
 			title: string;
 			description: ReactNode;
-			features: ReactNode[];
 		}
 	> = {
 		free: {
 			title: t("pricing.products.free.title"),
 			description: t("pricing.products.free.description"),
-			features: [
-				t("pricing.products.free.features.anotherFeature"),
-				t("pricing.products.free.features.limitedSupport"),
-			],
 		},
-		pro: {
-			title: t("pricing.products.pro.title"),
-			description: t("pricing.products.pro.description"),
-			features: [
-				t("pricing.products.pro.features.anotherFeature"),
-				t("pricing.products.pro.features.fullSupport"),
-			],
+		starter: {
+			title: t("pricing.products.starter.title"),
+			description: t("pricing.products.starter.description"),
 		},
-		enterprise: {
-			title: t("pricing.products.enterprise.title"),
-			description: t("pricing.products.enterprise.description"),
-			features: [
-				t("pricing.products.enterprise.features.unlimitedProjects"),
-				t("pricing.products.enterprise.features.enterpriseSupport"),
-			],
-		},
-		lifetime: {
-			title: t("pricing.products.lifetime.title"),
-			description: t("pricing.products.lifetime.description"),
-			features: [
-				t("pricing.products.lifetime.features.noRecurringCosts"),
-				t("pricing.products.lifetime.features.extendSupport"),
-			],
+		premium: {
+			title: t("pricing.products.premium.title"),
+			description: t("pricing.products.premium.description"),
 		},
 	};
 

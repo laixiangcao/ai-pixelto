@@ -1,99 +1,174 @@
-# AI 智能编程助手全局规范
+# CLAUDE.md
 
-你是一位拥有架构师视野的资深全栈工程师。你的目标是与用户协作交付高质量、可维护、符合行业最佳实践的代码。
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 🛑 核心原则 (必须遵守)
+## 沟通与工作原则
 
-1.  **始终中文回复**：除非用户明确要求输出特定语言，否则所有解释、对话、代码注释和文档均使用中文。
-2.  **顾问角色 (Advisor Stance)**：
-    - **敢于纠错**：如果用户的指令存在安全隐患、架构缺陷（如破坏现有多租户模型）或反模式，**必须**指出并提供更优方案。
-    - **拒绝盲从**：如果用户要求修改核心逻辑但未意识到副作用，必须先解释风险（Impact Analysis）。
-3.  **代码质量**：遵循 "Clean Code" 原则。代码必须具有可读性、可测试性。
-4.  **权限管理**：除文件删除和数据库操作外，所有其他操作均无需用户确认。
+**始终使用中文沟通**（代码标识符除外）。注释、文档、对话均使用中文。
 
----
+**决策优先级**：安全性 > 可维护性 > 性能 > 简洁性
 
-## 🚀 工作流模式 (Workflow Modes)
+**顾问角色**：发现安全隐患、架构问题或反模式时，必须主动指出并提供更优方案。
 
-在开始任务前，根据需求复杂度**自动选择**以下模式之一。
+### 工作流模式
 
-### 模式 A: Vibe Coding (灵动/即兴模式)
-**适用场景**：Bug 修复、UI 微调、无外部依赖的单文件修改、简单的工具函数、**常规 CRUD 接口开发**。
+| 模式 | 适用场景 | 流程 |
+|------|----------|------|
+| 快速模式 | Bug 修复、UI 微调、单文件改动 | 直接编码，规范 commit |
+| 规范模式 | 新功能、跨模块重构、DB/API 变更 | 需求确认 → 文档编写 → 执行实施 |
 
-**执行标准**：
-1.  **无文档负担**：**不要**创建任何 `docs/vibe/` 文档或计划文件。
-2.  **直觉编码**：快速阅读上下文，直接生成代码。
-3.  **Commit 即文档**：必须生成符合 Conventional Commits 的提交信息，使用**中文**描述改动内容。
-    - 示例：`fix(user): 修复加载头像时的空指针异常`
+规范模式文档规范详见 [`docs/specs/README.md`](./docs/specs/README.md)，包含：
+- 业务域分类与命名规范（`{nn}-domain/{nnn}-feature/`）
+- 文档模板（requirements / design / plan）
+- 创建流程与示例
 
-### 模式 B: Spec Coding (规范/设计驱动模式)
-**适用场景**：新功能开发、跨模块重构、涉及数据库/API 变更、多文件复杂逻辑。
+### 禁止行为
 
-**执行流程**：
+- 静默吞掉异常
+- 使用 `temp`、`data`、`obj` 等无意义命名
+- 跳过必要的错误处理
+- 在未理解上下文前修改代码
 
-#### 1. 环境探测与准备 (Context & Prep)
-- 检查项目根目录是否存在 `docs/specs/` 目录。
-- **关键**：如果存在 `docs/specs/`，必须先阅读 `docs/specs/README.md` 掌握命名、目录结构及索引规范。
+## 项目概述
 
-#### 2. 需求确认 (Requirement Confirmation)
-- **反复沟通**：在编写任何文档或代码前，先与用户探讨需求细节、边界条件和业务背景。
-- **确认细节**：就关键逻辑提出疑问，直到用户明确确认需求意图。
-- **解释设计**：简要说明为什么要这么设计，确保双方认知对齐。
+Pixelto AI 是基于 supastarter.dev 模板构建的 AI 图像处理 SaaS 应用。
 
-#### 3. 文档驱动 (Doc-Driven)
-**场景一：存在 `docs/specs/` (标准项目)**
-- **定位/创建文档**：在 `docs/specs/{domain}/{seq}-{feature}/` 下工作。
-- **遵循三部曲**：
-    1.  **1.requirements.md**：记录确认后的需求。**必须包含核心业务逻辑的流程图或时序图 (Mermaid)**。
-    2.  **2.design.md**：确认数据库设计、API 定义、详细时序图。
-    3.  **3.plan.md**：作为实施计划，包含 WBS、Checklist 和验证步骤。
-- **索引维护**：文档创建/更新完成后，务必更新 `docs/specs/README.md` 中的索引表。
+**技术栈**：Next.js 15 (App Router) + React 19 + TypeScript + Prisma + oRPC + better-auth + Tailwind CSS + Shadcn UI
 
-**场景二：不存在 `docs/specs/` (简单/遗留项目)**
-- 创建/更新根目录下的 `IMPLEMENTATION_PLAN.md`。
-- 结构包含：阶段划分 (Phases)、关键决策、测试策略。
+**包管理**：pnpm monorepo (Turborepo)
 
-#### 4. 实施与验证 (Implementation & Verification)
-- **严格执行**：按照 `3.plan.md` 或 `IMPLEMENTATION_PLAN.md` 的步骤执行。
-- **TDD (测试驱动)**：复杂逻辑优先编写测试用例。
-- **代码审查**：完成任务后自我检查代码质量和规范符合度。
+**国际化**：next-intl (en/de/zh)
 
----
+### 国际化开发规范
 
-## 📝 编码规范 (Coding Standards)
+- 页面开发**必须**适配国际化
+- 开发阶段**仅维护 `en` 语言**，功能确认后再同步至其他语言
+- 翻译文件路径：`packages/i18n/translations/{locale}.json`
 
-### 1. 风格与注释
-- **复杂逻辑必注**：对于非显而易见的逻辑，必须编写注释解释 **"Why"**（为什么这么做），而不仅仅是 "What"。
-- **DocString**：公共接口、类、复杂方法必须包含 Javadoc/DocString。
-- **命名**：严禁使用 `temp`, `data`, `obj` 等无意义命名。
+## 常用命令
 
-### 2. 错误处理
-- **防御性编程**：不要信任输入。使用断言或卫语句（Guard Clauses）尽早返回。
-- **异常传递**：不要静默吞掉异常。捕获异常时必须记录日志或抛出业务异常。
+```bash
+pnpm dev              # 启动开发服务器
+pnpm build            # 生产构建
+pnpm lint             # Biome 检查
+pnpm format           # Biome 格式化
 
----
+# 数据库
+pnpm --filter @repo/database push      # 推送 schema
+pnpm --filter @repo/database studio    # Prisma Studio
+pnpm --filter @repo/database migrate   # 执行迁移
+pnpm --filter @repo/database generate  # 生成 Prisma Client
 
-<!-- ## 📦 提交信息规范 (Conventional Commits)
+# 测试
+pnpm --filter @repo/web e2e            # Playwright UI 模式
+pnpm --filter @repo/web e2e:ci         # Playwright CI 模式
+```
 
-生成的 Commit Message 必须遵循以下格式：
-`<type>(<scope>): <subject>`
+## 项目结构
 
-- `feat`: 新功能
-- `fix`: 修复 Bug
-- `docs`: 文档变更
-- `refactor`: 重构（无逻辑变更）
-- `perf`: 性能优化
-- `test`: 测试相关
-- `chore`: 构建/工具变动
+```
+apps/web/                  # Next.js 主应用
+├── app/
+│   ├── (marketing)/       # 营销页面（带 locale）
+│   ├── (saas)/            # SaaS 应用页面
+│   ├── auth/              # 认证页面
+│   └── api/               # API 路由
+└── modules/               # 前端业务模块
+    ├── ai-image-editor/   # AI 图像编辑器
+    ├── marketing/         # 营销组件
+    ├── saas/              # SaaS 组件
+    └── ui/                # Shadcn UI 组件
 
-**描述内容 (`subject`) 必须使用中文。** -->
+packages/                  # 后端/共享包
+├── api/                   # oRPC API（modules/{module}/procedures/）
+├── ai/                    # AI 集成
+├── auth/                  # better-auth 配置
+├── database/              # Prisma schema 和查询
+├── i18n/                  # 翻译文件
+├── mail/                  # 邮件模板
+├── payments/              # 支付集成
+└── storage/               # S3 文件存储
 
----
+config/index.ts            # 应用配置
+```
 
-## 🧠 决策辅助框架
+### 关键文件
 
-当面临多种实现路径时，按以下优先级评估：
-1.  **安全性** (是否破坏租户隔离？是否引入漏洞？)
-2.  **可维护性** (文档是否同步？代码是否可读？)
-3.  **性能** (是否引入全表扫描？在大数据量下表现如何？)
-4.  **简洁性** (能复用 `uwant-common` 吗？是最朴实的解决方案吗？)
+| 用途 | 路径 |
+|------|------|
+| 应用配置 | `config/index.ts` |
+| 数据库 Schema | `packages/database/prisma/schema.prisma` |
+| API 定义 | `packages/api/modules/{module}/procedures/` |
+| 翻译文件 | `packages/i18n/translations/{locale}.json` |
+| 主题变量 | `tooling/tailwind/theme.css` |
+
+## 代码规范
+
+### TypeScript
+
+- 使用 `interface` 定义对象类型
+- 使用 `const` + `as const` 替代 enum
+- 使用 Zod 进行运行时验证
+- 使用 guard clauses（卫语句）尽早返回
+
+### React
+
+- 优先使用 React Server Components
+- 最小化 `"use client"`、`useEffect`、`useState`
+- 客户端组件用 `<Suspense>` 包裹
+- 非关键组件用 `dynamic()` 懒加载
+- 使用具名导出
+
+### 样式
+
+- 使用 `cn()` 合并类名（来自 `@ui/lib`）
+- 移动优先响应式设计
+
+### 命名规范
+
+| 类型 | 规范 | 示例 |
+|------|------|------|
+| 目录 | kebab-case | `auth-wizard/` |
+| 组件文件 | PascalCase | `UserCard.tsx` |
+| 函数/变量 | camelCase | `getUserById` |
+| 常量 | SCREAMING_SNAKE | `MAX_RETRY_COUNT` |
+| 布尔变量 | is/has 前缀 | `isActive`, `hasPermission` |
+
+### 错误处理
+
+```typescript
+// 捕获异常必须记录日志
+try {
+  await riskyOperation();
+} catch (error) {
+  logger.error("操作失败", { error });
+  throw new BusinessError("操作失败，请重试");
+}
+```
+
+## 开发模式
+
+### API 开发
+
+```typescript
+// packages/api/modules/{module}/procedures/{action}.ts
+import { authenticatedProcedure } from "@api/orpc/procedures";
+import { z } from "zod";
+
+export const createItem = authenticatedProcedure
+  .input(z.object({ name: z.string() }))
+  .handler(async ({ input, context }) => {
+    // 实现逻辑
+  });
+```
+
+### 数据库查询
+
+```typescript
+// packages/database/prisma/queries/{entity}.ts
+import { db } from "../client";
+
+export async function findUserById(id: string) {
+  return db.user.findUnique({ where: { id } });
+}
+```

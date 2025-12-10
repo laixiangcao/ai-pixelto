@@ -4,7 +4,7 @@ import { PricingTable } from "@saas/payments/components/PricingTable";
 import { useTranslations } from "next-intl";
 
 export function PricingSection() {
-	const t = useTranslations("home.pricing");
+	const t = useTranslations("pricing");
 
 	return (
 		<section id="pricing" className="scroll-mt-16 relative overflow-hidden">

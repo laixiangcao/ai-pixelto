@@ -35,9 +35,11 @@ export function FaqSection() {
 	];
 
 	return (
-		<section id="faq" className="container max-w-4xl mx-auto px-4">
+		<section id="faq" className="container max-w-4xl mx-auto px-4 pt-16">
 			<div className="text-center mb-16">
-				<h2 className="text-3xl md:text-4xl font-bold mb-4">{t("title")}</h2>
+				<h2 className="text-3xl md:text-4xl font-bold mb-4">
+					{t("title")}
+				</h2>
 				<p className="text-muted-foreground text-lg">{t("subtitle")}</p>
 			</div>
 

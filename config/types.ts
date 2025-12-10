@@ -67,6 +67,12 @@ export type Config = {
 				isFree?: boolean;
 				isEnterprise?: boolean;
 				recommended?: boolean;
+				yearlyDiscount?: number; // 年付折扣百分比（如 30 表示 Save 30%）
+				features?: Array<{
+					key: string; // 翻译键（如 "pricing.features.imagesPerDay"）
+					included: boolean; // 是否支持该功能
+					highlight?: boolean; // 是否高亮显示（绿色文字）
+				}>;
 				prices?: Array<
 					{
 						productId: string;

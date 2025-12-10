@@ -127,45 +127,144 @@ export const config = {
 			// The free plan is treated differently. It will automatically be assigned if the user has no other plan.
 			free: {
 				isFree: true,
+				features: [
+					{ key: "pricing.features.imagesPerDay", included: true },
+					{ key: "pricing.features.basicResolution", included: true },
+					{ key: "pricing.features.basicStyles", included: true },
+					{
+						key: "pricing.features.watermark",
+						included: false,
+						highlight: false,
+					},
+					{
+						key: "pricing.features.commercialLicense",
+						included: false,
+					},
+					{
+						key: "pricing.features.priorityQueue",
+						included: false,
+					},
+					{
+						key: "pricing.features.imageUpscaling",
+						included: false,
+					},
+					{
+						key: "pricing.features.backgroundRemoval",
+						included: false,
+					},
+				],
 			},
-			pro: {
+			starter: {
 				recommended: true,
+				yearlyDiscount: 30,
+				features: [
+					{ key: "pricing.features.imagesPerMonth", included: true },
+					{
+						key: "pricing.features.hdResolution",
+						included: true,
+						highlight: true,
+					},
+					{
+						key: "pricing.features.allStyles",
+						included: true,
+						highlight: true,
+					},
+					{ key: "pricing.features.watermark", included: true },
+					{
+						key: "pricing.features.commercialLicense",
+						included: true,
+					},
+					{
+						key: "pricing.features.priorityQueue",
+						included: true,
+					},
+					{
+						key: "pricing.features.imageUpscaling",
+						included: false,
+					},
+					{
+						key: "pricing.features.backgroundRemoval",
+						included: false,
+					},
+				],
 				prices: [
 					{
 						type: "recurring",
 						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_PRO_MONTHLY as string,
+							.NEXT_PUBLIC_PRICE_ID_STARTER_MONTHLY as string,
 						interval: "month",
-						amount: 29,
+						amount: 10,
 						currency: "USD",
-						seatBased: true,
-						trialPeriodDays: 7,
+						seatBased: false,
 					},
 					{
 						type: "recurring",
 						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_PRO_YEARLY as string,
+							.NEXT_PUBLIC_PRICE_ID_STARTER_YEARLY as string,
 						interval: "year",
-						amount: 290,
+						amount: 84,
 						currency: "USD",
-						seatBased: true,
-						trialPeriodDays: 7,
+						seatBased: false,
 					},
 				],
 			},
-			lifetime: {
+			premium: {
+				yearlyDiscount: 40,
+				features: [
+					{
+						key: "pricing.features.unlimitedImages",
+						included: true,
+					},
+					{
+						key: "pricing.features.ultraHdResolution",
+						included: true,
+						highlight: true,
+					},
+					{
+						key: "pricing.features.allStyles",
+						included: true,
+						highlight: true,
+					},
+					{ key: "pricing.features.watermark", included: true },
+					{
+						key: "pricing.features.commercialLicense",
+						included: true,
+					},
+					{
+						key: "pricing.features.priorityQueue",
+						included: true,
+					},
+					{
+						key: "pricing.features.imageUpscaling",
+						included: true,
+						highlight: true,
+					},
+					{
+						key: "pricing.features.backgroundRemoval",
+						included: true,
+						highlight: true,
+					},
+				],
 				prices: [
 					{
-						type: "one-time",
+						type: "recurring",
 						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_LIFETIME as string,
-						amount: 799,
+							.NEXT_PUBLIC_PRICE_ID_PREMIUM_MONTHLY as string,
+						interval: "month",
+						amount: 20,
 						currency: "USD",
+						seatBased: false,
+					},
+					{
+						type: "recurring",
+						productId: process.env
+							.NEXT_PUBLIC_PRICE_ID_PREMIUM_YEARLY as string,
+						interval: "year",
+						amount: 216,
+						currency: "USD",
+						seatBased: false,
 					},
 				],
-			},
-			enterprise: {
-				isEnterprise: true,
 			},
 		},
 	},
