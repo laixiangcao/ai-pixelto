@@ -48,7 +48,7 @@ OrganizationInvitation.PreviewProps = {
 	locale: defaultLocale,
 	translations: defaultTranslations,
 	url: "#",
-	organizationName: "Acme",
+	organizationName: "Pixelto",
 };
 
 export default OrganizationInvitation;

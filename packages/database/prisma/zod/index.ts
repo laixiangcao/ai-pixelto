@@ -56,9 +56,13 @@ export const AiChatScalarFieldEnumSchema = z.enum(['id', 'organizationId', 'user
 
 export const ContactSubmissionScalarFieldEnumSchema = z.enum(['id', 'name', 'email', 'subject', 'message', 'status', 'createdAt', 'updatedAt'])
 
-// File: CreditTransactionScalarFieldEnum.schema.ts
+// File: CreditGrantScalarFieldEnum.schema.ts
 
-export const CreditTransactionScalarFieldEnumSchema = z.enum(['id', 'userId', 'organizationId', 'amount', 'reason', 'metadata', 'createdAt'])
+export const CreditGrantScalarFieldEnumSchema = z.enum(['id', 'userId', 'organizationId', 'amount', 'remainingAmount', 'type', 'reason', 'expiresAt', 'sourceRef', 'metadata', 'createdAt', 'updatedAt'])
+
+// File: CreditSpendScalarFieldEnum.schema.ts
+
+export const CreditSpendScalarFieldEnumSchema = z.enum(['id', 'userId', 'organizationId', 'grantId', 'amount', 'reason', 'spendRef', 'metadata', 'createdAt'])
 
 // File: SortOrder.schema.ts
 
@@ -87,6 +91,10 @@ export const JsonNullValueFilterSchema = z.enum(['DbNull', 'JsonNull', 'AnyNull'
 // File: PurchaseType.schema.ts
 
 export const PurchaseTypeSchema = z.enum(['SUBSCRIPTION', 'ONE_TIME'])
+
+// File: CreditType.schema.ts
+
+export const CreditTypeSchema = z.enum(['DAILY_FREE', 'PURCHASED', 'SUBSCRIPTION', 'PROMOTIONAL'])
 
 // File: User.schema.ts
 
@@ -288,17 +296,39 @@ export const ContactSubmissionSchema = z.object({
 export type ContactSubmissionType = z.infer<typeof ContactSubmissionSchema>;
 
 
-// File: CreditTransaction.schema.ts
+// File: CreditGrant.schema.ts
 
-export const CreditTransactionSchema = z.object({
+export const CreditGrantSchema = z.object({
   id: z.string(),
   userId: z.string().nullish(),
   organizationId: z.string().nullish(),
   amount: z.number().int(),
+  remainingAmount: z.number().int(),
+  type: CreditTypeSchema,
   reason: z.string().nullish(),
+  expiresAt: z.date().nullish(),
+  sourceRef: z.string().nullish(),
+  metadata: z.unknown().refine((val) => { const getDepth = (obj: unknown, depth: number = 0): number => { if (depth > 10) return depth; if (obj === null || typeof obj !== 'object') return depth; const values = Object.values(obj as Record<string, unknown>); if (values.length === 0) return depth; return Math.max(...values.map(v => getDepth(v, depth + 1))); }; return getDepth(val) <= 10; }, "JSON nesting depth exceeds maximum of 10").nullish(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export type CreditGrantType = z.infer<typeof CreditGrantSchema>;
+
+
+// File: CreditSpend.schema.ts
+
+export const CreditSpendSchema = z.object({
+  id: z.string(),
+  userId: z.string().nullish(),
+  organizationId: z.string().nullish(),
+  grantId: z.string(),
+  amount: z.number().int(),
+  reason: z.string().nullish(),
+  spendRef: z.string().nullish(),
   metadata: z.unknown().refine((val) => { const getDepth = (obj: unknown, depth: number = 0): number => { if (depth > 10) return depth; if (obj === null || typeof obj !== 'object') return depth; const values = Object.values(obj as Record<string, unknown>); if (values.length === 0) return depth; return Math.max(...values.map(v => getDepth(v, depth + 1))); }; return getDepth(val) <= 10; }, "JSON nesting depth exceeds maximum of 10").nullish(),
   createdAt: z.date(),
 });
 
-export type CreditTransactionType = z.infer<typeof CreditTransactionSchema>;
+export type CreditSpendType = z.infer<typeof CreditSpendSchema>;
 

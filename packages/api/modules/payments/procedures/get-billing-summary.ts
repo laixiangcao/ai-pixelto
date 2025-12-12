@@ -1,6 +1,11 @@
 import { ORPCError, type } from "@orpc/server";
+import { config } from "@repo/config";
 import {
+	ensureDailyFreeGrant,
+	ensurePromotionalGrant,
+	ensureSubscriptionCycleGrant,
 	getCreditBalance,
+	getCreditDetailsBalance,
 	getPurchasesByOrganizationId,
 	getPurchasesByUserId,
 } from "@repo/database";
@@ -26,6 +31,14 @@ export const getBillingSummary = protectedProcedure
 	.output(
 		type<{
 			credits: number;
+			creditDetails: {
+				total: number;
+				dailyFree: number;
+				purchased: number;
+				subscription: number;
+				promotional: number;
+				nextExpiry: string | null;
+			};
 			activePlan: ReturnType<typeof createPurchasesHelper>["activePlan"];
 		}>(),
 	)
@@ -53,11 +66,80 @@ export const getBillingSummary = protectedProcedure
 			: await getPurchasesByUserId(context.user.id);
 
 		const { activePlan } = createPurchasesHelper(purchases);
+		const ownerUserId = ownerOrganizationId ? undefined : context.user.id;
+
+		// 懒发放：每日赠送（仅 Free 计划）
+		const activePlanConfig = activePlan
+			? config.payments.plans[activePlan.id]
+			: config.payments.plans.free;
+
+		if (
+			activePlan?.id === "free" &&
+			(activePlanConfig?.credits?.daily ?? 0) > 0
+		) {
+			await ensureDailyFreeGrant({
+				userId: ownerUserId,
+				organizationId: ownerOrganizationId,
+				amount: activePlanConfig.credits?.daily ?? 0,
+			});
+		}
+
+		// 懒发放：订阅周期（月付或年付按月发放）
+		if (
+			activePlan?.price?.type === "recurring" &&
+			(activePlanConfig?.credits?.monthly ?? 0) > 0
+		) {
+			const subscriptionPurchase =
+				purchases.find(
+					(purchase) =>
+						purchase.id === activePlan.purchaseId &&
+						purchase.type === "SUBSCRIPTION",
+				) ??
+				purchases.find((purchase) => purchase.type === "SUBSCRIPTION");
+
+			const anchorDate = subscriptionPurchase?.createdAt ?? new Date();
+
+			await ensureSubscriptionCycleGrant({
+				userId: ownerUserId,
+				organizationId: ownerOrganizationId,
+				amount: activePlanConfig.credits?.monthly ?? 0,
+				cycleAnchor: anchorDate,
+				sourceRefPrefix: `subscription-${activePlan.id}`,
+			});
+
+			// 年付促销赠送（一次性），过期时间与年付周期对齐
+			if (
+				activePlan.price.interval === "year" &&
+				(activePlanConfig?.credits?.promotionalBonus ?? 0) > 0 &&
+				subscriptionPurchase
+			) {
+				const bonusExpiresAt = new Date(anchorDate);
+				bonusExpiresAt.setUTCFullYear(bonusExpiresAt.getUTCFullYear() + 1);
+
+				await ensurePromotionalGrant({
+					userId: ownerUserId,
+					organizationId: ownerOrganizationId,
+					amount: activePlanConfig.credits?.promotionalBonus ?? 0,
+					expiresAt: bonusExpiresAt,
+					sourceRef: `promo-${activePlan.id}-${anchorDate.toISOString().slice(0, 10)}`,
+				});
+			}
+		}
 
 		const credits = await getCreditBalance({
 			userId: ownerOrganizationId ? undefined : context.user.id,
 			organizationId: ownerOrganizationId,
 		});
 
-		return { credits, activePlan };
+		const creditDetailsRaw = await getCreditDetailsBalance({
+			userId: ownerOrganizationId ? undefined : context.user.id,
+			organizationId: ownerOrganizationId,
+		});
+
+		const creditDetails = {
+			...creditDetailsRaw,
+			nextExpiry: creditDetailsRaw.nextExpiry?.toISOString() ?? null,
+		};
+
+		return { credits, creditDetails, activePlan };
 	});

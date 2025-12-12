@@ -1,7 +1,7 @@
 import type { Config } from "./types";
 
 export const config = {
-	appName: "supastarter for Next.js Demo",
+	appName: "Pixelto",
 	// Internationalization
 	i18n: {
 		// Whether internationalization should be enabled (if disabled, you still need to define the locale you want to use below and set it as the default locale)
@@ -32,7 +32,7 @@ export const config = {
 	// Organizations
 	organizations: {
 		// Whether organizations are enabled in general
-		enable: true,
+		enable: false,
 		// Whether billing for organizations should be enabled (below you can enable it for users instead)
 		enableBilling: false,
 		// Whether the organization should be hidden from the user (use this for multi-tenant applications)
@@ -46,7 +46,7 @@ export const config = {
 			"new-organization",
 			"admin",
 			"settings",
-			"ai-demo",
+			// "ai-demo",
 			"organization-invitation",
 		],
 	},
@@ -72,7 +72,7 @@ export const config = {
 		// Whether users should be activate two factor authentication
 		enableTwoFactor: true,
 		// where users should be redirected after the sign in
-		redirectAfterSignIn: "/app",
+		redirectAfterSignIn: "/",
 		// where users should be redirected after logout
 		redirectAfterLogout: "/",
 		// how long a session should be valid
@@ -81,7 +81,7 @@ export const config = {
 	// Mails
 	mails: {
 		// the from address for mails
-		from: "noreply@supastarter.dev",
+		from: "noreply@pixelto.ai",
 	},
 	// Frontend
 	ui: {
@@ -110,13 +110,13 @@ export const config = {
 		},
 	},
 	contact: {
-		email: "hello@pixelto.ai",
+		email: "support@pixelto.com",
 		twitter: "https://x.com/pixelto",
-		discord: "https://discord.gg/pixelto",
-		telegram: "https://t.me/pixelto",
+		discord: "https://discord.gg/z3aYM4bm",
+		telegram: "https://t.me/+GHY0iqMCpHtmYTI1",
 		form: {
 			enabled: true,
-			to: "hello@pixelto.ai",
+			to: "support@pixelto.com",
 			subject: "Contact form message",
 		},
 	},
@@ -127,6 +127,10 @@ export const config = {
 			// The free plan is treated differently. It will automatically be assigned if the user has no other plan.
 			free: {
 				isFree: true,
+				credits: {
+					daily:
+						Number(process.env.NEXT_PUBLIC_CREDITS_FREE_DAILY ?? "100"),
+				},
 				features: [
 					{ key: "pricing.features.imagesPerDay", included: true },
 					{ key: "pricing.features.basicResolution", included: true },
@@ -157,6 +161,13 @@ export const config = {
 			starter: {
 				recommended: true,
 				yearlyDiscount: 30,
+				credits: {
+					monthly:
+						Number(process.env.NEXT_PUBLIC_CREDITS_STARTER_MONTHLY ?? "3000"),
+					promotionalBonus: Number(
+						process.env.NEXT_PUBLIC_CREDITS_STARTER_YEARLY_BONUS ?? "1000",
+					),
+				},
 				features: [
 					{ key: "pricing.features.imagesPerMonth", included: true },
 					{
@@ -210,6 +221,13 @@ export const config = {
 			},
 			premium: {
 				yearlyDiscount: 40,
+				credits: {
+					monthly:
+						Number(process.env.NEXT_PUBLIC_CREDITS_PREMIUM_MONTHLY ?? "10000"),
+					promotionalBonus: Number(
+						process.env.NEXT_PUBLIC_CREDITS_PREMIUM_YEARLY_BONUS ?? "2000",
+					),
+				},
 				features: [
 					{
 						key: "pricing.features.unlimitedImages",

@@ -37,14 +37,14 @@ export function NavBar() {
 			icon: HomeIcon,
 			isActive: pathname === basePath,
 		},
-		{
-			label: t("app.menu.aiChatbot"),
-			href: activeOrganization
-				? `/app/${activeOrganization.slug}/chatbot`
-				: "/app/chatbot",
-			icon: BotMessageSquareIcon,
-			isActive: pathname.includes("/chatbot"),
-		},
+		// {
+		// 	label: t("app.menu.aiChatbot"),
+		// 	href: activeOrganization
+		// 		? `/app/${activeOrganization.slug}/chatbot`
+		// 		: "/app/chatbot",
+		// 	icon: BotMessageSquareIcon,
+		// 	isActive: pathname.includes("/chatbot"),
+		// },
 		...(activeOrganization && !config.organizations.hideOrganization
 			? [
 					{
@@ -93,7 +93,8 @@ export function NavBar() {
 								useSidebarLayout,
 						})}
 					>
-						<Link href="/app" className="block">
+						{/* Logo links to landing page */}
+						<Link href="/" className="block">
 							<Logo />
 						</Link>
 

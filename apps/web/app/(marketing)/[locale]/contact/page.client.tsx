@@ -58,14 +58,14 @@ export default function ContactContent() {
 			color: "text-blue-500",
 			bg: "bg-blue-500/10",
 		},
-		{
-			icon: XIcon,
-			label: "X (Twitter)",
-			value: "@pixelto",
-			href: config.contact.twitter,
-			color: "text-sky-500",
-			bg: "bg-sky-500/10",
-		},
+		// {
+		// 	icon: XIcon,
+		// 	label: "X (Twitter)",
+		// 	value: "@pixelto",
+		// 	href: config.contact.twitter,
+		// 	color: "text-sky-500",
+		// 	bg: "bg-sky-500/10",
+		// },
 		{
 			icon: Gamepad2Icon,
 			label: "Discord",

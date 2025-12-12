@@ -50,7 +50,7 @@ export function UserAvatarUpload({
 
 		setUploading(true);
 		try {
-			const path = `${user.id}-${uuid()}.png`;
+			const path = `avatars/${user.id}-${uuid()}.png`;
 			const { signedUploadUrl } =
 				await getSignedUploadUrlMutation.mutateAsync({
 					path,
@@ -69,6 +69,7 @@ export function UserAvatarUpload({
 				throw new Error("Failed to upload image");
 			}
 
+			// 保存相对路径，便于后续迁移存储服务
 			const { error } = await authClient.updateUser({
 				image: path,
 			});

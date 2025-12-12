@@ -37,8 +37,10 @@ docs/specs/
 
 | 业务域 | 功能 | 状态 | 路径 |
 |--------|------|------|------|
-| 01-marketing | 首页重设计 | 🔄 开发中 | [001-homepage-redesign](./01-marketing/001-homepage-redesign) |
+| 01-marketing | 首页重设计 | ✅ 已完成 | [001-homepage-redesign](./01-marketing/001-homepage-redesign) |
+| 01-marketing | 导航栏用户状态显示 | ✅ 已完成 | [003-navbar-user-status](./01-marketing/003-navbar-user-status) |
 | 02-features | AI 图片编辑接口与积分扣费 | ✅ 已完成 | [001-ai-image-edit-credits](./02-features/001-ai-image-edit-credits) |
+| 02-features | 积分系统重构 | ✅ 已完成 | [002-credit-system](./02-features/002-credit-system) |
 
 ### 状态说明
 

@@ -2,6 +2,7 @@
 
 import { LocaleLink, useLocalePathname } from "@i18n/routing";
 import { config } from "@repo/config";
+import { AuthDialog } from "@saas/auth/components/AuthDialog";
 import { useSession } from "@saas/auth/hooks/use-session";
 import { LanguageSwitch } from "@shared/components/LanguageSwitch";
 import { Logo } from "@shared/components/Logo";
@@ -15,15 +16,16 @@ import {
 } from "@ui/components/sheet";
 import { cn } from "@ui/lib";
 import { MenuIcon } from "lucide-react";
-import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useDebounceCallback } from "usehooks-ts";
+import { MarketingUserStatus } from "./MarketingUserStatus";
 
 export function NavBar() {
 	const t = useTranslations();
 	const { user } = useSession();
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [authDialogOpen, setAuthDialogOpen] = useState(false);
 	const localePathname = useLocalePathname();
 	const [isTop, setIsTop] = useState(true);
 
@@ -174,44 +176,45 @@ export function NavBar() {
 
 									<div className="w-full h-px bg-border my-4" />
 
-									<NextLink
-										key={user ? "start" : "login"}
-										href={user ? "/app" : "/auth/login"}
-										className={cn(
-											"block w-full px-4 py-3 rounded-lg font-medium text-base transition-colors duration-200",
-											"bg-primary text-primary-foreground hover:bg-primary/90",
-										)}
-										prefetch={!user}
-									>
-										{user
-											? t("common.menu.dashboard")
-											: t("common.menu.login")}
-									</NextLink>
+									{!user && (
+										<button
+											type="button"
+											onClick={() => {
+												setMobileMenuOpen(false);
+												setAuthDialogOpen(true);
+											}}
+											className={cn(
+												"block w-full px-4 py-3 rounded-lg font-medium text-base transition-colors duration-200",
+												"bg-primary text-primary-foreground hover:bg-primary/90 text-left",
+											)}
+										>
+											{t("common.menu.login")}
+										</button>
+									)}
 								</div>
 							</SheetContent>
 						</Sheet>
 
 						{config.ui.saas.enabled &&
 							(user ? (
-								<Button
-									key="dashboard"
-									className="hidden lg:flex bg-primary text-primary-foreground hover:bg-primary/90"
-									asChild
-								>
-									<NextLink href="/app">
-										{t("common.menu.dashboard")}
-									</NextLink>
-								</Button>
+								<div className="hidden lg:flex">
+									<MarketingUserStatus />
+								</div>
 							) : (
-								<Button
-									key="login"
-									className="hidden lg:flex bg-primary text-primary-foreground hover:bg-primary/90"
-									asChild
-								>
-									<NextLink href="/auth/login" prefetch>
+								<>
+									<Button
+										key="login"
+										className="hidden lg:flex bg-primary text-primary-foreground hover:bg-primary/90"
+										onClick={() => setAuthDialogOpen(true)}
+									>
 										{t("common.menu.login")}
-									</NextLink>
-								</Button>
+									</Button>
+									<AuthDialog
+										open={authDialogOpen}
+										onOpenChange={setAuthDialogOpen}
+										defaultTab="login"
+									/>
+								</>
 							))}
 					</div>
 				</div>

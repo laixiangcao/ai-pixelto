@@ -115,7 +115,31 @@
 			"currentPlan": "Current plan",
 			"upgradePlan": "Upgrade",
 			"credits": "Credits",
-			"freePlan": "Free"
+			"freePlan": "Free",
+			"manageAccount": "Manage Account",
+			"userGuide": "User Guide",
+			"discord": "Discord"
+		},
+		"credits": {
+			"details": {
+				"title": "Credits",
+				"available": "Available Credits",
+				"dailyFreeLabel": "Free Daily Credits",
+				"dailyFreeHint": "Resets daily",
+				"dailyFreeHintWithAmount": "Free {amount} credits renews daily",
+				"purchased": "Purchased Credits",
+				"purchasedHint": "Never expires",
+				"subscription": "Subscription Credits",
+				"promotional": "Promotional Credits",
+				"expiringOn": "Expiring on {date}",
+				"expireAfter": "Expire after {date}",
+				"getMore": "Get More Credits",
+				"usageDetails": "Usage details",
+				"usageComingSoon": "Usage details coming soon",
+				"expiring": "Expiring Credits",
+				"nonExpiring": "Non-expiring",
+				"nonExpiringCredits": "Non-Expiring Credits"
+			}
 		}
 	},
 	"auth": {
@@ -290,17 +314,17 @@
 			"subject": "Reset your password"
 		},
 		"magicLink": {
-			"body": "Hey,\nyou requested a login email from supastarter.\n\nClick the link below to login.",
+			"body": "Hey,\nyou requested a login email from Pixelto AI.\n\nClick the link below to login.",
 			"login": "Login",
-			"subject": "Login to supastarter"
+			"subject": "Login to Pixelto AI"
 		},
 		"newUser": {
-			"body": "Hey,\nthanks for signing up for supastarter.\n\nTo start using our app, please confirm your email address by clicking the link below.",
+			"body": "Hey,\nthanks for signing up for Pixelto AI.\n\nTo start using our app, please confirm your email address by clicking the link below.",
 			"confirmEmail": "Confirm email",
 			"subject": "Confirm your email"
 		},
 		"newsletterSignup": {
-			"body": "Thank you for signing up for the supastarter newsletter. We will keep you updated with the latest news and updates.",
+			"body": "Thank you for signing up for the Pixelto AI newsletter. We will keep you updated with the latest news and updates.",
 			"subject": "Welcome to our newsletter"
 		},
 		"organizationInvitation": {
@@ -322,7 +346,7 @@
 			}
 		},
 		"submit": "Subscribe",
-		"subtitle": "Be among the first to get access to supastarter.nextjs.",
+		"subtitle": "Be among the first to get access to pixelto ai.",
 		"title": "Get early access"
 	},
 	"onboarding": {
@@ -727,7 +751,7 @@
 		"save": "Save"
 	},
 	"start": {
-		"subtitle": "See the latest stats of your awesome business.",
+		"subtitle": "Welcome to your dashboard",
 		"welcome": "Welcome {name}!"
 	},
 	"zod": {

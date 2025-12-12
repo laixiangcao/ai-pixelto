@@ -1,0 +1,11 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"outDir": "./dist-tests",
+		"noEmit": false
+	},
+	"include": ["tests/**/*.ts", "prisma/queries/**/*.ts"],
+	"exclude": ["node_modules", "dist", "build"]
+}

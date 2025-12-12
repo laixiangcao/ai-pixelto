@@ -31,7 +31,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-Pixelto AI 是基于 supastarter.dev 模板构建的 AI 图像处理 SaaS 应用。
+Pixelto AI 是一款 AI 图像处理 SaaS 应用
 
 **技术栈**：Next.js 15 (App Router) + React 19 + TypeScript + Prisma + oRPC + better-auth + Tailwind CSS + Shadcn UI
 
@@ -41,9 +41,11 @@ Pixelto AI 是基于 supastarter.dev 模板构建的 AI 图像处理 SaaS 应用
 
 ### 国际化开发规范
 
-- 页面开发**必须**适配国际化
-- 开发阶段**仅维护 `en` 语言**，功能确认后再同步至其他语言
-- 翻译文件路径：`packages/i18n/translations/{locale}.json`
+- **禁止硬编码**用户可见文本
+- 新增/修改文本**必须同步更新** `en.json`、`de.json`、`zh.json`
+- 翻译文件：`packages/i18n/translations/{locale}.json`
+- 客户端：`useTranslations("namespace")`
+- 服务端：`await getTranslations("namespace")`
 
 ## 常用命令
 

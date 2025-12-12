@@ -1,14 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 import { ORPCError, type } from "@orpc/server";
-import { randomUUID } from "crypto";
 import {
 	addCreditEntry,
 	InsufficientCreditsError,
 	InvalidOwnerError,
+	type SpendAllocation,
 	spendCreditsOrThrow,
 } from "@repo/database";
-import { verifyOrganizationMembership } from "../../organizations/lib/membership";
+import { randomUUID } from "crypto";
 import { protectedProcedure } from "../../../orpc/procedures";
+import { verifyOrganizationMembership } from "../../organizations/lib/membership";
 
 type ApiResponse<T> = {
 	code: string;
@@ -28,7 +29,7 @@ const IMAGE_MODELS: Record<
 > = {
 	"gemini-2.5-flash-image": { cost: 4, active: true },
 	"flux-context": { cost: 24, active: false },
-	"seedream": { cost: 12, active: false },
+	seedream: { cost: 12, active: false },
 };
 const DEFAULT_MODEL_ID = "gemini-2.5-flash-image";
 
@@ -89,7 +90,9 @@ export const editImage = protectedProcedure
 		}
 
 		const targetOrganizationId =
-			input.organizationId ?? context.session.activeOrganizationId ?? null;
+			input.organizationId ??
+			context.session.activeOrganizationId ??
+			null;
 
 		const resolvedModelId =
 			input.modelId && IMAGE_MODELS[input.modelId]
@@ -126,21 +129,29 @@ export const editImage = protectedProcedure
 		const ownerOrganizationId = targetOrganizationId;
 		const ownerUserId = ownerOrganizationId ? undefined : context.user.id;
 		let spendCommitted = false;
+		let spendAllocations: SpendAllocation[] = [];
+		const spendRef = randomUUID();
 		// 模型生成失败时补偿已扣除的积分，避免用户为失败请求付费
 		const refundOnFailure = async () => {
-			if (!spendCommitted) return;
+			if (!spendCommitted || spendAllocations.length === 0) return;
 
 			try {
-				await addCreditEntry({
-					amount: modelConfig.cost,
-					reason: "image_edit_refund",
-					userId: ownerUserId,
-					organizationId: ownerOrganizationId,
-					metadata: {
-						modelId: resolvedModelId,
-						originalReason: "image_edit",
-					},
-				});
+				for (const allocation of spendAllocations) {
+					await addCreditEntry({
+						amount: allocation.amount,
+						type: allocation.type,
+						expiresAt: allocation.expiresAt ?? undefined,
+						reason: "image_edit_refund",
+						userId: ownerUserId,
+						organizationId: ownerOrganizationId,
+						metadata: {
+							modelId: resolvedModelId,
+							originalReason: "image_edit",
+							spendRef,
+							originalGrantId: allocation.grantId,
+						},
+					});
+				}
 			} catch (refundError) {
 				console.error("生成失败后积分退款失败", {
 					refundError,
@@ -152,13 +163,19 @@ export const editImage = protectedProcedure
 		};
 
 		try {
-			await spendCreditsOrThrow({
+			const spendResult = await spendCreditsOrThrow({
 				cost: modelConfig.cost,
 				reason: "image_edit",
 				userId: ownerUserId,
 				organizationId: ownerOrganizationId,
-				metadata: { modelId: resolvedModelId, cost: modelConfig.cost },
+				metadata: {
+					modelId: resolvedModelId,
+					cost: modelConfig.cost,
+					spendRef,
+				},
+				spendRef,
 			});
+			spendAllocations = spendResult.allocations;
 			spendCommitted = true;
 		} catch (error) {
 			if (error instanceof InsufficientCreditsError) {
@@ -179,7 +196,9 @@ export const editImage = protectedProcedure
 			}
 			throw buildError(
 				"CREDIT_DEDUCTION_FAILED",
-				error instanceof Error ? error.message : "Credit deduction failed",
+				error instanceof Error
+					? error.message
+					: "Credit deduction failed",
 				requestId,
 				500,
 			);
@@ -228,7 +247,9 @@ export const editImage = protectedProcedure
 
 			throw buildError(
 				"IMAGE_GENERATION_FAILED",
-				error instanceof Error ? error.message : "Image generation failed",
+				error instanceof Error
+					? error.message
+					: "Image generation failed",
 				requestId,
 				500,
 			);

@@ -1,4 +1,33 @@
 {
+	"about": {
+		"title": "Über Pixelto",
+		"description": "Wir haben es uns zur Aufgabe gemacht, professionelle Bildbearbeitung mit der Kraft der künstlichen Intelligenz zu demokratisieren.",
+		"mission": {
+			"title": "Unsere Mission",
+			"description": "Bei Pixelto glauben wir, dass Kreativität nicht durch technische Fähigkeiten eingeschränkt werden sollte. Unsere Mission ist es, zugängliche, leistungsstarke und intuitive Werkzeuge bereitzustellen, die es jedem ermöglichen, seine visuellen Ideen zum Leben zu erwecken. Ob du ein professioneller Designer oder ein Hobby-Kreativer bist, Pixelto hilft dir dabei, deine Vorstellungen in die Realität umzusetzen."
+		},
+		"values": {
+			"title": "Unsere Werte",
+			"subtitle": "Die Prinzipien, die alles leiten, was wir tun.",
+			"innovation": {
+				"title": "Innovation",
+				"description": "Wir erweitern ständig die Grenzen dessen, was mit KI-Technologie möglich ist."
+			},
+			"quality": {
+				"title": "Qualität",
+				"description": "Wir sind bestrebt, in jedem Pixel die höchste Qualität zu liefern."
+			},
+			"community": {
+				"title": "Gemeinschaft",
+				"description": "Wir bauen für und mit unserer Community und hören auf Feedback, um uns jeden Tag zu verbessern."
+			}
+		},
+		"cta": {
+			"title": "Bereit loszulegen?",
+			"description": "Schließe dich Tausenden von Kreativen an, die Pixelto bereits nutzen, um ihren Workflow zu verbessern.",
+			"button": "Kostenlos starten"
+		}
+	},
 	"admin": {
 		"menu": {
 			"organizations": "Organisationen",
@@ -84,8 +113,33 @@
 			"home": "Startseite",
 			"logout": "Abmelden",
 			"currentPlan": "Aktueller Plan",
-			"credits": "Credits",
-			"freePlan": "Gratis"
+			"upgradePlan": "Upgrade",
+			"credits": "Guthaben",
+			"freePlan": "Gratis",
+			"manageAccount": "Konto verwalten",
+			"userGuide": "Benutzerhandbuch",
+			"discord": "Discord"
+		},
+		"credits": {
+			"details": {
+				"title": "Guthaben",
+				"available": "Verfügbares Guthaben",
+				"dailyFreeLabel": "Tägliches Gratis-Guthaben",
+				"dailyFreeHint": "Wird täglich zurückgesetzt",
+				"dailyFreeHintWithAmount": "Gratis {amount} Guthaben wird täglich erneuert",
+				"purchased": "Gekauftes Guthaben",
+				"purchasedHint": "Läuft nie ab",
+				"subscription": "Abo-Guthaben",
+				"promotional": "Aktions-Guthaben",
+				"expiringOn": "Läuft ab am {date}",
+				"expireAfter": "Läuft ab nach {date}",
+				"getMore": "Mehr Guthaben erhalten",
+				"usageDetails": "Nutzungsdetails",
+				"usageComingSoon": "Nutzungsdetails demnächst verfügbar",
+				"expiring": "Ablaufendes Guthaben",
+				"nonExpiring": "Unbegrenzt gültig",
+				"nonExpiringCredits": "Unbegrenzt gültiges Guthaben"
+			}
 		}
 	},
 	"auth": {
@@ -198,11 +252,13 @@
 		"title": "Changelog"
 	},
 	"common": {
+		"slogan": "Von Pixeln zu Allem",
 		"confirmation": {
 			"cancel": "Abbrechen",
 			"confirm": "Bestätigen"
 		},
 		"menu": {
+			"about": "Über uns",
 			"blog": "Blog",
 			"changelog": "Changelog",
 			"contact": "Kontakt",
@@ -255,17 +311,17 @@
 			"subject": "Passwort zurücksetzen"
 		},
 		"magicLink": {
-			"body": "Hey,\ndu hast eine Anmelde-E-Mail von supastarter angefordert.\n\nKlicke auf den unten stehenden Link, um dich anzumelden.",
+			"body": "Hey,\ndu hast eine Anmelde-E-Mail von Pixelto AI angefordert.\n\nKlicke auf den unten stehenden Link, um dich anzumelden.",
 			"login": "Login",
-			"subject": "Login bei supastarter"
+			"subject": "Login bei Pixelto AI"
 		},
 		"newUser": {
-			"body": "Hallo,\n\nVielen Dank, dass du dich bei Supastarter angemeldet hast.\n\n\nUm mit der Nutzung unserer App zu beginnen, bestätige bitte deine E-Mail-Adresse, indem du auf den untenstehenden Link klickst.",
+			"body": "Hallo,\n\nVielen Dank, dass du dich bei Pixelto AI angemeldet hast.\n\n\nUm mit der Nutzung unserer App zu beginnen, bestätige bitte deine E-Mail-Adresse, indem du auf den untenstehenden Link klickst.",
 			"confirmEmail": "E-Mail bestätigen",
 			"subject": "E-Mail bestätigen"
 		},
 		"newsletterSignup": {
-			"body": "Vielen Dank, dass du dich für den supastarter-Newsletter angemeldet hast. \nWir halten dich mit den neuesten Nachrichten und Updates auf dem Laufenden.",
+			"body": "Vielen Dank, dass du dich für den Pixelto AI - Newsletter angemeldet hast. \nWir halten dich mit den neuesten Nachrichten und Updates auf dem Laufenden.",
 			"subject": "Willkommen bei unserem Newsletter"
 		},
 		"organizationInvitation": {
@@ -287,7 +343,7 @@
 			}
 		},
 		"submit": "Abonnieren",
-		"subtitle": "Gehöre zu den Ersten, die Zugriff auf supastarter.nextjs erhalten.",
+		"subtitle": "Gehöre zu den Ersten, die Zugriff auf Pixelto AI.nextjs erhalten.",
 		"title": "Erhalte frühen Zugang"
 	},
 	"onboarding": {
@@ -453,63 +509,54 @@
 		}
 	},
 	"pricing": {
+		"title": "Preise & Pläne",
+		"description": "Wähle den Plan, der am besten zu dir passt.",
 		"choosePlan": "Plan auswählen",
 		"contactSales": "Vertrieb kontaktieren",
-		"description": "Wähle das passende Paket für dich aus.",
-		"getStarted": "Jetzt loslegen",
-		"month": "Monat",
+		"getStarted": "Jetzt starten",
+		"month": "{count, plural, one {Monat} other {{count} Monate}}",
 		"monthly": "Monatlich",
+		"mostPopular": "Am beliebtesten",
+		"savePercent": "Spare {percent}%",
+		"freeToUse": "Kostenlos nutzbar",
+		"billedAnnually": "jährlich abgerechnet als {amount}",
+		"features": {
+			"imagesPerDay": "10 Bilder pro Tag",
+			"imagesPerMonth": "500 Bilder pro Monat",
+			"unlimitedImages": "2000 Bilder pro Monat",
+			"basicResolution": "Max. 1024x1024 Auflösung",
+			"hdResolution": "Max. 2048x2048 Auflösung",
+			"ultraHdResolution": "Max. 4096x4096 Auflösung",
+			"basicStyles": "5 Generierungsstile",
+			"allStyles": "Alle Generierungsstile",
+			"watermark": "Keine Wasserzeichen",
+			"commercialLicense": "Kommerzielle Lizenz",
+			"priorityQueue": "Prioritäts-Warteschlange",
+			"imageUpscaling": "Bild-Hochskalierung (4x)",
+			"backgroundRemoval": "Hintergrundentfernung",
+			"batchGeneration": "Stapelgenerierung"
+		},
 		"products": {
-			"basic": {
-				"description": "Perfekt für den Einstieg",
-				"features": {
-					"anotherFeature": "Ein weiteres erstaunliches Merkmal",
-					"limitedSupport": "Begrenzter Support"
-				},
-				"title": "Basic"
-			},
-			"enterprise": {
-				"description": "Maßgeschneiderter Plan für deine Anforderungen",
-				"features": {
-					"enterpriseSupport": "Support für Unternehmen",
-					"unlimitedProjects": "Unbegrenzte Projekte"
-				},
-				"title": "Enterprise"
-			},
 			"free": {
-				"description": "Kostenloser Start",
-				"features": {
-					"anotherFeature": "Ein weiteres erstaunliches Merkmal",
-					"limitedSupport": "Begrenzter Support"
-				},
-				"title": "Free"
+				"description": "Für gelegentliche persönliche Anforderungen.",
+				"title": "Kostenlos"
 			},
-			"lifetime": {
-				"description": "Einmal kaufen. Für immer verwenden.",
-				"features": {
-					"extendSupport": "Erweiterter Support",
-					"noRecurringCosts": "Keine wiederkehrenden Kosten"
-				},
-				"title": "Lifetime"
+			"starter": {
+				"description": "Erfülle tägliche persönliche Bedürfnisse und entfalte deine Kreativität.",
+				"title": "Starter"
 			},
-			"pro": {
-				"description": "Am besten für Teams",
-				"features": {
-					"anotherFeature": "Ein weiteres erstaunliches Merkmal",
-					"fiveMembers": "Bis zu 5 Mitglieder",
-					"fullSupport": "Voller Support"
-				},
-				"title": "Pro"
+			"premium": {
+				"description": "Erfülle persönliche und professionelle Anforderungen und verbessere die Arbeitseffizienz.",
+				"title": "Premium"
 			}
 		},
 		"purchase": "Kaufen",
 		"recommended": "Empfohlen",
 		"subscribe": "Abonnieren",
-		"title": "Preise",
 		"trialPeriod": "{days} {days, plural, one {Tag} other {Tage}} kostenlose Testphase",
-		"year": "Jahr",
+		"year": "{count, plural, one {Jahr} other {{count} Jahre}}",
 		"yearly": "Jährlich",
-		"perSeat": "Sitz"
+		"perSeat": "Platz"
 	},
 	"settings": {
 		"account": {
@@ -701,7 +748,7 @@
 		"save": "Speichern"
 	},
 	"start": {
-		"subtitle": "Sieh dir die neuesten Statistiken über dein großartiges Unternehmen an.",
+		"subtitle": "Welcome to your dashboard",
 		"welcome": "Willkommen {name}!"
 	},
 	"zod": {
@@ -825,151 +872,151 @@
 	"home": {
 		"hero": {
 			"badge": {
-				"label": "Instant Access",
-				"sublabel": "Free Forever"
+				"label": "Sofortiger Zugang",
+				"sublabel": "Für immer kostenlos"
 			},
 			"title": {
-				"prefix": "Generate",
-				"highlight": "Stunning AI Art",
-				"suffix": "in Seconds"
+				"prefix": "Erstelle",
+				"highlight": "Atemberaubende KI-Kunst",
+				"suffix": "in Sekunden"
 			},
-			"subtitle": "Turn text into stunning visuals in seconds. Powered by premium Gemini models for photorealistic results.",
+			"subtitle": "Verwandle Text in Sekunden in atemberaubende Bilder. Unterstützt von Premium-Gemini-Modellen für fotorealistische Ergebnisse.",
 			"features": {
-				"unlimited": "Unlimited Generation",
-				"fast": "Fast Speed",
-				"styles": "All Styles",
-				"noRestrictions": "No Restrictions"
+				"unlimited": "Unbegrenzte Generierung",
+				"fast": "Hohe Geschwindigkeit",
+				"styles": "Alle Stile",
+				"noRestrictions": "Keine Einschränkungen"
 			}
 		},
 		"showcase": {
-			"title": "More AI Image Ideas",
-			"subtitle": "Explore the limitless possibilities of AI-powered editing.",
+			"title": "Mehr KI-Bildideen",
+			"subtitle": "Entdecke die grenzenlosen Möglichkeiten der KI-gestützten Bearbeitung.",
 			"original": "Original",
-			"enhanced": "Enhanced",
+			"enhanced": "Verbessert",
 			"inspiration": {
-				"title": "More AI Image Inspiration",
-				"cta": "More Inspiration",
+				"title": "Mehr KI-Bildinspiration",
+				"cta": "Mehr Inspiration",
 				"tabs": {
-					"latest": "Latest",
-					"christmas": "Christmas",
+					"latest": "Neueste",
+					"christmas": "Weihnachten",
 					"poster": "Poster",
-					"packing": "Packing",
-					"ai_image": "AI Image",
-					"brand_identity": "Brand Identity"
+					"packing": "Verpackung",
+					"ai_image": "KI-Bild",
+					"brand_identity": "Markenidentität"
 				}
 			}
 		},
 		"features": {
-			"title": "Pixelto AI - Ultra Fast AI Image Editing",
-			"subtitle": "Experience the next generation of image editing.",
+			"title": "Pixelto AI - Ultraschnelle KI-Bildbearbeitung",
+			"subtitle": "Erlebe die nächste Generation der Bildbearbeitung.",
 			"items": {
 				"speed": {
-					"title": "Lightning Fast Generation",
-					"description": "Officially powered by advanced AI models, Pixelto lets you create stunning images in seconds. Just use text or image prompts and watch your ideas come to life instantly, making creativity faster than ever.",
-					"cta": "Start Creating"
+					"title": "Blitzschnelle Generierung",
+					"description": "Offiziell unterstützt von fortschrittlichen KI-Modellen, lässt Pixelto dich in Sekunden atemberaubende Bilder erstellen. Nutze einfach Text- oder Bildprompts und sieh zu, wie deine Ideen sofort zum Leben erwachen.",
+					"cta": "Jetzt erstellen"
 				},
 				"figures": {
-					"title": "AI Figure Maker with Pixelto",
-					"description": "Use Pixelto to create the trendiest collectible figures from any image - people, pets, or anime characters - instantly brought to life in 1/7 scale.",
-					"cta": "Generate Your Figure"
+					"title": "KI-Figurenersteller mit Pixelto",
+					"description": "Nutze Pixelto, um aus jedem Bild die trendigsten Sammelfiguren zu erstellen - Menschen, Haustiere oder Anime-Charaktere - sofort im Maßstab 1/7 zum Leben erweckt.",
+					"cta": "Erstelle deine Figur"
 				},
 				"freedom": {
-					"title": "Unlimited Creative Freedom",
-					"description": "Change backgrounds, merge shots, and experiment with new styles in seconds. From anime-inspired art to cinematic realism, Pixelto delivers versatile results, perfect for game designers, marketers, and digital creators.",
-					"cta": "Create with Pixelto"
+					"title": "Unbegrenzte kreative Freiheit",
+					"description": "Ändere Hintergründe, füge Aufnahmen zusammen und experimentiere in Sekunden mit neuen Stilen. Von Anime-inspirierter Kunst bis zu filmischem Realismus liefert Pixelto vielseitige Ergebnisse.",
+					"cta": "Mit Pixelto erstellen"
 				}
 			}
 		},
 		"pricing": {
-			"title": "Simple Pricing",
-			"description": "Choose the plan that works best for you.",
-			"monthly": "Monthly",
-			"yearly": "Yearly",
-			"save": "Save {discount}%",
-			"popular": "Most Popular"
+			"title": "Einfache Preisgestaltung",
+			"description": "Wähle den Plan, der am besten zu dir passt.",
+			"monthly": "Monatlich",
+			"yearly": "Jährlich",
+			"save": "Spare {discount}%",
+			"popular": "Am beliebtesten"
 		},
 		"faq": {
-			"title": "Frequently Asked Questions",
-			"subtitle": "Find answers to the most common questions about Pixelto AI.",
+			"title": "Häufig gestellte Fragen",
+			"subtitle": "Finde Antworten auf die häufigsten Fragen zu Pixelto AI.",
 			"q1": {
-				"question": "What is Pixelto AI?",
-				"answer": "Pixelto AI is an advanced image editing platform powered by artificial intelligence, designed to help you transform your images with ease and precision."
+				"question": "Was ist Pixelto AI?",
+				"answer": "Pixelto AI ist eine fortschrittliche Bildbearbeitungsplattform, die von künstlicher Intelligenz angetrieben wird und dir hilft, deine Bilder mit Leichtigkeit und Präzision zu transformieren."
 			},
 			"q2": {
-				"question": "How does the AI editor work?",
-				"answer": "Simply upload your image and describe the changes you want to make using natural language. Our AI models will then process your request and generate the edited image."
+				"question": "Wie funktioniert der KI-Editor?",
+				"answer": "Lade einfach dein Bild hoch und beschreibe die gewünschten Änderungen in natürlicher Sprache. Unsere KI-Modelle verarbeiten dann deine Anfrage und generieren das bearbeitete Bild."
 			},
 			"q3": {
-				"question": "What file formats are supported?",
-				"answer": "We currently support JPG, PNG, and WebP formats for both upload and download."
+				"question": "Welche Dateiformate werden unterstützt?",
+				"answer": "Wir unterstützen derzeit JPG, PNG und WebP-Formate für Upload und Download."
 			},
 			"q4": {
-				"question": "Is there a free trial available?",
-				"answer": "Yes, we offer a generous free tier that allows you to try out most of our core features without any cost."
+				"question": "Gibt es eine kostenlose Testversion?",
+				"answer": "Ja, wir bieten eine großzügige kostenlose Stufe an, mit der du die meisten unserer Kernfunktionen ohne Kosten ausprobieren kannst."
 			}
 		},
 		"cta": {
-			"title": "Ready to Transform Your Images?",
-			"subtitle": "Join thousands of creators who are already using Pixelto AI to bring their visions to life.",
-			"startCreating": "Start Creating for Free",
-			"viewPricing": "View Pricing"
-		}
-	},
-	"editor": {
-		"title": "AI Magic Editor",
-		"subtitle": "Upload an image and describe how you want to change it. Our AI will handle the rest.",
-		"systemReady": "System Ready",
-		"upload": {
-			"title": "Upload Source Image",
-			"dragDrop": "Drag & drop or click to browse system files",
-			"supportedFormats": "Supported Formats: JPG, PNG",
-			"orDemo": "Or initialize with demo"
-		},
-		"input": {
-			"placeholder": "Enter edit instructions...",
-			"placeholderWaiting": "Waiting for image upload...",
-			"generate": "Generate",
-			"processing": "Processing"
-		},
-		"history": {
-			"title": "Recent Creations",
-			"label": "History",
-			"edited": "Edited",
-			"original": "Original",
-			"delete": "Delete"
-		},
-		"errors": {
-			"generationFailed": "Could not edit image. Please try again. (Note: Very large files may fail)",
-			"comingSoon": "is coming soon",
-			"authRequired": "Please sign in",
-			"insufficientCredits": "You have run out of credits. Please upgrade or add balance."
-		},
-		"preview": {
-			"processing": "Processing Image...",
-			"defaultTitle": "Editor Preview",
-			"showResult": "Show Result Only",
-			"compare": "Compare with Original",
-			"download": "Download Image",
-			"newEdit": "New Edit",
-			"startOver": "Start Over",
-			"close": "Close",
-			"new": "New",
-			"original": "Original",
-			"editedResult": "Edited Result"
-		},
-		"loading": {
-			"title": "Editing Image",
-			"processing": "{model} is processing your request...",
-			"steps": {
-				"analyzing": "Analyzing image structure",
-				"understanding": "Understanding prompt instructions",
-				"diffusion": "Applying diffusion transformation",
-				"finalizing": "Finalizing pixel data"
-			}
+			"title": "Bereit, deine Bilder zu transformieren?",
+			"subtitle": "Schließe dich Tausenden von Kreativen an, die Pixelto AI bereits nutzen, um ihre Visionen zum Leben zu erwecken.",
+			"startCreating": "Kostenlos starten",
+			"viewPricing": "Preise ansehen"
 		}
 	},
 	"choosePlan": {
-		"title": "Wähle einen Plan",
-		"description": "Um weiterzumachen, wähle bitte einen Plan aus."
+		"title": "Wähle deinen Plan",
+		"description": "Um fortzufahren, wähle bitte einen Plan aus."
+	},
+	"editor": {
+		"title": "KI-Magie-Editor",
+		"subtitle": "Lade ein Bild hoch und beschreibe, wie du es ändern möchtest. Unsere KI erledigt den Rest.",
+		"systemReady": "System bereit",
+		"upload": {
+			"title": "Quellbild hochladen",
+			"dragDrop": "Ziehen & Ablegen oder klicken zum Durchsuchen",
+			"supportedFormats": "Unterstützte Formate: JPG, PNG",
+			"orDemo": "Oder mit Demo starten"
+		},
+		"input": {
+			"placeholder": "Bearbeitungsanweisungen eingeben...",
+			"placeholderWaiting": "Warte auf Bild-Upload...",
+			"generate": "Generieren",
+			"processing": "Verarbeitung"
+		},
+		"history": {
+			"title": "Letzte Kreationen",
+			"label": "Verlauf",
+			"edited": "Bearbeitet",
+			"original": "Original",
+			"delete": "Löschen"
+		},
+		"errors": {
+			"generationFailed": "Bild konnte nicht bearbeitet werden. Bitte versuche es erneut. (Hinweis: Sehr große Dateien können fehlschlagen)",
+			"comingSoon": "kommt bald",
+			"authRequired": "Bitte melde dich an",
+			"insufficientCredits": "Dein Guthaben ist aufgebraucht. Bitte upgrade oder lade Guthaben auf."
+		},
+		"preview": {
+			"processing": "Bild wird verarbeitet...",
+			"defaultTitle": "Editor-Vorschau",
+			"showResult": "Nur Ergebnis anzeigen",
+			"compare": "Mit Original vergleichen",
+			"download": "Bild herunterladen",
+			"newEdit": "Neue Bearbeitung",
+			"startOver": "Neu beginnen",
+			"close": "Schließen",
+			"new": "Neu",
+			"original": "Original",
+			"editedResult": "Bearbeitetes Ergebnis"
+		},
+		"loading": {
+			"title": "Bild wird bearbeitet",
+			"processing": "{model} verarbeitet deine Anfrage...",
+			"steps": {
+				"analyzing": "Bildstruktur wird analysiert",
+				"understanding": "Prompt-Anweisungen werden verstanden",
+				"diffusion": "Diffusionstransformation wird angewendet",
+				"finalizing": "Pixeldaten werden finalisiert"
+			}
+		}
 	}
 }

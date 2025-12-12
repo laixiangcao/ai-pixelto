@@ -61,6 +61,19 @@ export const auth = betterAuth({
 	},
 	hooks: {
 		after: createAuthMiddleware(async (ctx) => {
+			// 为新注册的邮箱用户分配默认头像
+			if (ctx.path.startsWith("/sign-up/email")) {
+				const user = ctx.context.session?.user;
+				if (user && !user.image) {
+					// 生成 DiceBear 头像 URL
+					const avatarUrl = `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.id}`;
+					await db.user.update({
+						where: { id: user.id },
+						data: { image: avatarUrl },
+					});
+				}
+			}
+
 			if (ctx.path.startsWith("/organization/accept-invitation")) {
 				const { invitationId } = ctx.body;
 

@@ -1,28 +1,60 @@
 import React from "react";
 
-export function Logo({ withLabel = true }: { withLabel?: boolean }) {
+function cn(...classes: Array<string | undefined | null | false>) {
+	return classes.filter(Boolean).join(" ");
+}
+
+export function Logo({
+	className,
+	iconClassName,
+	withText,
+	withLabel,
+}: {
+	className?: string;
+	iconClassName?: string;
+	withText?: boolean;
+	withLabel?: boolean;
+}) {
+	const resolvedWithText = withText ?? withLabel ?? true;
+
 	return (
-		<span className="flex items-center font-semibold text-primary leading-none">
-			<svg className="h-12 w-12" viewBox="0 0 734 635">
-				<title>acme</title>
-				<path
-					opacity="0.2"
-					d="M282.102 232.435C328.904 205.42 404.785 205.42 451.588 232.435L697.946 374.634C744.748 401.648 744.748 445.447 697.946 472.462L451.588 614.661C404.785 641.676 328.904 641.676 282.102 614.661L35.7432 472.462C-11.059 445.447 -11.0589 401.648 35.7432 374.634L282.102 232.435Z"
-					fill="currentColor"
-				/>
-				<path
-					opacity="0.4"
-					d="M282.102 126.674C328.904 99.66 404.785 99.66 451.588 126.674L697.946 268.874C744.748 295.888 744.748 339.687 697.946 366.702L451.588 508.901C404.785 535.915 328.904 535.915 282.102 508.901L35.7432 366.702C-11.059 339.687 -11.0589 295.888 35.7432 268.874L282.102 126.674Z"
-					fill="currentColor"
-				/>
-				<path
-					fillRule="evenodd"
-					clipRule="evenodd"
-					d="M451.588 20.9141C404.785 -6.10027 328.904 -6.1003 282.102 20.9141L35.7432 163.113C-11.0589 190.128 -11.059 233.927 35.7432 260.941L282.102 403.141C328.904 430.155 404.785 430.155 451.588 403.141L697.946 260.941C744.748 233.927 744.748 190.128 697.946 163.113L451.588 20.9141ZM497.704 114.921C499.134 115.855 500.121 117.04 500.545 118.332C505.138 132.238 505.138 143.12 505.072 154.003C505.072 198.349 468.453 225.167 420.48 245.161V290.25C420.485 294.097 418.849 297.868 415.755 301.141C412.662 304.413 408.233 307.058 402.967 308.777L337.739 330.105C335.32 330.893 332.634 331.263 329.935 331.181C327.236 331.1 324.613 330.569 322.316 329.64C320.019 328.71 318.124 327.412 316.809 325.87C315.495 324.327 314.806 322.591 314.806 320.825V275.982L299.957 285.686C297.993 286.969 295.661 287.987 293.095 288.682C290.529 289.377 287.779 289.734 285.001 289.734C282.223 289.734 279.473 289.377 276.907 288.682C274.341 287.987 272.009 286.969 270.045 285.686L236.407 263.7C232.442 261.109 230.214 257.594 230.214 253.93C230.214 250.265 232.442 246.751 236.407 244.159L251.257 234.456H182.678C179.975 234.457 177.316 234.006 174.955 233.147C172.593 232.288 170.607 231.049 169.184 229.547C167.761 228.046 166.949 226.331 166.825 224.567C166.701 222.803 167.269 221.047 168.475 219.466L201.136 176.8C203.771 173.364 207.817 170.475 212.82 168.455C217.823 166.435 223.587 165.364 229.468 165.36H298.331C328.857 133.922 369.765 110.084 437.967 110.084C454.555 110.084 471.202 110.084 492.483 113.064C494.46 113.341 496.273 113.986 497.704 114.921ZM405.86 179.723C410.207 181.621 415.318 182.634 420.546 182.634C427.557 182.634 434.281 180.814 439.239 177.575C444.196 174.335 446.981 169.942 446.981 165.36C446.981 161.944 445.431 158.604 442.526 155.763C439.622 152.923 435.493 150.709 430.663 149.401C425.832 148.094 420.517 147.752 415.389 148.418C410.261 149.085 405.551 150.73 401.854 153.146C398.157 155.562 395.639 158.64 394.619 161.99C393.599 165.341 394.123 168.814 396.124 171.971C398.124 175.127 401.513 177.825 405.86 179.723Z"
-					fill="currentColor"
-				/>
-			</svg>
-			{withLabel && <span className="ml-3 text-xl">acme</span>}
-		</span>
+		<div className={cn("flex items-center gap-3", className)}>
+			<div
+				className={cn(
+					"relative size-10 group/logo shrink-0 select-none",
+					iconClassName,
+				)}
+			>
+				<div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-600 blur-md transition-opacity rounded-lg opacity-0 group-hover/logo:opacity-30" />
+
+				<div className="bg-white w-full h-full rounded-lg border border-slate-200 relative z-10 shadow-sm flex items-center justify-center overflow-hidden text-slate-900 transition-transform duration-300 group-hover/logo:scale-105">
+					<div className="relative font-black text-2xl leading-none flex items-center justify-center w-full h-full">
+						<span className="text-slate-900 relative z-10">P</span>
+						<div className="absolute inset-0 overflow-hidden">
+							<div className="absolute top-1/2 left-1/3 w-1 h-1 bg-slate-900 animate-[drop_2s_infinite]" />
+							<div className="absolute top-1/2 right-1/4 w-1 h-1 bg-slate-900 animate-[drop_2.5s_infinite_0.5s]" />
+							<div className="absolute top-2/3 right-1/3 w-1 h-1 bg-slate-900 animate-[drop_1.8s_infinite_1s]" />
+						</div>
+						<style>
+							{"@keyframes drop { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(20px); opacity:0; } }"}
+						</style>
+					</div>
+				</div>
+			</div>
+
+			{resolvedWithText && (
+				<div className="flex flex-col justify-center">
+					<span className="mb-0.5 mt-0.5 whitespace-nowrap text-xl font-bold leading-none tracking-tight text-slate-900">
+						Pixelto{" "}
+						<span className="bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">
+							AI
+						</span>
+					</span>
+					<span className="whitespace-nowrap text-[0.65rem] font-bold uppercase leading-none tracking-[0.2em] text-slate-500">
+						Pixels to Everything
+					</span>
+				</div>
+			)}
+		</div>
 	);
 }

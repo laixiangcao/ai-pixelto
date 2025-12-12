@@ -87,3 +87,20 @@ export const getSignedUrl: GetSignedUrlHander = async (
 		throw new Error("Could not get signed url");
 	}
 };
+
+/**
+ * 获取文件的公开访问 URL
+ * 需要配置 S3_PUBLIC_URL 环境变量（R2 公共开发 URL 或自定义域名）
+ * R2 公共 URL 直接映射到 bucket 根目录，路径格式为 {path}
+ */
+export const getPublicUrl = (path: string, _bucket: string): string => {
+	const publicUrl = process.env.S3_PUBLIC_URL;
+	if (!publicUrl) {
+		throw new Error(
+			"Missing env variable S3_PUBLIC_URL. Please enable R2 public URL or configure a custom domain.",
+		);
+	}
+	// R2 公共 URL 格式: https://pub-xxx.r2.dev/{path}
+	// bucket 参数保留用于兼容性，但 R2 公共 URL 不需要 bucket 前缀
+	return `${publicUrl.replace(/\/$/, "")}/${path}`;
+};

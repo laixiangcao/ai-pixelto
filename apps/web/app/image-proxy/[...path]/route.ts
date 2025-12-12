@@ -1,5 +1,5 @@
 import { config } from "@repo/config";
-import { getSignedUrl } from "@repo/storage";
+import { getPublicUrl } from "@repo/storage";
 import { NextResponse } from "next/server";
 
 export const GET = async (
@@ -8,20 +8,20 @@ export const GET = async (
 ) => {
 	const { path } = await params;
 
-	const [bucket, filePath] = path;
-
-	if (!(bucket && filePath)) {
+	if (path.length < 2) {
 		return new Response("Invalid path", { status: 400 });
 	}
 
-	if (bucket === config.storage.bucketNames.avatars) {
-		const signedUrl = await getSignedUrl(filePath, {
-			bucket,
-			expiresIn: 60 * 60,
-		});
+	// 第一段是 bucket，剩余部分是文件路径
+	const [bucket, ...rest] = path;
+	const filePath = rest.join("/");
 
-		return NextResponse.redirect(signedUrl, {
-			headers: { "Cache-Control": "max-age=3600" },
+	if (bucket === config.storage.bucketNames.avatars) {
+		// 直接使用公开 URL，无需预签名
+		const publicUrl = getPublicUrl(filePath, bucket);
+
+		return NextResponse.redirect(publicUrl, {
+			headers: { "Cache-Control": "max-age=86400" },
 		});
 	}
 

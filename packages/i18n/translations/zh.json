@@ -30,81 +30,81 @@
 	},
 	"admin": {
 		"menu": {
-			"organizations": "Organizations",
-			"users": "Users"
+			"organizations": "组织",
+			"users": "用户"
 		},
 		"organizations": {
-			"backToList": "Back to organizations",
+			"backToList": "返回组织列表",
 			"confirmDelete": {
-				"confirm": "Delete",
-				"message": "Are you sure you want to delete this organization? This action cannot be undone.",
-				"title": "Delete organization"
+				"confirm": "删除",
+				"message": "确定要删除此组织吗？此操作无法撤销。",
+				"title": "删除组织"
 			},
-			"create": "Create",
-			"delete": "Delete",
+			"create": "创建",
+			"delete": "删除",
 			"deleteOrganization": {
-				"deleted": "Organization has been deleted successfully!",
-				"deleting": "Deleting organization...",
-				"notDeleted": "Organization could not be deleted. Please try again."
+				"deleted": "组织已成功删除！",
+				"deleting": "正在删除组织...",
+				"notDeleted": "无法删除组织，请重试。"
 			},
-			"edit": "Edit",
+			"edit": "编辑",
 			"form": {
-				"createTitle": "Create an organization",
-				"name": "Organization name",
+				"createTitle": "创建组织",
+				"name": "组织名称",
 				"notifications": {
-					"error": "Could not save the organization. Please try again later.",
-					"success": "Organization has been saved."
+					"error": "无法保存组织，请稍后重试。",
+					"success": "组织已保存。"
 				},
-				"save": "Save",
-				"updateTitle": "Edit organization"
+				"save": "保存",
+				"updateTitle": "编辑组织"
 			},
-			"loading": "Loading organizations...",
-			"membersCount": "{count} {count, plural, one {member} other {members}}",
-			"search": "Search for an organization...",
-			"title": "Manage organizations"
+			"loading": "正在加载组织...",
+			"membersCount": "{count} 个成员",
+			"search": "搜索组织...",
+			"title": "管理组织"
 		},
-		"title": "Administration",
+		"title": "管理后台",
 		"users": {
 			"confirmDelete": {
-				"confirm": "Delete",
-				"message": "Are you sure you want to delete this user? This action cannot be undone.",
-				"title": "Delete user"
+				"confirm": "删除",
+				"message": "确定要删除此用户吗？此操作无法撤销。",
+				"title": "删除用户"
 			},
-			"delete": "Delete",
+			"delete": "删除",
 			"deleteUser": {
-				"deleted": "User has been deleted successfully!",
-				"deleting": "Deleting user...",
-				"notDeleted": "User could not be deleted. Please try again."
+				"deleted": "用户已成功删除！",
+				"deleting": "正在删除用户...",
+				"notDeleted": "无法删除用户，请重试。"
 			},
 			"emailVerified": {
-				"verified": "Email verified",
-				"waiting": "Email waiting for verification"
+				"verified": "邮箱已验证",
+				"waiting": "邮箱等待验证"
 			},
-			"impersonate": "Impersonate",
+			"impersonate": "模拟登录",
 			"impersonation": {
-				"impersonating": "Impersonating as {name}..."
+				"impersonating": "正在以 {name} 身份登录..."
 			},
-			"loading": "Loading users...",
+			"loading": "正在加载用户...",
 			"resendVerificationMail": {
-				"error": "Could not resend verification mail. Please try again.",
-				"submitting": "Resending verification mail...",
-				"success": "Verification mail has been sent.",
-				"title": "Resend verification mail"
+				"error": "无法重新发送验证邮件，请重试。",
+				"submitting": "正在重新发送验证邮件...",
+				"success": "验证邮件已发送。",
+				"title": "重新发送验证邮件"
 			},
-			"search": "Search for name or email...",
-			"title": "Manage users",
-			"assignAdminRole": "Assign admin role",
-			"removeAdminRole": "Remove admin role"
+			"search": "搜索姓名或邮箱...",
+			"title": "管理用户",
+			"assignAdminRole": "分配管理员角色",
+			"removeAdminRole": "移除管理员角色"
 		},
-		"description": "Manage your application."
+		"description": "管理您的应用程序。"
 	},
 	"app": {
 		"menu": {
-			"accountSettings": "Account settings",
-			"admin": "Admin",
-			"aiChatbot": "AI Chatbot",
-			"organizationSettings": "Organization settings",
-			"start": "Start"
+			"accountSettings": "账户设置",
+			"admin": "管理后台",
+			"aiChatbot": "AI 聊天机器人",
+			"organizationSettings": "组织设置",
+			"start": "开始"
 		},
 		"userMenu": {
 			"accountSettings": "账户管理",
@@ -113,629 +113,646 @@
 			"home": "首页",
 			"logout": "退出登录",
 			"currentPlan": "当前计划",
+			"upgradePlan": "升级",
 			"credits": "积分",
-			"freePlan": "免费版"
+			"freePlan": "免费版",
+			"manageAccount": "管理账户",
+			"userGuide": "用户指南",
+			"discord": "Discord"
+		},
+		"credits": {
+			"details": {
+				"title": "积分",
+				"available": "可用积分",
+				"dailyFreeLabel": "每日免费积分",
+				"dailyFreeHint": "每日重置",
+				"dailyFreeHintWithAmount": "每日免费 {amount} 积分",
+				"purchased": "已购买积分",
+				"purchasedHint": "永不过期",
+				"subscription": "订阅积分",
+				"promotional": "促销积分",
+				"expiringOn": "将于 {date} 过期",
+				"expireAfter": "{date} 后过期",
+				"getMore": "获取更多积分",
+				"usageDetails": "使用详情",
+				"usageComingSoon": "使用详情即将推出",
+				"expiring": "即将过期积分",
+				"nonExpiring": "永不过期",
+				"nonExpiringCredits": "永不过期积分"
+			}
 		}
 	},
 	"auth": {
 		"errors": {
-			"invalidEmailOrPassword": "The credentials you entered are invalid. Please check them and try again.",
-			"unknown": "Something went wrong. Please try again.",
-			"userNotFound": "This user does not exists",
-			"failedToCreateUser": "Could not create user. Please try again.",
-			"failedToCreateSession": "Could not create a session. Please try again.",
-			"failedToUpdateUser": "Could not update user. Please try again.",
-			"failedToGetSession": "Could not get the session.",
-			"invalidPassword": "The entered password is incorrect.",
-			"invalidEmail": "The entered email is invalid.",
-			"invalidToken": "The token you entered is invalid or has expired.",
-			"credentialAccountNotFound": "Account not found.",
-			"emailCanNotBeUpdated": "Email could not be updated. Please try again.",
-			"emailNotVerified": "Please verify your email first before logging in.",
-			"failedToGetUserInfo": "Could not load user information.",
-			"idTokenNotSupported": "ID token is not supported.",
-			"passwordTooLong": "Password is too long.",
-			"passwordTooShort": "Password is too short.",
-			"providerNotFound": "This provider is not suppported.",
-			"socialAccountAlreadyLinked": "This account is already linked to a user.",
-			"userEmailNotFound": "Email not found.",
-			"userAlreadyExists": "This user already exists.",
-			"invalidInvitation": "The invitation is invalid or expired.",
-			"sessionExpired": "The session has expired.",
-			"failedToUnlinkLastAccount": "Failed to unlink account",
-			"accountNotFound": "Account not found"
+			"invalidEmailOrPassword": "您输入的凭据无效，请检查后重试。",
+			"unknown": "出了点问题，请重试。",
+			"userNotFound": "用户不存在",
+			"failedToCreateUser": "无法创建用户，请重试。",
+			"failedToCreateSession": "无法创建会话，请重试。",
+			"failedToUpdateUser": "无法更新用户，请重试。",
+			"failedToGetSession": "无法获取会话。",
+			"invalidPassword": "输入的密码不正确。",
+			"invalidEmail": "输入的邮箱无效。",
+			"invalidToken": "您输入的令牌无效或已过期。",
+			"credentialAccountNotFound": "账户未找到。",
+			"emailCanNotBeUpdated": "无法更新邮箱，请重试。",
+			"emailNotVerified": "请先验证您的邮箱后再登录。",
+			"failedToGetUserInfo": "无法加载用户信息。",
+			"idTokenNotSupported": "不支持 ID 令牌。",
+			"passwordTooLong": "密码太长。",
+			"passwordTooShort": "密码太短。",
+			"providerNotFound": "不支持此提供商。",
+			"socialAccountAlreadyLinked": "此账户已绑定到其他用户。",
+			"userEmailNotFound": "邮箱未找到。",
+			"userAlreadyExists": "用户已存在。",
+			"invalidInvitation": "邀请无效或已过期。",
+			"sessionExpired": "会话已过期。",
+			"failedToUnlinkLastAccount": "无法解除账户绑定",
+			"accountNotFound": "账户未找到"
 		},
 		"forgotPassword": {
-			"backToSignin": "Back to signin",
-			"email": "Email",
+			"backToSignin": "返回登录",
+			"email": "邮箱",
 			"hints": {
 				"linkNotSent": {
-					"message": "We are sorry, but we were unable to send you a link to reset your password. Please try again later.",
-					"title": "Link not sent"
+					"message": "抱歉，我们无法发送重置密码链接，请稍后重试。",
+					"title": "链接未发送"
 				},
 				"linkSent": {
-					"message": "We have sent you a link to continue. Please check your inbox.",
-					"title": "Link sent"
+					"message": "我们已发送链接，请检查您的收件箱。",
+					"title": "链接已发送"
 				}
 			},
-			"message": "Please enter your email address and we will send you a link to reset your password.",
-			"submit": "Send link",
-			"title": "Forgot your password?"
+			"message": "请输入您的邮箱地址，我们将发送重置密码链接。",
+			"submit": "发送链接",
+			"title": "忘记密码？"
 		},
 		"login": {
-			"continueWith": "Or continue with",
-			"createAnAccount": "Create an account",
-			"dontHaveAnAccount": "Don't have an account yet?",
-			"forgotPassword": "Forgot password?",
+			"continueWith": "或通过以下方式继续",
+			"createAnAccount": "创建账户",
+			"dontHaveAnAccount": "还没有账户？",
+			"forgotPassword": "忘记密码？",
 			"hints": {
-				"invalidCredentials": "The email or password you entered are invalid. Please try again.",
+				"invalidCredentials": "您输入的邮箱或密码无效，请重试。",
 				"linkSent": {
-					"message": "We have sent you a link to continue. Please check your inbox.",
-					"title": "Link sent"
+					"message": "我们已发送链接，请检查您的收件箱。",
+					"title": "链接已发送"
 				}
 			},
-			"loginWithPasskey": "Login with passkey",
+			"loginWithPasskey": "使用通行密钥登录",
 			"modes": {
-				"magicLink": "Magic link",
-				"password": "Password"
+				"magicLink": "魔法链接",
+				"password": "密码"
 			},
-			"submit": "Sign in",
-			"subtitle": "Please enter your credentials to sign in.",
-			"title": "Welcome back",
-			"sendMagicLink": "Send magic link"
+			"submit": "登录",
+			"subtitle": "请输入您的凭据以登录。",
+			"title": "欢迎回来",
+			"sendMagicLink": "发送魔法链接"
 		},
 		"resetPassword": {
-			"backToSignin": "Back to signin",
+			"backToSignin": "返回登录",
 			"hints": {
-				"error": "We are sorry, but we were unable to reset your password. Please try again.",
-				"success": "Your password has been reset successfully."
+				"error": "抱歉，我们无法重置您的密码，请重试。",
+				"success": "您的密码已成功重置。"
 			},
-			"message": "Please enter a new password.",
-			"newPassword": "New password",
-			"submit": "Reset password",
-			"title": "Reset your password"
+			"message": "请输入新密码。",
+			"newPassword": "新密码",
+			"submit": "重置密码",
+			"title": "重置密码"
 		},
 		"signup": {
-			"alreadyHaveAccount": "Already have an account?",
-			"email": "Email",
+			"alreadyHaveAccount": "已有账户？",
+			"email": "邮箱",
 			"hints": {
-				"signupFailed": "We are sorry, but we were unable to create your account. Please try again later.",
-				"verifyEmail": "We have sent you a link to verify your email. Please check your inbox."
+				"signupFailed": "抱歉，我们无法创建您的账户，请稍后重试。",
+				"verifyEmail": "我们已发送验证链接，请检查您的收件箱。"
 			},
-			"message": "We are happy that you want to join us. Please fill in the form below to create your account.",
-			"name": "Name",
-			"password": "Password",
-			"signIn": "Sign in",
-			"submit": "Create account",
-			"title": "Create an account"
+			"message": "欢迎加入我们！请填写以下表单创建您的账户。",
+			"name": "姓名",
+			"password": "密码",
+			"signIn": "登录",
+			"submit": "创建账户",
+			"title": "创建账户"
 		},
 		"verify": {
-			"title": "Verify your account",
-			"code": "One-time password",
-			"submit": "Verify",
-			"backToSignin": "Back to login",
-			"message": "Enter the one-time password from your authenticator app to continue."
+			"title": "验证您的账户",
+			"code": "一次性密码",
+			"submit": "验证",
+			"backToSignin": "返回登录",
+			"message": "请输入您身份验证器应用中的一次性密码以继续。"
 		}
 	},
 	"blog": {
-		"description": "Read the latest news from our company",
-		"title": "My awesome blog",
-		"back": "Back to blog"
+		"description": "阅读我们公司的最新动态",
+		"title": "博客",
+		"back": "返回博客"
 	},
 	"changelog": {
-		"description": "Stay up to date with the latest changes in our product.",
-		"title": "Changelog"
+		"description": "了解我们产品的最新变化。",
+		"title": "更新日志"
 	},
 	"common": {
 		"slogan": "从像素到万物",
 		"confirmation": {
-			"cancel": "Cancel",
-			"confirm": "Confirm"
+			"cancel": "取消",
+			"confirm": "确认"
 		},
 		"menu": {
-			"blog": "Blog",
-			"changelog": "Changelog",
-			"contact": "Contact",
-			"dashboard": "Dashboard",
-			"docs": "Docs",
-			"faq": "FAQ",
+			"about": "关于我们",
+			"blog": "博客",
+			"changelog": "更新日志",
+			"contact": "联系我们",
+			"dashboard": "仪表盘",
+			"docs": "文档",
+			"faq": "常见问题",
 			"login": "登录",
 			"pricing": "定价"
 		},
 		"tableOfContents": {
-			"title": "On this page"
+			"title": "本页内容"
 		},
 		"actions": {
-			"continue": "Continue",
-			"verify": "Verify"
+			"continue": "继续",
+			"verify": "验证"
 		}
 	},
 	"contact": {
-		"description": "We are here to help you. Please use the form below to get in touch with us.",
+		"description": "我们随时为您提供帮助。请使用以下表单与我们联系。",
 		"form": {
-			"email": "Email",
-			"message": "Message",
-			"name": "Name",
+			"email": "邮箱",
+			"message": "消息",
+			"name": "姓名",
 			"notifications": {
-				"error": "We are sorry, but we were unable to send your message. Please try again later.",
-				"success": "Your message has been sent successfully. We will get back to you as soon as possible."
+				"error": "抱歉，我们无法发送您的消息，请稍后重试。",
+				"success": "您的消息已成功发送。我们将尽快回复您。"
 			},
-			"submit": "Send message"
+			"submit": "发送消息"
 		},
-		"title": "Contact us"
+		"title": "联系我们"
 	},
 	"documentation": {
-		"title": "Documentation"
+		"title": "文档"
 	},
 	"faq": {
-		"description": "Do you have any questions? We have got you covered.",
-		"title": "Frequently asked questions"
+		"description": "有任何问题？我们为您解答。",
+		"title": "常见问题"
 	},
 	"mail": {
 		"common": {
-			"openLinkInBrowser": "If you want to open the link in a different browser than your default one, copy and paste this link:",
-			"otp": "One-time password",
-			"useLink": "or use the following link:"
+			"openLinkInBrowser": "如果您想在其他浏览器中打开链接，请复制并粘贴此链接：",
+			"otp": "一次性密码",
+			"useLink": "或使用以下链接："
 		},
 		"emailVerification": {
-			"body": "Hey,\nplease click the link below to verify this new email address.",
-			"confirmEmail": "Verify email",
-			"subject": "Verify your email"
+			"body": "您好，\n请点击下方链接验证此新邮箱地址。",
+			"confirmEmail": "验证邮箱",
+			"subject": "验证您的邮箱"
 		},
 		"forgotPassword": {
-			"body": "Hey,\nyou requested a password reset.\n\nClick the button below to reset your password.",
-			"resetPassword": "Reset password",
-			"subject": "Reset your password"
+			"body": "您好，\n您请求了密码重置。\n\n请点击下方按钮重置您的密码。",
+			"resetPassword": "重置密码",
+			"subject": "重置您的密码"
 		},
 		"magicLink": {
-			"body": "Hey,\nyou requested a login email from supastarter.\n\nClick the link below to login.",
-			"login": "Login",
-			"subject": "Login to supastarter"
+			"body": "您好，\n您已向 Pixelto AI 申请了登录邮件。\n\n点击下方链接登录。",
+			"login": "登录",
+			"subject": "登录 Pixelto AI"
 		},
 		"newUser": {
-			"body": "Hey,\nthanks for signing up for supastarter.\n\nTo start using our app, please confirm your email address by clicking the link below.",
-			"confirmEmail": "Confirm email",
-			"subject": "Confirm your email"
+			"body": "您好，\n感谢您注册 Pixelto AI。\n\n要开始使用我们的应用，请点击下方链接确认您的邮箱地址。",
+			"confirmEmail": "确认邮箱",
+			"subject": "确认您的邮箱"
 		},
 		"newsletterSignup": {
-			"body": "Thank you for signing up for the supastarter newsletter. We will keep you updated with the latest news and updates.",
-			"subject": "Welcome to our newsletter"
+			"body": "感谢您订阅 Pixelto AI 的通讯。我们将为您提供最新的新闻和更新。",
+			"subject": "欢迎订阅 Pixelto AI 的通讯"
 		},
 		"organizationInvitation": {
-			"body": "You have been invited to join the organization {organizationName}. Click the button below or copy and paste the link into your browser of choice to accept the invitation and join the organization.",
-			"headline": "Join the organization {organizationName}",
-			"join": "Join the organization",
-			"subject": "You have been invited to join an organization"
+			"body": "您已被邀请加入组织 {organizationName}。请点击下方按钮或将链接复制到浏览器中以接受邀请并加入组织。",
+			"headline": "加入组织 {organizationName}",
+			"join": "加入组织",
+			"subject": "您已被邀请加入一个组织"
 		}
 	},
 	"newsletter": {
-		"email": "Email",
+		"email": "邮箱",
 		"hints": {
 			"error": {
-				"message": "Could not subscribe to newsletter. Please try again later."
+				"message": "无法订阅通讯，请稍后重试。"
 			},
 			"success": {
-				"message": "Thank you for subscribing to our newsletter. We will keep you posted.",
-				"title": "Subscribed"
+				"message": "感谢您订阅我们的通讯。我们将为您提供最新动态。",
+				"title": "订阅成功"
 			}
 		},
-		"submit": "Subscribe",
-		"subtitle": "Be among the first to get access to supastarter.nextjs.",
-		"title": "Get early access"
+		"submit": "订阅",
+		"subtitle": "成为第一批获取访问权限的用户。",
+		"title": "获取早期访问权"
 	},
 	"onboarding": {
 		"account": {
-			"avatar": "Avatar",
-			"avatarDescription": "Click the circle or drop an image to it to upload your avatar.",
-			"name": "Name"
+			"avatar": "头像",
+			"avatarDescription": "点击圆圈或拖放图片以上传您的头像。",
+			"name": "姓名"
 		},
-		"continue": "Continue",
-		"message": "Just a few quick steps to get you started.",
+		"continue": "继续",
+		"message": "只需几个简单步骤即可开始。",
 		"notifications": {
-			"accountSetupFailed": "We are sorry, but we were unable to set up your account. Please try again later."
+			"accountSetupFailed": "抱歉，我们无法设置您的账户，请稍后重试。"
 		},
-		"step": "Step {step} / {total}",
-		"title": "Set up your account"
+		"step": "步骤 {step} / {total}",
+		"title": "设置您的账户"
 	},
 	"organizations": {
 		"createForm": {
-			"name": "Organization name",
+			"name": "组织名称",
 			"notifications": {
-				"error": "We are sorry, but we were unable to create your organization. Please try again later.",
-				"success": "Your organization has been created. You can now invite members."
+				"error": "抱歉，我们无法创建您的组织，请稍后重试。",
+				"success": "您的组织已创建。您现在可以邀请成员。"
 			},
-			"submit": "Create organization",
-			"subtitle": "Enter a name for your organization to get started. You can change the name later in the organization settings.",
-			"title": "Create an organization"
+			"submit": "创建组织",
+			"subtitle": "输入组织名称以开始。您可以稍后在组织设置中更改名称。",
+			"title": "创建组织"
 		},
 		"invitationAlert": {
-			"description": "You need to sign in or create an account to join the organization.",
-			"title": "You have been invited to join an organization."
+			"description": "您需要登录或创建账户才能加入组织。",
+			"title": "您已被邀请加入一个组织。"
 		},
 		"invitationModal": {
-			"accept": "Accept",
-			"decline": "Decline",
-			"description": "You have been invited to join the organization {organizationName}. Do you want to accept the invitation and join the organization?",
-			"title": "Join the organization"
+			"accept": "接受",
+			"decline": "拒绝",
+			"description": "您已被邀请加入组织 {organizationName}。您要接受邀请并加入组织吗？",
+			"title": "加入组织"
 		},
 		"organizationSelect": {
-			"createNewOrganization": "Create new organization",
-			"organizations": "Organizations",
-			"personalAccount": "Personal account"
+			"createNewOrganization": "创建新组织",
+			"organizations": "组织",
+			"personalAccount": "个人账户"
 		},
 		"organizationsGrid": {
-			"createNewOrganization": "Create new organization",
-			"title": "Your organizations"
+			"createNewOrganization": "创建新组织",
+			"title": "您的组织"
 		},
 		"roles": {
-			"admin": "Admin",
-			"member": "Member",
-			"owner": "Owner"
+			"admin": "管理员",
+			"member": "成员",
+			"owner": "所有者"
 		},
 		"settings": {
 			"changeName": {
-				"title": "Organization name"
+				"title": "组织名称"
 			},
 			"deleteOrganization": {
-				"confirmation": "Are you sure you want to delete your organization?",
-				"description": "Permanently delete your organization. Once you delete your organization, there is no going back. To confirm, please enter your password below:",
-				"submit": "Delete organization",
-				"title": "Delete organization"
+				"confirmation": "确定要删除您的组织吗？",
+				"description": "永久删除您的组织。一旦删除，无法恢复。请在下方输入您的密码以确认：",
+				"submit": "删除组织",
+				"title": "删除组织"
 			},
 			"logo": {
-				"description": "Upload a logo for your organization.",
-				"title": "Organization logo"
+				"description": "为您的组织上传标志。",
+				"title": "组织标志"
 			},
 			"members": {
-				"activeMembers": "Active members",
-				"description": "See all active members and the pending invites of your organization.",
+				"activeMembers": "活跃成员",
+				"description": "查看您组织的所有活跃成员和待处理邀请。",
 				"invitations": {
-					"empty": "You have not invited any members yet.",
-					"expiresAt": "Expires at {date}",
+					"empty": "您还没有邀请任何成员。",
+					"expiresAt": "过期时间：{date}",
 					"invitationStatus": {
-						"accepted": "Accepted",
-						"canceled": "Canceled",
-						"pending": "Pending",
-						"rejected": "Rejected"
+						"accepted": "已接受",
+						"canceled": "已取消",
+						"pending": "待处理",
+						"rejected": "已拒绝"
 					},
-					"revoke": "Revoke invitation",
-					"resend": "Resend invitation"
+					"revoke": "撤销邀请",
+					"resend": "重新发送邀请"
 				},
 				"inviteMember": {
-					"description": "To invite a new member, send them an invitation.",
-					"email": "Email",
+					"description": "要邀请新成员，请发送邀请。",
+					"email": "邮箱",
 					"notifications": {
 						"error": {
-							"description": "We were unable to invite the member. Please try again later.",
-							"title": "Could not invite member"
+							"description": "无法邀请成员，请稍后重试。",
+							"title": "无法邀请成员"
 						},
 						"success": {
-							"description": "The member has been invited.",
-							"title": "Member invited"
+							"description": "成员已被邀请。",
+							"title": "成员已邀请"
 						}
 					},
-					"role": "Role",
-					"submit": "Invite",
-					"title": "Invite member"
+					"role": "角色",
+					"submit": "邀请",
+					"title": "邀请成员"
 				},
-				"leaveOrganization": "Leave organization",
+				"leaveOrganization": "离开组织",
 				"notifications": {
 					"removeMember": {
 						"error": {
-							"description": "Could not remove the member from your organization. Please try again."
+							"description": "无法从组织中移除成员，请重试。"
 						},
 						"loading": {
-							"description": "Removing member from organization..."
+							"description": "正在从组织中移除成员..."
 						},
 						"success": {
-							"description": "The member has been successfully removed from your organization."
+							"description": "成员已成功从您的组织中移除。"
 						}
 					},
 					"revokeInvitation": {
 						"error": {
-							"description": "The invitation could not be revoked. Please try again later."
+							"description": "无法撤销邀请，请稍后重试。"
 						},
 						"loading": {
-							"description": "Revoking invitation..."
+							"description": "正在撤销邀请..."
 						},
 						"success": {
-							"description": "The invitation has been revoked."
+							"description": "邀请已撤销。"
 						}
 					},
 					"updateMembership": {
 						"error": {
-							"description": "Could not update organization membership. Please try again."
+							"description": "无法更新组织成员资格，请重试。"
 						},
 						"loading": {
-							"description": "Updating membership..."
+							"description": "正在更新成员资格..."
 						},
 						"success": {
-							"description": "Membership was updated successfully"
+							"description": "成员资格已成功更新"
 						}
 					},
 					"resendInvitation": {
 						"loading": {
-							"description": "Resending invitation..."
+							"description": "正在重新发送邀请..."
 						},
 						"success": {
-							"description": "Invitation sent"
+							"description": "邀请已发送"
 						},
 						"error": {
-							"description": "Could not sent invitation. Please try again."
+							"description": "无法发送邀请，请重试。"
 						}
 					}
 				},
-				"pendingInvitations": "Pending invitations",
-				"removeMember": "Remove member",
-				"title": "Members"
+				"pendingInvitations": "待处理邀请",
+				"removeMember": "移除成员",
+				"title": "成员"
 			},
 			"notifications": {
-				"organizationDeleted": "Your organization has been deleted.",
-				"organizationNameNotUpdated": "We were unable to update your organization name. Please try again later.",
-				"organizationNameUpdated": "Your organization name has been updated.",
-				"organizationNotDeleted": "We were unable to delete your organization. Please try again later."
+				"organizationDeleted": "您的组织已删除。",
+				"organizationNameNotUpdated": "无法更新组织名称，请稍后重试。",
+				"organizationNameUpdated": "您的组织名称已更新。",
+				"organizationNotDeleted": "无法删除组织，请稍后重试。"
 			},
-			"subtitle": "Manage the settings of the organization.",
-			"title": "Organization",
+			"subtitle": "管理组织设置。",
+			"title": "组织",
 			"dangerZone": {
-				"title": "Danger zone"
+				"title": "危险区域"
 			}
 		},
 		"start": {
-			"subtitle": "Welcome to the start page of this organization!"
+			"subtitle": "欢迎来到此组织的首页！"
 		}
 	},
 	"pricing": {
-		"choosePlan": "Choose plan",
-		"contactSales": "Contact sales",
-		"description": "Choose the plan that works best for you.",
-		"getStarted": "Get started",
-		"month": "{count, plural, one {month} other {{count} months}}",
-		"monthly": "Monthly",
+		"title": "定价与方案",
+		"description": "选择最适合您的方案。",
+		"choosePlan": "选择方案",
+		"contactSales": "联系销售",
+		"getStarted": "开始使用",
+		"month": "{count} 个月",
+		"monthly": "月付",
+		"mostPopular": "最受欢迎",
+		"savePercent": "省 {percent}%",
+		"freeToUse": "免费使用",
+		"billedAnnually": "按年计费 {amount}",
+		"features": {
+			"imagesPerDay": "每天 10 张图片",
+			"imagesPerMonth": "每月 500 张图片",
+			"unlimitedImages": "每月 2000 张图片",
+			"basicResolution": "最高 1024x1024 分辨率",
+			"hdResolution": "最高 2048x2048 分辨率",
+			"ultraHdResolution": "最高 4096x4096 分辨率",
+			"basicStyles": "5 种生成风格",
+			"allStyles": "所有生成风格",
+			"watermark": "无水印",
+			"commercialLicense": "商用许可",
+			"priorityQueue": "优先处理队列",
+			"imageUpscaling": "图片放大 (4x)",
+			"backgroundRemoval": "背景移除",
+			"batchGeneration": "批量生成"
+		},
 		"products": {
-			"basic": {
-				"description": "Perfect to small teams.",
-				"features": {
-					"anotherFeature": "Another amazing feature",
-					"limitedSupport": "Limited support"
-				},
-				"title": "Basic"
-			},
-			"enterprise": {
-				"description": "Custom plan tailored to your requirements",
-				"features": {
-					"enterpriseSupport": "Enterprise support",
-					"unlimitedProjects": "Unlimited projects"
-				},
-				"title": "Enterprise"
-			},
 			"free": {
-				"description": "Start for free",
-				"features": {
-					"anotherFeature": "Another amazing feature",
-					"limitedSupport": "Limited support"
-				},
-				"title": "Free"
+				"description": "适合偶尔的个人需求。",
+				"title": "免费版"
 			},
-			"lifetime": {
-				"description": "Buy once. Use forever.",
-				"features": {
-					"extendSupport": "Extended support",
-					"noRecurringCosts": "No recurring costs"
-				},
-				"title": "Lifetime"
+			"starter": {
+				"description": "满足日常个人需求，释放您的创造力。",
+				"title": "入门版"
 			},
-			"pro": {
-				"description": "Best for teams",
-				"features": {
-					"anotherFeature": "Another amazing feature",
-					"fiveMembers": "Up to 5 members",
-					"fullSupport": "Full support"
-				},
-				"title": "Pro"
+			"premium": {
+				"description": "满足个人和专业需求，提高工作效率。",
+				"title": "高级版"
 			}
 		},
-		"purchase": "Purchase",
-		"recommended": "Recommended",
-		"subscribe": "Subscribe",
-		"title": "Pricing",
-		"trialPeriod": "{days} {days, plural, one {day} other {days}} free trial",
-		"year": "{count, plural, one {year} other {{count} years}}",
-		"yearly": "Yearly",
-		"perSeat": "seat"
+		"purchase": "购买",
+		"recommended": "推荐",
+		"subscribe": "订阅",
+		"trialPeriod": "{days} 天免费试用",
+		"year": "{count} 年",
+		"yearly": "年付",
+		"perSeat": "席位"
 	},
 	"settings": {
 		"account": {
 			"avatar": {
-				"description": "To change your avatar click the picture in this block and select a file from your computer to upload.",
+				"description": "要更改头像，请点击此处的图片并从您的电脑中选择文件上传。",
 				"notifications": {
-					"error": "Could not update avatar",
-					"success": "Avatar was updated successfully"
+					"error": "无法更新头像",
+					"success": "头像已成功更新"
 				},
-				"title": "Your avatar"
+				"title": "您的头像"
 			},
 			"changeEmail": {
-				"description": "To change your email, enter the new email and hit save. You will have to confirm the new email before it will become active.",
+				"description": "要更改邮箱，请输入新邮箱并点击保存。您需要确认新邮箱后才能生效。",
 				"notifications": {
-					"error": "Could not update email",
-					"success": "Email was updated successfully"
+					"error": "无法更新邮箱",
+					"success": "邮箱已成功更新"
 				},
-				"title": "Your email"
+				"title": "您的邮箱"
 			},
 			"changeName": {
 				"notifications": {
-					"error": "Could not update name",
-					"success": "Name was updated successfully"
+					"error": "无法更新姓名",
+					"success": "姓名已成功更新"
 				},
-				"title": "Your name"
+				"title": "您的姓名"
 			},
 			"deleteAccount": {
-				"confirmation": "Are you sure you want to delete your account?",
-				"description": "Permanently delete your account. Once you delete your account, there is no going back. To confirm, please enter your password below:",
+				"confirmation": "确定要删除您的账户吗？",
+				"description": "永久删除您的账户。一旦删除，无法恢复。请在下方输入您的密码以确认：",
 				"notifications": {
-					"error": "Could not delete account",
-					"success": "Account was deleted successfully"
+					"error": "无法删除账户",
+					"success": "账户已成功删除"
 				},
-				"submit": "Delete account",
-				"title": "Delete account"
+				"submit": "删除账户",
+				"title": "删除账户"
 			},
 			"language": {
-				"description": "To change the language of the app for your account, select a language from the list and click save.",
+				"description": "要更改应用的语言，请从列表中选择语言并点击保存。",
 				"notifications": {
-					"error": "Could not update language",
-					"success": "Language was updated successfully"
+					"error": "无法更新语言",
+					"success": "语言已成功更新"
 				},
-				"title": "Your language"
+				"title": "您的语言"
 			},
 			"security": {
 				"activeSessions": {
-					"description": "These are all the active sessions of your account. Click the X to end a specifc session.",
-					"title": "Active sessions",
+					"description": "这些是您账户的所有活跃会话。点击 X 结束特定会话。",
+					"title": "活跃会话",
 					"notifications": {
 						"revokeSession": {
-							"success": "Session revoked"
+							"success": "会话已撤销"
 						}
 					},
-					"currentSession": "Current session"
+					"currentSession": "当前会话"
 				},
 				"changePassword": {
-					"currentPassword": "Current password",
-					"newPassword": "New password",
+					"currentPassword": "当前密码",
+					"newPassword": "新密码",
 					"notifications": {
-						"error": "Could not update password",
-						"success": "Password was updated successfully"
+						"error": "无法更新密码",
+						"success": "密码已成功更新"
 					},
-					"title": "Your password"
+					"title": "您的密码"
 				},
 				"connectedAccounts": {
-					"connect": "Connect",
-					"disconnect": "Disconnect",
-					"title": "Connected accounts"
+					"connect": "连接",
+					"disconnect": "断开连接",
+					"title": "已连接账户"
 				},
 				"passkeys": {
-					"description": "Use passkeys as a secure alternative to passwords.",
+					"description": "使用通行密钥作为密码的安全替代方案。",
 					"notifications": {
 						"addPasskey": {
 							"error": {
-								"title": "Could not add passkey"
+								"title": "无法添加通行密钥"
 							},
 							"success": {
-								"title": "Passkey added"
+								"title": "通行密钥已添加"
 							}
 						},
 						"deletePasskey": {
 							"error": {
-								"title": "Could not delete passkey"
+								"title": "无法删除通行密钥"
 							},
 							"loading": {
-								"title": "Deleting passkey..."
+								"title": "正在删除通行密钥..."
 							},
 							"success": {
-								"title": "Passkey deleted"
+								"title": "通行密钥已删除"
 							}
 						}
 					},
-					"title": "Passkeys"
+					"title": "通行密钥"
 				},
 				"setPassword": {
-					"description": "You have not set a password yet. To set one, you need to go through the password reset flow. Click the button below to send an email to reset your password and follow the instructions in the email.",
+					"description": "您尚未设置密码。要设置密码，您需要通过密码重置流程。点击下方按钮发送重置密码邮件，并按照邮件中的说明操作。",
 					"notifications": {
-						"error": "Could not send link to set password. Please try again.",
-						"success": "Check your inbox for the link to set your password."
+						"error": "无法发送设置密码链接，请重试。",
+						"success": "请检查您的收件箱获取设置密码链接。"
 					},
-					"submit": "Set password",
-					"title": "Your password"
+					"submit": "设置密码",
+					"title": "您的密码"
 				},
-				"title": "Security",
+				"title": "安全",
 				"twoFactor": {
-					"title": "Two-factor authentication",
-					"description": "Add an extra layer of security to your account.",
+					"title": "双重认证",
+					"description": "为您的账户添加额外的安全层。",
 					"dialog": {
 						"password": {
-							"title": "Verify with password",
-							"description": "Please verify your account by entering your password:",
-							"label": "Your password:"
+							"title": "使用密码验证",
+							"description": "请输入您的密码以验证账户：",
+							"label": "您的密码："
 						},
 						"totpUrl": {
-							"description": "Use your preferred authenticator app and scan the QR code with it or enter the secret below manually to set up two-factor authentication.",
-							"code": "Enter 6-digit code to verify the setup:",
-							"title": "Enable two-factor authentication"
+							"description": "使用您喜欢的身份验证器应用扫描二维码，或手动输入下方的密钥以设置双重认证。",
+							"code": "输入 6 位验证码以确认设置：",
+							"title": "启用双重认证"
 						}
 					},
-					"enable": "Enable two-factor authentication",
+					"enable": "启用双重认证",
 					"notifications": {
 						"verify": {
 							"success": {
-								"title": "Two-factor authentication has been enabled successfully."
+								"title": "双重认证已成功启用。"
 							}
 						},
 						"enable": {
 							"error": {
-								"title": "Could not verify your account with the provided password. Please try again."
+								"title": "无法使用提供的密码验证您的账户，请重试。"
 							}
 						},
 						"disable": {
 							"success": {
-								"title": "Two-factor authentication has been disabled successfully."
+								"title": "双重认证已成功禁用。"
 							}
 						}
 					},
-					"disable": "Disable two-factor authentication",
-					"enabled": "You have two-factor authentication enabled for your account."
+					"disable": "禁用双重认证",
+					"enabled": "您的账户已启用双重认证。"
 				}
 			},
-			"subtitle": "Manage the settings of your personal account.",
-			"title": "Account settings"
+			"subtitle": "管理您的个人账户设置。",
+			"title": "账户设置"
 		},
 		"billing": {
 			"createCustomerPortal": {
-				"label": "Manage billing",
+				"label": "管理计费",
 				"notifications": {
 					"error": {
-						"title": "Could not create a customer portal session. Please try again."
+						"title": "无法创建客户门户会话，请重试。"
 					}
 				}
 			},
 			"activePlan": {
 				"status": {
-					"active": "Active",
-					"canceled": "Canceled",
-					"expired": "Expired",
-					"incomplete": "Incomplete",
-					"past_due": "Past due",
-					"paused": "Paused",
-					"trialing": "Trialing",
-					"unpaid": "Unpaid"
+					"active": "活跃",
+					"canceled": "已取消",
+					"expired": "已过期",
+					"incomplete": "未完成",
+					"past_due": "已逾期",
+					"paused": "已暂停",
+					"trialing": "试用中",
+					"unpaid": "未付款"
 				},
-				"title": "Your plan"
+				"title": "您的方案"
 			},
 			"changePlan": {
-				"description": "Choose a plan to subscribe to.",
-				"title": "Change your plan"
+				"description": "选择要订阅的方案。",
+				"title": "更改方案"
 			},
-			"title": "Billing"
+			"title": "计费"
 		},
 		"menu": {
 			"account": {
-				"billing": "Billing",
-				"dangerZone": "Danger zone",
-				"general": "General",
-				"security": "Security",
-				"title": "Account"
+				"billing": "计费",
+				"dangerZone": "危险区域",
+				"general": "常规",
+				"security": "安全",
+				"title": "账户"
 			},
 			"organization": {
-				"billing": "Billing",
-				"general": "General",
-				"members": "Members",
-				"title": "Organization",
-				"dangerZone": "Danger zone"
+				"billing": "计费",
+				"general": "常规",
+				"members": "成员",
+				"title": "组织",
+				"dangerZone": "危险区域"
 			}
 		},
-		"save": "Save"
+		"save": "保存"
 	},
 	"start": {
-		"subtitle": "See the latest stats of your awesome business.",
-		"welcome": "Welcome {name}!"
+		"subtitle": "欢迎来到您的仪表盘",
+		"welcome": "欢迎 {name}！"
 	},
 	"zod": {
 		"errors": {
@@ -946,8 +963,8 @@
 		}
 	},
 	"choosePlan": {
-		"title": "Choose your plan",
-		"description": "To continue, please select a plan."
+		"title": "选择您的方案",
+		"description": "要继续，请选择一个方案。"
 	},
 	"editor": {
 		"title": "AI 魔法编辑器",
@@ -985,13 +1002,15 @@
 			"compare": "与原图对比",
 			"download": "下载图片",
 			"newEdit": "新编辑",
+			"startOver": "重新开始",
+			"close": "关闭",
 			"new": "新建",
 			"original": "原图",
 			"editedResult": "编辑结果"
 		},
 		"loading": {
 			"title": "正在编辑图片",
-			"subtitle": "Gemini 2.5 正在处理您的请求...",
+			"processing": "{model} 正在处理您的请求...",
 			"steps": {
 				"analyzing": "正在分析图片结构",
 				"understanding": "正在理解提示词指令",

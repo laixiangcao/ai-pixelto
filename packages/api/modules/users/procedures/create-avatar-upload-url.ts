@@ -1,5 +1,5 @@
-import { config } from "@repo/config";
-import { getSignedUploadUrl } from "@repo/storage";
+import { getPublicUrl, getSignedUploadUrl } from "@repo/storage";
+import { z } from "zod";
 import { protectedProcedure } from "../../../orpc/procedures";
 
 export const createAvatarUploadUrl = protectedProcedure
@@ -11,10 +11,17 @@ export const createAvatarUploadUrl = protectedProcedure
 		description:
 			"Create a signed upload URL to upload an avatar image to the storage bucket",
 	})
-	.handler(async ({ context: { user } }) => {
-		const signedUploadUrl = await getSignedUploadUrl(`${user.id}.png`, {
-			bucket: config.storage.bucketNames.avatars,
-		});
+	.input(
+		z.object({
+			path: z.string(),
+			bucket: z.string(),
+		}),
+	)
+	.handler(async ({ input }) => {
+		const { path, bucket } = input;
 
-		return { signedUploadUrl };
+		const signedUploadUrl = await getSignedUploadUrl(path, { bucket });
+		const publicUrl = getPublicUrl(path, bucket);
+
+		return { signedUploadUrl, publicUrl };
 	});

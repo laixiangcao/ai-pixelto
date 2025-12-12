@@ -2,21 +2,20 @@ import { OpenAPIGenerator } from "@orpc/openapi";
 import { ZodToJsonSchemaConverter } from "@orpc/zod/zod4";
 import { auth } from "@repo/auth";
 import { config } from "@repo/config";
-import { logger } from "@repo/logs";
 import { webhookHandler as paymentsWebhookHandler } from "@repo/payments";
 import { getBaseUrl } from "@repo/utils";
 import { Scalar } from "@scalar/hono-api-reference";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { logger as honoLogger } from "hono/logger";
 import { mergeOpenApiSchemas } from "./lib/openapi-schema";
+import { requestLogger } from "./lib/request-logger";
 import { openApiHandler, rpcHandler } from "./orpc/handler";
 import { router } from "./orpc/router";
 
 export const app = new Hono()
 	.basePath("/api")
 	// Logger middleware
-	.use(honoLogger((message, ...rest) => logger.log(message, ...rest)))
+	.use(requestLogger)
 	// Cors middleware
 	.use(
 		cors({
