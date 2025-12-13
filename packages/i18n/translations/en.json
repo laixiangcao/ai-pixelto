@@ -514,43 +514,38 @@
 	"pricing": {
 		"title": "Pricing & Plans",
 		"description": "Choose the plan that works best for you.",
-		"choosePlan": "Choose plan",
-		"contactSales": "Contact sales",
-		"getStarted": "Get started",
 		"month": "{count, plural, one {month} other {{count} months}}",
 		"monthly": "Monthly",
 		"mostPopular": "Most popular",
-		"savePercent": "Save {percent}%",
+		"expertChoice": "Expert choice",
+		"upToPercentOff": "🔥 {percent}% OFF",
 		"freeToUse": "Free to Use",
 		"billedAnnually": "billed annually as {amount}",
+		"billedMonthly": "Billed monthly",
+		"creditsMonthlyLabel": "Credits / month",
+		"creditsDailyLabel": "Refresh credits / day",
 		"features": {
-			"imagesPerDay": "10 images per day",
-			"imagesPerMonth": "500 images per month",
-			"unlimitedImages": "2000 images per month",
+			"imagesPerMonth50": "Up to 50 images per month",
+			"imagesPerMonth1000": "Up to 1,000 images per month",
+			"imagesPerMonth3000": "Up to 3,000 images per month",
+			"partialModelAccess": "Access partial image models",
+			"allModelAccess": "Access all image models",
 			"basicResolution": "Max 1024x1024 resolution",
 			"hdResolution": "Max 2048x2048 resolution",
 			"ultraHdResolution": "Max 4096x4096 resolution",
-			"basicStyles": "5 generation styles",
-			"allStyles": "All generation styles",
 			"watermark": "No watermarks",
 			"commercialLicense": "Commercial license",
-			"priorityQueue": "Priority processing queue",
-			"imageUpscaling": "Image upscaling (4x)",
-			"backgroundRemoval": "Background removal",
-			"batchGeneration": "Batch generation"
+			"priorityQueue": "Priority processing queue"
 		},
 		"products": {
 			"free": {
-				"description": "Made for occasional personal requirements.",
 				"title": "Free"
 			},
-			"starter": {
-				"description": "Meet daily personal needs and unleash your creativity.",
-				"title": "Starter"
+			"ultra": {
+				"title": "Ultra"
 			},
-			"premium": {
-				"description": "Meet personal and professional needs and improve work efficiency.",
-				"title": "Premium"
+			"pro": {
+				"title": "Pro"
 			}
 		},
 		"purchase": "Purchase",

@@ -1,5 +1,5 @@
 import { ORPCError, type } from "@orpc/server";
-import { config } from "@repo/config";
+import { config, type Config } from "@repo/config";
 import {
 	ensureDailyFreeGrant,
 	ensurePromotionalGrant,
@@ -69,9 +69,8 @@ export const getBillingSummary = protectedProcedure
 		const ownerUserId = ownerOrganizationId ? undefined : context.user.id;
 
 		// 懒发放：每日赠送（仅 Free 计划）
-		const activePlanConfig = activePlan
-			? config.payments.plans[activePlan.id]
-			: config.payments.plans.free;
+		const plans = config.payments.plans as unknown as Config["payments"]["plans"];
+		const activePlanConfig = activePlan ? plans[activePlan.id] : plans.free;
 
 		if (
 			activePlan?.id === "free" &&

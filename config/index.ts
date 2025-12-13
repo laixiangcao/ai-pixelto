@@ -129,80 +129,36 @@ export const config = {
 				isFree: true,
 				credits: {
 					daily:
-						Number(process.env.NEXT_PUBLIC_CREDITS_FREE_DAILY ?? "100"),
+						Number(process.env.NEXT_PUBLIC_CREDITS_FREE_DAILY ?? "30"),
 				},
 				features: [
-					{ key: "pricing.features.imagesPerDay", included: true },
+					{ key: "pricing.features.imagesPerMonth50", included: true },
+					{ key: "pricing.features.partialModelAccess", included: true },
+					{ key: "pricing.features.commercialLicense", included: true },
+					{ key: "pricing.features.watermark", included: true },
 					{ key: "pricing.features.basicResolution", included: true },
-					{ key: "pricing.features.basicStyles", included: true },
-					{
-						key: "pricing.features.watermark",
-						included: false,
-						highlight: false,
-					},
-					{
-						key: "pricing.features.commercialLicense",
-						included: false,
-					},
-					{
-						key: "pricing.features.priorityQueue",
-						included: false,
-					},
-					{
-						key: "pricing.features.imageUpscaling",
-						included: false,
-					},
-					{
-						key: "pricing.features.backgroundRemoval",
-						included: false,
-					},
+					{ key: "pricing.features.priorityQueue", included: false },
 				],
 			},
-			starter: {
+			pro: {
 				recommended: true,
 				yearlyDiscount: 30,
 				credits: {
 					monthly:
-						Number(process.env.NEXT_PUBLIC_CREDITS_STARTER_MONTHLY ?? "3000"),
-					promotionalBonus: Number(
-						process.env.NEXT_PUBLIC_CREDITS_STARTER_YEARLY_BONUS ?? "1000",
-					),
+						Number(process.env.NEXT_PUBLIC_CREDITS_PRO_MONTHLY ?? "3000"),
 				},
 				features: [
-					{ key: "pricing.features.imagesPerMonth", included: true },
-					{
-						key: "pricing.features.hdResolution",
-						included: true,
-						highlight: true,
-					},
-					{
-						key: "pricing.features.allStyles",
-						included: true,
-						highlight: true,
-					},
+					{ key: "pricing.features.imagesPerMonth1000", included: true, highlight: true },
+					{ key: "pricing.features.allModelAccess", included: true, highlight: true },
+					{ key: "pricing.features.commercialLicense", included: true },
 					{ key: "pricing.features.watermark", included: true },
-					{
-						key: "pricing.features.commercialLicense",
-						included: true,
-					},
-					{
-						key: "pricing.features.priorityQueue",
-						included: true,
-					},
-					{
-						key: "pricing.features.imageUpscaling",
-						included: false,
-					},
-					{
-						key: "pricing.features.backgroundRemoval",
-						included: false,
-					},
+					{ key: "pricing.features.hdResolution", included: true, highlight: true},
+					{ key: "pricing.features.priorityQueue", included: true, highlight: true },
 				],
 				prices: [
 					{
 						type: "recurring",
-						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_STARTER_MONTHLY as string,
+						productId: process.env.NEXT_PUBLIC_PRICE_ID_PRO_MONTHLY as string,
 						interval: "month",
 						amount: 10,
 						currency: "USD",
@@ -210,8 +166,7 @@ export const config = {
 					},
 					{
 						type: "recurring",
-						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_STARTER_YEARLY as string,
+						productId: process.env.NEXT_PUBLIC_PRICE_ID_PRO_YEARLY as string,
 						interval: "year",
 						amount: 84,
 						currency: "USD",
@@ -219,55 +174,23 @@ export const config = {
 					},
 				],
 			},
-			premium: {
+			ultra: {
 				yearlyDiscount: 40,
 				credits: {
-					monthly:
-						Number(process.env.NEXT_PUBLIC_CREDITS_PREMIUM_MONTHLY ?? "10000"),
-					promotionalBonus: Number(
-						process.env.NEXT_PUBLIC_CREDITS_PREMIUM_YEARLY_BONUS ?? "2000",
-					),
+					monthly: Number(process.env.NEXT_PUBLIC_CREDITS_ULTRA_MONTHLY ?? "8000"),
 				},
 				features: [
-					{
-						key: "pricing.features.unlimitedImages",
-						included: true,
-					},
-					{
-						key: "pricing.features.ultraHdResolution",
-						included: true,
-						highlight: true,
-					},
-					{
-						key: "pricing.features.allStyles",
-						included: true,
-						highlight: true,
-					},
+					{ key: "pricing.features.imagesPerMonth3000", included: true, highlight: true },
+					{ key: "pricing.features.allModelAccess", included: true, highlight: true },
+					{ key: "pricing.features.commercialLicense", included: true },
 					{ key: "pricing.features.watermark", included: true },
-					{
-						key: "pricing.features.commercialLicense",
-						included: true,
-					},
-					{
-						key: "pricing.features.priorityQueue",
-						included: true,
-					},
-					{
-						key: "pricing.features.imageUpscaling",
-						included: true,
-						highlight: true,
-					},
-					{
-						key: "pricing.features.backgroundRemoval",
-						included: true,
-						highlight: true,
-					},
+					{ key: "pricing.features.ultraHdResolution", included: true, highlight: true},
+					{ key: "pricing.features.priorityQueue", included: true, highlight: true },
 				],
 				prices: [
 					{
 						type: "recurring",
-						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_PREMIUM_MONTHLY as string,
+						productId: process.env.NEXT_PUBLIC_PRICE_ID_ULTRA_MONTHLY as string,
 						interval: "month",
 						amount: 20,
 						currency: "USD",
@@ -275,8 +198,7 @@ export const config = {
 					},
 					{
 						type: "recurring",
-						productId: process.env
-							.NEXT_PUBLIC_PRICE_ID_PREMIUM_YEARLY as string,
+						productId: process.env.NEXT_PUBLIC_PRICE_ID_ULTRA_YEARLY as string,
 						interval: "year",
 						amount: 216,
 						currency: "USD",

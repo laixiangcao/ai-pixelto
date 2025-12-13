@@ -42,20 +42,20 @@ export function MarketingUserStatus({ className }: MarketingUserStatusProps) {
 			);
 		}
 
-		if (planId === "premium") {
+		if (planId === "pro") {
 			return (
 				<div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-600 bg-clip-text text-transparent">
 					<CrownIcon className="size-3.5 text-amber-500 fill-amber-500/20" />
-					<span className="font-extrabold tracking-tight">Premium</span>
+					<span className="font-extrabold tracking-tight">Pro</span>
 				</div>
 			);
 		}
 
-		if (planId === "starter") {
+		if (planId === "ultra") {
 			return (
-				<div className="flex items-center gap-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
-					<SparklesIcon className="size-3.5 text-blue-600 fill-blue-600/20" />
-					<span className="font-extrabold tracking-tight">Starter</span>
+				<div className="flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-600 bg-clip-text text-transparent">
+					<CrownIcon className="size-3.5 text-amber-500 fill-amber-500/20" />
+					<span className="font-extrabold tracking-tight">Ultra</span>
 				</div>
 			);
 		}
@@ -69,7 +69,7 @@ export function MarketingUserStatus({ className }: MarketingUserStatusProps) {
 	});
 	// Use simple label for the popover context
 	const planLabel =
-		planId === "premium" ? "Premium" : planId === "starter" ? "Starter" : "Free";
+		planId === "pro" ? "Pro" : planId === "ultra" ? "Ultra" : "Free";
 
 	return (
 		<div className={cn("flex items-center gap-2 sm:gap-3", className)}>

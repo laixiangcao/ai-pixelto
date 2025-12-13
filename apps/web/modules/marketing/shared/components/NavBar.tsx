@@ -81,6 +81,12 @@ export function NavBar() {
 
 	const isMenuItemActive = (href: string) => localePathname.startsWith(href);
 
+	const plans = config.payments.plans;
+	const maxYearlyDiscount = Object.values(plans).reduce(
+		(acc, plan) => Math.max(acc, (plan as any).yearlyDiscount ?? 0),
+		0,
+	);
+
 	return (
 		<nav
 			className={cn(
@@ -120,7 +126,15 @@ export function NavBar() {
 								)}
 								prefetch
 							>
-								{menuItem.label}
+								<span className="relative">
+									{menuItem.label}
+									{/* 折扣 badge */}
+									{/* {menuItem.href === "/pricing" && maxYearlyDiscount > 0 && (
+										<span className="absolute -top-2 -right-3 translate-x-1/2 -translate-y-1/2 flex items-center justify-center rounded-full bg-white px-1.5 py-0.5 text-[9px] font-bold text-red-600 shadow-md ring-1 ring-black/5 animate-pulse whitespace-nowrap">
+											{t("pricing.upToPercentOff", { percent: maxYearlyDiscount })}
+										</span>
+									)} */}
+								</span>
 								{isMenuItemActive(menuItem.href) && (
 									<span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary" />
 								)}

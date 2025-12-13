@@ -120,7 +120,7 @@ export function PricingTable({
 			)}
 
 			<div
-				className={cn("grid grid-cols-1 gap-6", {
+				className={cn("grid grid-cols-1 gap-8 py-8 px-1", {
 					"@xl:grid-cols-2": filteredPlans.length >= 2,
 					"@3xl:grid-cols-3": filteredPlans.length >= 3,
 					"@4xl:grid-cols-4": filteredPlans.length >= 4,
@@ -137,7 +137,7 @@ export function PricingTable({
 							yearlyDiscount,
 							features,
 						} = plan;
-						const { title, description } =
+						const { title } =
 							planData[planId as keyof typeof planData];
 
 						let price = prices?.find(
@@ -172,105 +172,142 @@ export function PricingTable({
 								? price.amount
 								: null;
 
+						const shouldShowOriginalMonthlyPrice =
+							!isFree &&
+							interval === "year" &&
+							typeof yearlyDiscount === "number" &&
+							yearlyDiscount > 0 &&
+							monthlyPrice !== null;
+
+						const originalMonthlyPrice = shouldShowOriginalMonthlyPrice
+							? monthlyPrice / (1 - yearlyDiscount / 100)
+							: null;
+
+						const isUltra = planId === "ultra";
+						const isPro = planId === "pro";
+
 						return (
 							<div
 								key={planId}
 								className={cn(
 									"relative flex flex-col rounded-[2rem] bg-card p-8 transition-all duration-200",
-									recommended
-										? "border-2 border-primary hover:-translate-y-1"
-										: "border border-border/60 hover:border-primary/20 hover:-translate-y-1",
+									isPro
+										? "border border-primary shadow-lg scale-[1.02] ring-4 ring-primary/5 z-10"
+										: isUltra
+											? "border border-blue-600 shadow-lg scale-[1.02] ring-4 ring-blue-600/5 z-10 dark:border-blue-500"
+											: "border border-border/60 hover:border-primary/20 hover:shadow-md",
 								)}
 							>
-								{/* Zone 1: Header (Title & Description) */}
+								{ isPro && (
+									<div className="absolute -top-4 left-0 right-0 mx-auto w-fit rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-sm ring-4 ring-background">
+										{t("pricing.mostPopular")}
+									</div>
+								)}
+								{ isUltra && (
+									<div className="absolute -top-4 left-0 right-0 mx-auto w-fit rounded-full bg-blue-600 px-4 py-1.5 text-xs font-bold text-white shadow-sm ring-4 ring-background dark:bg-blue-500">
+										{t("pricing.expertChoice")}
+									</div>
+								)}
+
 								<div className="mb-4">
-									<div className="mb-2 flex h-[32px] items-center justify-between">
-										<h3 className="text-xl font-bold text-foreground">
+									<div className="mb-2 flex min-h-[32px] items-center justify-between">
+										<h3
+											className={cn(
+												"text-xl font-bold",
+												isPro && "text-primary",
+												isUltra && "text-blue-600 dark:text-blue-400",
+												!isUltra && !isPro && "text-foreground",
+											)}
+										>
 											{title}
 										</h3>
-										{recommended && (
-											<span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-												{t("pricing.mostPopular")}
-											</span>
-										)}
 									</div>
-									<p className="h-[48px] text-sm text-muted-foreground leading-relaxed line-clamp-2">
-										{description}
-									</p>
 								</div>
 
-								{/* Zone 2: Pricing & Action */}
-								<div className="flex flex-col justify-end pb-8">
-									{/* Discount Tag */}
-									<div className="mb-2 h-[26px]">
-										{!isFree &&
-										yearlyDiscount &&
-										interval === "year" ? (
-											<span className="inline-flex items-center rounded-md bg-green-500/15 px-2.5 py-1 text-xs font-bold text-green-600 dark:bg-green-500/20 dark:text-green-400">
-												{t("pricing.savePercent", {
-													percent: yearlyDiscount,
-												})}
-											</span>
-										) : null}
-									</div>
-
-									{/* Price Area */}
-									<div className="mb-4 h-[88px]">
+								<div className="flex flex-col pb-8">
+									<div className="min-h-[120px] space-y-2">
 										{price && (
 											<div>
-												<div className="flex items-baseline gap-1">
-													<span className="text-5xl font-bold tracking-tight">
-														{format.number(
-															monthlyPrice ??
-																price.amount,
-															{
+												<div className="flex items-baseline gap-2">
+													{originalMonthlyPrice !== null && (
+														<span
+															className={cn(
+																"text-3xl font-semibold line-through decoration-2 opacity-50",
+																isPro && "text-primary/80",
+																isUltra && "text-blue-600/80 dark:text-blue-400/80",
+																!isUltra && !isPro && "text-foreground/60",
+															)}
+														>
+															{format.number(originalMonthlyPrice, {
 																style: "currency",
-																currency:
-																	price.currency,
+																currency: price.currency,
 																minimumFractionDigits: 0,
 																maximumFractionDigits: 2,
-															},
-														)}
+															})}
+														</span>
+													)}
+													<span className="text-4xl font-bold tracking-tight">
+														{format.number(monthlyPrice ?? price.amount, {
+															style: "currency",
+															currency: price.currency,
+															minimumFractionDigits: 0,
+															maximumFractionDigits: 2,
+														})}
 													</span>
 													{"interval" in price && (
 														<span className="text-muted-foreground font-medium">
 															/
-															{t(
-																"pricing.month",
-																{ count: 1 },
-															)}
+															{t("pricing.month", { count: 1 })}
 														</span>
 													)}
 												</div>
-												<div className="h-[20px]">
-													{yearlyTotal !== null &&
-														yearlyTotal > 0 && (
-															<p className="mt-2 text-sm text-muted-foreground">
-																{t(
-																	"pricing.billedAnnually",
-																	{
-																		amount: format.number(
-																			yearlyTotal,
-																			{
-																				style: "currency",
-																				currency:
-																					price.currency,
-																			},
-																		),
-																	},
-																)}
-															</p>
-														)}
+
+												<div className="mt-1 h-5">
+													{interval === "month" && !isFree ? (
+														<p className="text-sm text-muted-foreground">
+															{t("pricing.billedMonthly")}
+														</p>
+													) : yearlyTotal !== null && yearlyTotal > 0 ? (
+														<p className="text-sm text-muted-foreground">
+															{t("pricing.billedAnnually", {
+																amount: format.number(yearlyTotal, {
+																	style: "currency",
+																	currency: price.currency,
+																}),
+															})}
+														</p>
+													) : null}
+												</div>
+
+												<div className="mt-6">
+													{typeof plan.credits?.monthly === "number" ? (
+														<div className="flex items-baseline gap-2 rounded-lg bg-muted/50 p-2.5">
+															<span className="text-2xl font-bold leading-none text-foreground">
+																{format.number(plan.credits.monthly)}
+															</span>
+															<span className="text-sm font-medium text-muted-foreground">
+																{t("pricing.creditsMonthlyLabel")}
+															</span>
+														</div>
+													) : typeof plan.credits?.daily === "number" ? (
+														<div className="flex items-baseline gap-2 rounded-lg bg-muted/50 p-2.5">
+															<span className="text-2xl font-bold leading-none text-foreground">
+																{format.number(plan.credits.daily)}
+															</span>
+															<span className="text-sm font-medium text-muted-foreground">
+																{t("pricing.creditsDailyLabel")}
+															</span>
+														</div>
+													) : null}
 												</div>
 											</div>
 										)}
 									</div>
 
-									{/* Button */}
-									<div>
+									<div className="mt-6">
 										{isEnterprise ? (
 											<Button
-												className="w-full rounded-xl font-bold"
+												className="w-full rounded-xl font-bold h-12"
 												variant="outline"
 												size="lg"
 												asChild
@@ -283,22 +320,17 @@ export function PricingTable({
 										) : (
 											<Button
 												className={cn(
-													"w-full rounded-xl font-bold",
-													recommended
-														? "shadow-md hover:shadow-lg"
-														: "border-primary/20 text-primary hover:bg-primary/5 hover:text-primary",
+													"w-full rounded-xl font-bold h-12 transition-all",
+													isPro
+														? "shadow-md hover:shadow-xl hover:-translate-y-0.5"
+														: isUltra
+															? "bg-blue-600 text-white hover:bg-blue-700 shadow-md hover:shadow-xl hover:-translate-y-0.5 dark:bg-blue-600 dark:hover:bg-blue-500 border-transparent"
+															: "border-primary/20 text-primary hover:bg-primary/5 hover:text-primary",
 												)}
-												variant={
-													recommended
-														? "primary"
-														: "outline"
-												}
+												variant={isPro ? "primary" : "outline"}
 												size="lg"
 												onClick={() =>
-													onSelectPlan(
-														planId as PlanId,
-														price?.productId,
-													)
+													onSelectPlan(planId as PlanId, price?.productId)
 												}
 												loading={loading === planId}
 											>
@@ -310,18 +342,29 @@ export function PricingTable({
 									</div>
 								</div>
 
-								{/* Zone 3: Features */}
 								{features && features.length > 0 && (
-									<ul className="flex-1 space-y-3">
+									<ul className="flex-1 space-y-3 pt-2 border-t border-border/40">
 										{features.map((feature, index) => (
 											<li
 												key={index}
-												className="flex items-start gap-3"
+												className="flex items-start gap-3 mt-4"
 											>
 												{feature.included ? (
-													<CheckIcon className="mt-0.5 size-4 shrink-0 text-green-500" />
+													<div
+														className={cn(
+															"flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+															isUltra ? "bg-blue-600/10" : "bg-primary/10",
+														)}
+													>
+														<CheckIcon
+															className={cn(
+																"size-3.5",
+																isUltra ? "text-blue-600" : "text-primary",
+															)}
+														/>
+													</div>
 												) : (
-													<XIcon className="mt-0.5 size-4 shrink-0 text-red-500/70" />
+													<XIcon className="mt-0.5 size-4 shrink-0 text-muted-foreground/40" />
 												)}
 												<span
 													className={cn(
@@ -330,7 +373,9 @@ export function PricingTable({
 															? "text-foreground"
 															: "text-muted-foreground",
 														feature.highlight &&
-															"font-bold text-primary",
+															(isUltra
+																? "font-semibold text-blue-600"
+																: "font-semibold text-primary"),
 													)}
 												>
 													{t(feature.key)}

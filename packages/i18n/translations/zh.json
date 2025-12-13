@@ -514,43 +514,38 @@
 	"pricing": {
 		"title": "定价与方案",
 		"description": "选择最适合您的方案。",
-		"choosePlan": "选择方案",
-		"contactSales": "联系销售",
-		"getStarted": "开始使用",
 		"month": "{count} 个月",
 		"monthly": "月付",
 		"mostPopular": "最受欢迎",
-		"savePercent": "省 {percent}%",
+		"expertChoice": "Expert choice",
+		"upToPercentOff": "🔥 {percent}% OFF",
 		"freeToUse": "免费使用",
 		"billedAnnually": "按年计费 {amount}",
+		"billedMonthly": "按月计费",
+		"creditsMonthlyLabel": "积分/月",
+		"creditsDailyLabel": "刷新积分/天",
 		"features": {
-			"imagesPerDay": "每天 10 张图片",
-			"imagesPerMonth": "每月 500 张图片",
-			"unlimitedImages": "每月 2000 张图片",
+			"imagesPerMonth50": "每月最多 50 张图片",
+			"imagesPerMonth1000": "每月最多 1,000 张图片",
+			"imagesPerMonth3000": "每月最多 3,000 张图片",
+			"partialModelAccess": "可使用部分图像模型",
+			"allModelAccess": "可使用全部图像模型",
 			"basicResolution": "最高 1024x1024 分辨率",
 			"hdResolution": "最高 2048x2048 分辨率",
 			"ultraHdResolution": "最高 4096x4096 分辨率",
-			"basicStyles": "5 种生成风格",
-			"allStyles": "所有生成风格",
 			"watermark": "无水印",
 			"commercialLicense": "商用许可",
-			"priorityQueue": "优先处理队列",
-			"imageUpscaling": "图片放大 (4x)",
-			"backgroundRemoval": "背景移除",
-			"batchGeneration": "批量生成"
+			"priorityQueue": "优先处理队列"
 		},
 		"products": {
 			"free": {
-				"description": "适合偶尔的个人需求。",
-				"title": "免费版"
+				"title": "Free"
 			},
-			"starter": {
-				"description": "满足日常个人需求，释放您的创造力。",
-				"title": "入门版"
+			"ultra": {
+				"title": "Ultra"
 			},
-			"premium": {
-				"description": "满足个人和专业需求，提高工作效率。",
-				"title": "高级版"
+			"pro": {
+				"title": "Pro"
 			}
 		},
 		"purchase": "购买",

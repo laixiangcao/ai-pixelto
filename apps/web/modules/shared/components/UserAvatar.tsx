@@ -4,11 +4,11 @@ import type React from "react";
 import { forwardRef, useMemo } from "react";
 
 const avatars = [
-	"/images/avatar/avatar_1.png",
-	"/images/avatar/avatar_2.png",
-	"/images/avatar/avatar_3.png",
-	"/images/avatar/avatar_4.png",
-	"/images/avatar/avatar_5.png",
+	"/images/avatar/avatar_1.webp",
+	"/images/avatar/avatar_2.webp",
+	"/images/avatar/avatar_3.webp",
+	"/images/avatar/avatar_4.webp",
+	"/images/avatar/avatar_5.webp",
 ];
 
 type UserAvatarProps = React.ComponentPropsWithoutRef<typeof Avatar> & {

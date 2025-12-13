@@ -511,43 +511,38 @@
 	"pricing": {
 		"title": "Preise & Pläne",
 		"description": "Wähle den Plan, der am besten zu dir passt.",
-		"choosePlan": "Plan auswählen",
-		"contactSales": "Vertrieb kontaktieren",
-		"getStarted": "Jetzt starten",
 		"month": "{count, plural, one {Monat} other {{count} Monate}}",
 		"monthly": "Monatlich",
 		"mostPopular": "Am beliebtesten",
-		"savePercent": "Spare {percent}%",
+		"expertChoice": "Expert choice",
+		"upToPercentOff": "🔥 {percent}% RABATT",
 		"freeToUse": "Kostenlos nutzbar",
 		"billedAnnually": "jährlich abgerechnet als {amount}",
+		"billedMonthly": "Monatlich abgerechnet",
+		"creditsMonthlyLabel": "Credits / Monat",
+		"creditsDailyLabel": "Refresh-Credits / Tag",
 		"features": {
-			"imagesPerDay": "10 Bilder pro Tag",
-			"imagesPerMonth": "500 Bilder pro Monat",
-			"unlimitedImages": "2000 Bilder pro Monat",
+			"imagesPerMonth50": "Bis zu 50 Bilder pro Monat",
+			"imagesPerMonth1000": "Bis zu 1.000 Bilder pro Monat",
+			"imagesPerMonth3000": "Bis zu 3.000 Bilder pro Monat",
+			"partialModelAccess": "Zugriff auf teilweise Bildmodelle",
+			"allModelAccess": "Zugriff auf alle Bildmodelle",
 			"basicResolution": "Max. 1024x1024 Auflösung",
 			"hdResolution": "Max. 2048x2048 Auflösung",
 			"ultraHdResolution": "Max. 4096x4096 Auflösung",
-			"basicStyles": "5 Generierungsstile",
-			"allStyles": "Alle Generierungsstile",
 			"watermark": "Keine Wasserzeichen",
 			"commercialLicense": "Kommerzielle Lizenz",
-			"priorityQueue": "Prioritäts-Warteschlange",
-			"imageUpscaling": "Bild-Hochskalierung (4x)",
-			"backgroundRemoval": "Hintergrundentfernung",
-			"batchGeneration": "Stapelgenerierung"
+			"priorityQueue": "Prioritäts-Warteschlange"
 		},
 		"products": {
 			"free": {
-				"description": "Für gelegentliche persönliche Anforderungen.",
 				"title": "Kostenlos"
 			},
-			"starter": {
-				"description": "Erfülle tägliche persönliche Bedürfnisse und entfalte deine Kreativität.",
-				"title": "Starter"
+			"ultra": {
+				"title": "Ultra"
 			},
-			"premium": {
-				"description": "Erfülle persönliche und professionelle Anforderungen und verbessere die Arbeitseffizienz.",
-				"title": "Premium"
+			"pro": {
+				"title": "Pro"
 			}
 		},
 		"purchase": "Kaufen",

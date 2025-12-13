@@ -1,6 +1,5 @@
 import type { config } from "@repo/config";
 import { useTranslations } from "next-intl";
-import type { ReactNode } from "react";
 
 type ProductReferenceId = keyof (typeof config)["payments"]["plans"];
 
@@ -11,20 +10,16 @@ export function usePlanData() {
 		ProductReferenceId,
 		{
 			title: string;
-			description: ReactNode;
 		}
 	> = {
 		free: {
-			title: t("pricing.products.free.title"),
-			description: t("pricing.products.free.description"),
+			title: t("pricing.products.free.title")
 		},
-		starter: {
-			title: t("pricing.products.starter.title"),
-			description: t("pricing.products.starter.description"),
+		pro: {
+			title: t("pricing.products.pro.title")
 		},
-		premium: {
-			title: t("pricing.products.premium.title"),
-			description: t("pricing.products.premium.description"),
+		ultra: {
+			title: t("pricing.products.ultra.title")
 		},
 	};
 
