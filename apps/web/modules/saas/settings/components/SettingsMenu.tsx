@@ -5,6 +5,36 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+function normalizePath(value: string) {
+	return value === "/" ? value : value.replace(/\/+$/, "");
+}
+
+function getActiveHref({
+	pathname,
+	menuItems,
+}: {
+	pathname: string;
+	menuItems: {
+		items: {
+			href: string;
+		}[];
+	}[];
+}) {
+	const normalizedPathname = normalizePath(pathname);
+
+	return (
+		menuItems
+			.flatMap((group) => group.items)
+			.map((item) => normalizePath(item.href))
+			.sort((a, b) => b.length - a.length)
+			.find(
+				(href) =>
+					normalizedPathname === href ||
+					normalizedPathname.startsWith(`${href}/`),
+			) ?? null
+	);
+}
+
 export function SettingsMenu({
 	menuItems,
 }: {
@@ -19,8 +49,10 @@ export function SettingsMenu({
 	}[];
 }) {
 	const pathname = usePathname();
+	const activeHref = getActiveHref({ pathname, menuItems });
 
-	const isActiveMenuItem = (href: string) => pathname.includes(href);
+	const isActiveMenuItem = (href: string) =>
+		normalizePath(href) === activeHref;
 
 	return (
 		<div className="space-y-8">

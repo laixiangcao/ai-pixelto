@@ -81,11 +81,11 @@ export function NavBar() {
 
 	const isMenuItemActive = (href: string) => localePathname.startsWith(href);
 
-	const plans = config.payments.plans;
-	const maxYearlyDiscount = Object.values(plans).reduce(
-		(acc, plan) => Math.max(acc, (plan as any).yearlyDiscount ?? 0),
-		0,
-	);
+	// const plans = config.payments.plans;
+	// const maxYearlyDiscount = Object.values(plans).reduce(
+	// 	(acc, plan) => Math.max(acc, (plan as any).yearlyDiscount ?? 0),
+	// 	0,
+	// );
 
 	return (
 		<nav

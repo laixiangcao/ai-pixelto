@@ -9,9 +9,9 @@ import {
 import { cn } from "@ui/lib";
 import { ArrowRightIcon, ZapIcon } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
 
 export interface CreditDetails {
 	total: number;
@@ -27,6 +27,7 @@ interface CreditDetailsPopoverProps {
 	creditDetails?: CreditDetails;
 	planLabel: string;
 	isFreePlan: boolean;
+	isMaxPlan?: boolean;
 	children: React.ReactNode;
 	className?: string;
 }
@@ -36,11 +37,13 @@ export function CreditDetailsPopover({
 	creditDetails,
 	planLabel,
 	isFreePlan,
+	isMaxPlan = false,
 	children,
 	className,
 }: CreditDetailsPopoverProps) {
 	const t = useTranslations("app.credits.details");
 	const tMenu = useTranslations("app.userMenu");
+	const router = useRouter();
 	const formatter = useFormatter();
 	const [open, setOpen] = useState(false);
 	const isPointerFine = useIsPointerFine();
@@ -59,7 +62,8 @@ export function CreditDetailsPopover({
 	const nextExpiry = creditDetails?.nextExpiry;
 
 	const handleUsageDetails = () => {
-		toast.info(t("usageComingSoon"));
+		setOpen(false);
+		router.push("/app/billing/credit-usage");
 	};
 
 	const handlePointerEnter = () => {
@@ -115,13 +119,17 @@ export function CreditDetailsPopover({
 						<div className="text-sm font-bold text-foreground leading-none">
 							{planLabel}
 						</div>
-						<Button
-							asChild
-							size="sm"
-							className="h-7 px-3 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200/50 dark:shadow-none shrink-0 border border-emerald-500/20"
-						>
-							<Link href="/pricing">{tMenu("upgradePlan")}</Link>
-						</Button>
+						{!isMaxPlan && (
+							<Button
+								asChild
+								size="sm"
+								className="h-7 px-3 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200/50 dark:shadow-none shrink-0 border border-emerald-500/20"
+							>
+								<Link href="/pricing">
+									{tMenu("upgradePlan")}
+								</Link>
+							</Button>
+						)}
 					</div>
 
 					{/* 付费用户：积分详情 */}

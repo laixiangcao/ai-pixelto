@@ -18,24 +18,31 @@ function safeStringify(obj: unknown, maxLength = 500): string {
 	}
 	try {
 		const seen = new WeakSet();
-		const sanitized = JSON.stringify(
-			obj,
-			(key, value) => {
-				// 过滤敏感字段
-				if (["password", "token", "secret", "authorization", "cookie"].includes(key.toLowerCase())) {
-					return "[REDACTED]";
+		const sanitized = JSON.stringify(obj, (key, value) => {
+			// 过滤敏感字段
+			if (
+				[
+					"password",
+					"token",
+					"secret",
+					"authorization",
+					"cookie",
+				].includes(key.toLowerCase())
+			) {
+				return "[REDACTED]";
+			}
+			// 处理循环引用
+			if (typeof value === "object" && value !== null) {
+				if (seen.has(value)) {
+					return "[Circular]";
 				}
-				// 处理循环引用
-				if (typeof value === "object" && value !== null) {
-					if (seen.has(value)) {
-						return "[Circular]";
-					}
-					seen.add(value);
-				}
-				return value;
-			},
-		);
-		return sanitized.length > maxLength ? `${sanitized.slice(0, maxLength)}...` : sanitized;
+				seen.add(value);
+			}
+			return value;
+		});
+		return sanitized.length > maxLength
+			? `${sanitized.slice(0, maxLength)}...`
+			: sanitized;
 	} catch {
 		return "[Unserializable]";
 	}
@@ -61,7 +68,8 @@ export async function requestLogger(c: Context, next: Next) {
 			headers: c.req.raw.headers,
 		});
 		if (session?.user) {
-			userInfo = session.user.name || session.user.email || session.user.id;
+			userInfo =
+				session.user.name || session.user.email || session.user.id;
 		}
 	} catch {
 		// 获取 session 失败，忽略
@@ -105,22 +113,31 @@ export async function requestLogger(c: Context, next: Next) {
 			} catch {
 				// 非 JSON 响应体
 			}
-			logger.error(`${logPrefix} ✗ ${method} ${path} ${status} (${duration}ms)`, {
-				error: errorBody || `HTTP ${status}`,
-			});
+			logger.error(
+				`${logPrefix} ✗ ${method} ${path} ${status} (${duration}ms)`,
+				{
+					error: errorBody || `HTTP ${status}`,
+				},
+			);
 		} else {
-			logger.info(`${logPrefix} ← ${method} ${path} ${status} (${duration}ms)`);
+			logger.info(
+				`${logPrefix} ← ${method} ${path} ${status} (${duration}ms)`,
+			);
 		}
 	} catch (error) {
 		// 未捕获异常
 		const duration = Date.now() - startTime;
-		const errorMessage = error instanceof Error ? error.message : String(error);
+		const errorMessage =
+			error instanceof Error ? error.message : String(error);
 		const errorStack = error instanceof Error ? error.stack : undefined;
 
-		logger.error(`${logPrefix} ✗ ${method} ${path} EXCEPTION (${duration}ms)`, {
-			error: errorMessage,
-			stack: errorStack,
-		});
+		logger.error(
+			`${logPrefix} ✗ ${method} ${path} EXCEPTION (${duration}ms)`,
+			{
+				error: errorMessage,
+				stack: errorStack,
+			},
+		);
 
 		throw error;
 	}

@@ -63,6 +63,63 @@ function getActivePlanFromPurchases(purchases?: PurchaseWithoutTimestamps[]) {
 		: null;
 }
 
+/**
+ * 根据 productId (Stripe Price ID) 获取对应的 planId
+ */
+export function getPlanIdByProductId(productId: string): PlanId | null {
+	const plan = Object.entries(plans).find(([_, plan]) =>
+		plan.prices?.some((price) => price.productId === productId),
+	);
+	return plan ? (plan[0] as PlanId) : null;
+}
+
+/**
+ * 获取计划的月度积分配额
+ */
+export function getPlanMonthlyCredits(planId: PlanId): number {
+	const plan = plans[planId];
+	if (!plan) {
+		return 0;
+	}
+	return plan.credits?.monthly ?? 0;
+}
+
+/**
+ * 计划级别映射（用于判断升级/降级）
+ * 数值越大级别越高
+ */
+const PLAN_LEVEL: Record<string, number> = {
+	free: 0,
+	pro: 1,
+	ultra: 2,
+};
+
+/**
+ * 判断是否为升级（新计划级别 > 旧计划级别）
+ */
+export function isUpgrade(oldPlanId: PlanId, newPlanId: PlanId): boolean {
+	const oldLevel = PLAN_LEVEL[oldPlanId] ?? 0;
+	const newLevel = PLAN_LEVEL[newPlanId] ?? 0;
+	return newLevel > oldLevel;
+}
+
+/**
+ * 计算升级时应发放的差额积分
+ * 返回值 > 0 表示应发放的积分数
+ * 返回值 <= 0 表示无需发放（降级或相同计划）
+ */
+export function calculateUpgradeCreditsDiff(
+	oldPlanId: PlanId,
+	newPlanId: PlanId,
+): number {
+	if (!isUpgrade(oldPlanId, newPlanId)) {
+		return 0;
+	}
+	const oldCredits = getPlanMonthlyCredits(oldPlanId);
+	const newCredits = getPlanMonthlyCredits(newPlanId);
+	return Math.max(0, newCredits - oldCredits);
+}
+
 export function createPurchasesHelper(purchases: PurchaseWithoutTimestamps[]) {
 	const activePlan = getActivePlanFromPurchases(purchases);
 

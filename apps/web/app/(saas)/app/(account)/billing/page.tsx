@@ -13,11 +13,11 @@ export async function generateMetadata() {
 	const t = await getTranslations();
 
 	return {
-		title: t("settings.billing.title"),
+		title: t("billing.title"),
 	};
 }
 
-export default async function BillingSettingsPage() {
+export default async function BillingPage() {
 	const session = await getSession();
 	const [error, data] = await attemptAsync(() =>
 		orpcClient.payments.listPurchases({}),
@@ -46,6 +46,7 @@ export default async function BillingSettingsPage() {
 			<ChangePlan
 				userId={session?.user.id}
 				activePlanId={activePlan?.id}
+				activePurchaseId={activePlan?.purchaseId}
 			/>
 		</SettingsList>
 	);

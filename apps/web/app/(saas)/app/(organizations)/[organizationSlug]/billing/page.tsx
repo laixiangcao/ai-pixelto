@@ -12,13 +12,12 @@ import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
 	const t = await getTranslations();
-
 	return {
-		title: t("settings.billing.title"),
+		title: t("billing.title"),
 	};
 }
 
-export default async function BillingSettingsPage({
+export default async function OrganizationBillingPage({
 	params,
 }: {
 	params: Promise<{ organizationSlug: string }>;
@@ -60,6 +59,7 @@ export default async function BillingSettingsPage({
 			<ChangePlan
 				organizationId={organization.id}
 				activePlanId={activePlan?.id}
+				activePurchaseId={activePlan?.purchaseId}
 			/>
 		</SettingsList>
 	);

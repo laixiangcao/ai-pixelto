@@ -13,13 +13,13 @@ export function usePlanData() {
 		}
 	> = {
 		free: {
-			title: t("pricing.products.free.title")
+			title: t("pricing.products.free.title"),
 		},
 		pro: {
-			title: t("pricing.products.pro.title")
+			title: t("pricing.products.pro.title"),
 		},
 		ultra: {
-			title: t("pricing.products.ultra.title")
+			title: t("pricing.products.ultra.title"),
 		},
 	};
 

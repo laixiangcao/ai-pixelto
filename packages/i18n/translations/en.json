@@ -101,6 +101,7 @@
 	"app": {
 		"menu": {
 			"accountSettings": "Account settings",
+			"billing": "Billing",
 			"admin": "Admin",
 			"aiChatbot": "AI Chatbot",
 			"organizationSettings": "Organization settings",
@@ -135,11 +136,18 @@
 				"expireAfter": "Expire after {date}",
 				"getMore": "Get More Credits",
 				"usageDetails": "Usage details",
-				"usageComingSoon": "Usage details coming soon",
 				"expiring": "Expiring Credits",
 				"nonExpiring": "Non-expiring",
 				"nonExpiringCredits": "Non-Expiring Credits"
 			}
+		}
+	},
+	"billing": {
+		"title": "Billing",
+		"subtitle": "Manage your plan and credit usage.",
+		"menu": {
+			"billing": "Billing",
+			"creditUsage": "Credit usage"
 		}
 	},
 	"auth": {
@@ -554,7 +562,17 @@
 		"trialPeriod": "{days} {days, plural, one {day} other {days}} free trial",
 		"year": "{count, plural, one {year} other {{count} years}}",
 		"yearly": "Yearly",
-		"perSeat": "seat"
+		"perSeat": "seat",
+		"notifications": {
+			"subscriptionSuccess": {
+				"title": "Subscription successful!",
+				"description": "Welcome to {plan}! Your credits have been added to your account."
+			}
+		},
+		"currentPlan": "Current Plan",
+		"upgrade": "Upgrade",
+		"downgrade": "Downgrade",
+		"managePlan": "Manage Plan"
 	},
 	"settings": {
 		"account": {
@@ -1013,5 +1031,44 @@
 				"finalizing": "Finalizing pixel data"
 			}
 		}
+	},
+	"creditUsage": {
+		"title": "Credit Usage",
+		"description": "View your credit usage history and statistics.",
+		"tabs": {
+			"summary": "Summary",
+			"spends": "Spending",
+			"grants": "Credits"
+		},
+		"summary": {
+			"totalSpent": "Total Spent",
+			"totalGranted": "Total Granted",
+			"last30Days": "Last 30 days",
+			"dailyUsage": "Daily Usage",
+			"dailyUsageDescription": "Credit consumption over the last 30 days"
+		},
+		"type": {
+			"dailyFree": "Daily Free",
+			"purchased": "Purchased",
+			"subscription": "Subscription",
+			"promotional": "Promotional"
+		},
+		"table": {
+			"date": "Date",
+			"amount": "Amount",
+			"type": "Type",
+			"reason": "Reason",
+			"remaining": "Remaining",
+			"expires": "Expires"
+		},
+		"pagination": {
+			"showing": "Showing {from} to {to} of {total}",
+			"previous": "Previous",
+			"next": "Next"
+		},
+		"noData": "No usage data available",
+		"noSpends": "No spending records found",
+		"noGrants": "No credit grants found",
+		"noExpiry": "Never expires"
 	}
 }

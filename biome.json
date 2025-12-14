@@ -30,7 +30,7 @@
 					"fix": "safe"
 				},
 				"noNonNullAssertion": "warn",
-				"useBlockStatements": "warn",
+				"useBlockStatements": "off",
 				"noParameterAssign": "error",
 				"useAsConstAssertion": "error",
 				"useDefaultParameterLast": "error",

@@ -20,7 +20,6 @@ import {
 	DropdownMenuTrigger,
 } from "@ui/components/dropdown-menu";
 import {
-	BookIcon,
 	HardDriveIcon,
 	HomeIcon,
 	LogOutIcon,

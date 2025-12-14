@@ -1,5 +1,9 @@
 import assert from "node:assert/strict";
-import { planSpend, sortGrantsForSpend, totalAvailable } from "../prisma/queries/credits-helpers";
+import {
+	planSpend,
+	sortGrantsForSpend,
+	totalAvailable,
+} from "../prisma/queries/credits-helpers";
 
 enum CreditType {
 	DAILY_FREE = "DAILY_FREE",
@@ -135,7 +139,8 @@ cases.push([
 			() => planSpend(grants, 2),
 			(error: unknown) =>
 				error instanceof Error &&
-				(error as Error & { code?: string }).code === "INSUFFICIENT_CREDITS",
+				(error as Error & { code?: string }).code ===
+					"INSUFFICIENT_CREDITS",
 		);
 	},
 ]);

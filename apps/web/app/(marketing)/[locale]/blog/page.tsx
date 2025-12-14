@@ -39,7 +39,8 @@ export default async function BlogListPage() {
 					<div className="grid gap-8 md:grid-cols-2">
 						{posts
 							.filter(
-								(post) => post.published && locale === post.locale,
+								(post) =>
+									post.published && locale === post.locale,
 							)
 							.sort(
 								(a, b) =>

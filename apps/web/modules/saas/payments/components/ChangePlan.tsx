@@ -7,10 +7,12 @@ export function ChangePlan({
 	organizationId,
 	userId,
 	activePlanId,
+	activePurchaseId,
 }: {
 	organizationId?: string;
 	userId?: string;
 	activePlanId?: string;
+	activePurchaseId?: string;
 }) {
 	const t = useTranslations();
 
@@ -23,6 +25,7 @@ export function ChangePlan({
 				organizationId={organizationId}
 				userId={userId}
 				activePlanId={activePlanId}
+				activePurchaseId={activePurchaseId}
 			/>
 		</SettingsItem>
 	);

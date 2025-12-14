@@ -14,7 +14,6 @@ import {
 } from "@ui/components/dropdown-menu";
 import {
 	ArrowRightIcon,
-	BookIcon,
 	LogOutIcon,
 	MessageCircleIcon,
 	UserIcon,
@@ -26,11 +25,13 @@ import { useEffect, useRef, useState } from "react";
 interface MarketingUserMenuProps {
 	user: Session["user"];
 	credits?: number;
+	isMaxPlan?: boolean;
 }
 
 export function MarketingUserMenu({
 	user,
 	credits = 0,
+	isMaxPlan = false,
 }: MarketingUserMenuProps) {
 	const t = useTranslations("app.userMenu");
 	const [open, setOpen] = useState(false);
@@ -112,13 +113,15 @@ export function MarketingUserMenu({
 							</div>
 						</div>
 
-						<Button
-							asChild
-							size="sm"
-							className="h-7 px-3 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200/50 dark:shadow-none shrink-0 border border-emerald-500/20"
-						>
-							<Link href="/pricing">{t("upgradePlan")}</Link>
-						</Button>
+						{!isMaxPlan && (
+							<Button
+								asChild
+								size="sm"
+								className="h-7 px-3 text-xs font-bold rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200/50 dark:shadow-none shrink-0 border border-emerald-500/20"
+							>
+								<Link href="/pricing">{t("upgradePlan")}</Link>
+							</Button>
+						)}
 					</div>
 
 					<div className="h-px w-full bg-border/30 dark:bg-border/50 mb-3" />
@@ -126,10 +129,12 @@ export function MarketingUserMenu({
 					{/* Credits Row */}
 					{typeof credits === "number" && (
 						<Link
-							href="/app/credits/usage"
+							href="/app/billing/credit-usage"
 							className="flex items-center justify-between group"
 						>
-							<span className="text-sm font-medium text-foreground/80">{t("credits")}</span>
+							<span className="text-sm font-medium text-foreground/80">
+								{t("credits")}
+							</span>
 							<div className="flex items-center gap-1.5 text-foreground">
 								<span className="text-sm font-bold tabular-nums">
 									{credits.toLocaleString()}
@@ -178,7 +183,9 @@ export function MarketingUserMenu({
 								className="flex items-center gap-3 px-3 py-2.5 cursor-pointer rounded-lg hover:bg-muted/50 focus:bg-muted/50"
 							>
 								<MessageCircleIcon className="size-[18px] text-muted-foreground" />
-								<span className="text-sm font-medium">Discord</span>
+								<span className="text-sm font-medium">
+									Discord
+								</span>
 							</a>
 						</DropdownMenuItem>
 					)}

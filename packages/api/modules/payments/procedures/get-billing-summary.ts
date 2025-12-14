@@ -69,7 +69,8 @@ export const getBillingSummary = protectedProcedure
 		const ownerUserId = ownerOrganizationId ? undefined : context.user.id;
 
 		// 懒发放：每日赠送（仅 Free 计划）
-		const plans = config.payments.plans as unknown as Config["payments"]["plans"];
+		const plans = config.payments
+			.plans as unknown as Config["payments"]["plans"];
 		const activePlanConfig = activePlan ? plans[activePlan.id] : plans.free;
 
 		if (
@@ -113,7 +114,9 @@ export const getBillingSummary = protectedProcedure
 				subscriptionPurchase
 			) {
 				const bonusExpiresAt = new Date(anchorDate);
-				bonusExpiresAt.setUTCFullYear(bonusExpiresAt.getUTCFullYear() + 1);
+				bonusExpiresAt.setUTCFullYear(
+					bonusExpiresAt.getUTCFullYear() + 1,
+				);
 
 				await ensurePromotionalGrant({
 					userId: ownerUserId,

@@ -1,10 +1,44 @@
 "use client";
 
+import { useSession } from "@saas/auth/hooks/use-session";
+import { useUserPurchases } from "@saas/payments/hooks/purchases";
 import { PricingTable } from "@saas/payments/components/PricingTable";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { toast } from "sonner";
 
 export function PricingSection() {
 	const t = useTranslations("pricing");
+	const { user } = useSession();
+	// 仅在用户已登录时查询购买记录，避免匿名用户触发 401 错误
+	const { activePlan } = useUserPurchases({ enabled: !!user });
+	const searchParams = useSearchParams();
+	const toastShownRef = useRef(false);
+
+	// 检测订阅成功回调并显示toast
+	useEffect(() => {
+		const checkoutSuccess = searchParams.get("checkout_success");
+		if (
+			checkoutSuccess === "true" &&
+			!toastShownRef.current &&
+			activePlan?.id &&
+			activePlan.id !== "free"
+		) {
+			toastShownRef.current = true;
+			const planTitle = t(`products.${activePlan.id}.title`);
+			toast.success(t("notifications.subscriptionSuccess.title"), {
+				description: t(
+					"notifications.subscriptionSuccess.description",
+					{ plan: planTitle },
+				),
+			});
+			// 清除URL参数
+			const url = new URL(window.location.href);
+			url.searchParams.delete("checkout_success");
+			window.history.replaceState({}, "", url.toString());
+		}
+	}, [searchParams, activePlan, t]);
 
 	return (
 		<section id="pricing" className="scroll-mt-16 relative overflow-hidden">
@@ -21,7 +55,11 @@ export function PricingSection() {
 					</p>
 				</div>
 
-				<PricingTable />
+				<PricingTable
+					userId={user?.id}
+					activePlanId={activePlan?.id}
+					activePurchaseId={activePlan?.purchaseId}
+				/>
 			</div>
 		</section>
 	);

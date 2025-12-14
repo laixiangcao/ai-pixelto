@@ -4,7 +4,7 @@ import { useSession } from "@saas/auth/hooks/use-session";
 import { useBillingSummary } from "@saas/payments/hooks/billing-summary";
 import { Skeleton } from "@ui/components/skeleton";
 import { cn } from "@ui/lib";
-import { CrownIcon, SparklesIcon, ZapIcon } from "lucide-react";
+import { CrownIcon, ZapIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import Link from "next/link";
 import { CreditDetailsPopover } from "./CreditDetailsPopover";
@@ -32,6 +32,7 @@ export function MarketingUserStatus({ className }: MarketingUserStatusProps) {
 
 	const planId = billingSummary?.activePlan?.id;
 	const isFree = planId === "free" || !planId;
+	const isMaxPlan = planId === "ultra"; // Ultra是最高级套餐
 
 	const renderPlanBadge = () => {
 		if (isFree) {
@@ -89,6 +90,7 @@ export function MarketingUserStatus({ className }: MarketingUserStatusProps) {
 					creditDetails={billingSummary?.creditDetails}
 					planLabel={planLabel}
 					isFreePlan={isFree}
+					isMaxPlan={isMaxPlan}
 				>
 					<button
 						type="button"
@@ -108,7 +110,11 @@ export function MarketingUserStatus({ className }: MarketingUserStatusProps) {
 			</div>
 
 			{/* 用户菜单 */}
-			<MarketingUserMenu user={user} credits={credits} />
+			<MarketingUserMenu
+				user={user}
+				credits={credits}
+				isMaxPlan={isMaxPlan}
+			/>
 		</div>
 	);
 }

@@ -101,6 +101,7 @@
 	"app": {
 		"menu": {
 			"accountSettings": "Kontoeinstellungen",
+			"billing": "Abrechnung",
 			"admin": "Administration",
 			"aiChatbot": "AI Chatbot",
 			"organizationSettings": "Organisationseinstellungen",
@@ -135,11 +136,18 @@
 				"expireAfter": "Läuft ab nach {date}",
 				"getMore": "Mehr Guthaben erhalten",
 				"usageDetails": "Nutzungsdetails",
-				"usageComingSoon": "Nutzungsdetails demnächst verfügbar",
 				"expiring": "Ablaufendes Guthaben",
 				"nonExpiring": "Unbegrenzt gültig",
 				"nonExpiringCredits": "Unbegrenzt gültiges Guthaben"
 			}
+		}
+	},
+	"billing": {
+		"title": "Abrechnung",
+		"subtitle": "Plan und Guthabenverbrauch verwalten.",
+		"menu": {
+			"billing": "Abrechnung",
+			"creditUsage": "Guthabenverbrauch"
 		}
 	},
 	"auth": {
@@ -551,7 +559,17 @@
 		"trialPeriod": "{days} {days, plural, one {Tag} other {Tage}} kostenlose Testphase",
 		"year": "{count, plural, one {Jahr} other {{count} Jahre}}",
 		"yearly": "Jährlich",
-		"perSeat": "Platz"
+		"perSeat": "Platz",
+		"notifications": {
+			"subscriptionSuccess": {
+				"title": "Abonnement erfolgreich!",
+				"description": "Willkommen bei {plan}! Ihre Credits wurden Ihrem Konto gutgeschrieben."
+			}
+		},
+		"currentPlan": "Aktueller Plan",
+		"upgrade": "Upgraden",
+		"downgrade": "Downgraden",
+		"managePlan": "Plan verwalten"
 	},
 	"settings": {
 		"account": {
@@ -1013,5 +1031,44 @@
 				"finalizing": "Pixeldaten werden finalisiert"
 			}
 		}
+	},
+	"creditUsage": {
+		"title": "Guthabenverbrauch",
+		"description": "Sieh dir Verlauf und Statistiken deines Guthabenverbrauchs an.",
+		"tabs": {
+			"summary": "Übersicht",
+			"spends": "Verbrauch",
+			"grants": "Gutschriften"
+		},
+		"summary": {
+			"totalSpent": "Insgesamt verbraucht",
+			"totalGranted": "Insgesamt erhalten",
+			"last30Days": "Letzte 30 Tage",
+			"dailyUsage": "Täglicher Verbrauch",
+			"dailyUsageDescription": "Guthabenverbrauch der letzten 30 Tage"
+		},
+		"type": {
+			"dailyFree": "Täglich kostenlos",
+			"purchased": "Gekauft",
+			"subscription": "Abo",
+			"promotional": "Aktion"
+		},
+		"table": {
+			"date": "Datum",
+			"amount": "Menge",
+			"type": "Typ",
+			"reason": "Grund",
+			"remaining": "Verbleibend",
+			"expires": "Läuft ab"
+		},
+		"pagination": {
+			"showing": "{from} bis {to} von {total}",
+			"previous": "Zurück",
+			"next": "Weiter"
+		},
+		"noData": "Keine Verbrauchsdaten verfügbar",
+		"noSpends": "Keine Verbrauchseinträge gefunden",
+		"noGrants": "Keine Gutschriften gefunden",
+		"noExpiry": "Läuft nie ab"
 	}
 }

@@ -5,12 +5,7 @@ import { OrganizationLogo } from "@saas/organizations/components/OrganizationLog
 import { SettingsMenu } from "@saas/settings/components/SettingsMenu";
 import { PageHeader } from "@saas/shared/components/PageHeader";
 import { SidebarContentLayout } from "@saas/shared/components/SidebarContentLayout";
-import {
-	CreditCardIcon,
-	Settings2Icon,
-	TriangleAlertIcon,
-	Users2Icon,
-} from "lucide-react";
+import { Settings2Icon, TriangleAlertIcon, Users2Icon } from "lucide-react";
 import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import type { PropsWithChildren } from "react";
@@ -61,13 +56,6 @@ export default async function SettingsLayout({
 				config.organizations.enableBilling &&
 				userIsOrganizationAdmin
 					? [
-							{
-								title: t("settings.menu.organization.billing"),
-								href: `${organizationSettingsBasePath}/billing`,
-								icon: (
-									<CreditCardIcon className="size-4 opacity-50" />
-								),
-							},
 							{
 								title: t(
 									"settings.menu.organization.dangerZone",

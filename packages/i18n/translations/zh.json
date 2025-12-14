@@ -101,6 +101,7 @@
 	"app": {
 		"menu": {
 			"accountSettings": "账户设置",
+			"billing": "账单",
 			"admin": "管理后台",
 			"aiChatbot": "AI 聊天机器人",
 			"organizationSettings": "组织设置",
@@ -135,11 +136,18 @@
 				"expireAfter": "{date} 后过期",
 				"getMore": "获取更多积分",
 				"usageDetails": "使用详情",
-				"usageComingSoon": "使用详情即将推出",
 				"expiring": "即将过期积分",
 				"nonExpiring": "永不过期",
 				"nonExpiringCredits": "永不过期积分"
 			}
+		}
+	},
+	"billing": {
+		"title": "账单",
+		"subtitle": "管理你的套餐与积分用量。",
+		"menu": {
+			"billing": "账单",
+			"creditUsage": "积分用量"
 		}
 	},
 	"auth": {
@@ -554,7 +562,17 @@
 		"trialPeriod": "{days} 天免费试用",
 		"year": "{count} 年",
 		"yearly": "年付",
-		"perSeat": "席位"
+		"perSeat": "席位",
+		"notifications": {
+			"subscriptionSuccess": {
+				"title": "订阅成功！",
+				"description": "欢迎使用 {plan}！积分已添加到您的账户。"
+			}
+		},
+		"currentPlan": "当前套餐",
+		"upgrade": "升级",
+		"downgrade": "降级",
+		"managePlan": "管理订阅"
 	},
 	"settings": {
 		"account": {
@@ -1013,5 +1031,44 @@
 				"finalizing": "正在完成像素数据"
 			}
 		}
+	},
+	"creditUsage": {
+		"title": "积分用量",
+		"description": "查看你的积分使用记录与统计。",
+		"tabs": {
+			"summary": "概览",
+			"spends": "消费",
+			"grants": "获取"
+		},
+		"summary": {
+			"totalSpent": "总消费",
+			"totalGranted": "总获取",
+			"last30Days": "最近 30 天",
+			"dailyUsage": "每日用量",
+			"dailyUsageDescription": "最近 30 天的积分消耗"
+		},
+		"type": {
+			"dailyFree": "每日免费",
+			"purchased": "购买",
+			"subscription": "订阅",
+			"promotional": "活动"
+		},
+		"table": {
+			"date": "日期",
+			"amount": "数量",
+			"type": "类型",
+			"reason": "原因",
+			"remaining": "剩余",
+			"expires": "到期"
+		},
+		"pagination": {
+			"showing": "显示第 {from} - {to} 条，共 {total} 条",
+			"previous": "上一页",
+			"next": "下一页"
+		},
+		"noData": "暂无用量数据",
+		"noSpends": "暂无消费记录",
+		"noGrants": "暂无获取记录",
+		"noExpiry": "永不过期"
 	}
 }

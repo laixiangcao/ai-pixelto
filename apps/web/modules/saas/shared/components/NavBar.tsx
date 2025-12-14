@@ -6,8 +6,8 @@ import { UserMenu } from "@saas/shared/components/UserMenu";
 import { Logo } from "@shared/components/Logo";
 import { cn } from "@ui/lib";
 import {
-	BotMessageSquareIcon,
 	ChevronRightIcon,
+	CreditCardIcon,
 	HomeIcon,
 	SettingsIcon,
 	UserCog2Icon,
@@ -22,13 +22,17 @@ export function NavBar() {
 	const t = useTranslations();
 	const pathname = usePathname();
 	const { user } = useSession();
-	const { activeOrganization } = useActiveOrganization();
+	const { activeOrganization, isOrganizationAdmin } = useActiveOrganization();
 
 	const { useSidebarLayout } = config.ui.saas;
 
 	const basePath = activeOrganization
 		? `/app/${activeOrganization.slug}`
 		: "/app";
+
+	const billingBasePath = activeOrganization
+		? `/app/${activeOrganization.slug}/billing`
+		: "/app/billing";
 
 	const menuItems = [
 		{
@@ -52,6 +56,19 @@ export function NavBar() {
 						href: `${basePath}/settings`,
 						icon: SettingsIcon,
 						isActive: pathname.startsWith(`${basePath}/settings/`),
+					},
+				]
+			: []),
+		...((activeOrganization
+			? config.organizations.enableBilling
+			: config.users.enableBilling) &&
+		(activeOrganization ? isOrganizationAdmin : true)
+			? [
+					{
+						label: t("app.menu.billing"),
+						href: billingBasePath,
+						icon: CreditCardIcon,
+						isActive: pathname.startsWith(billingBasePath),
 					},
 				]
 			: []),

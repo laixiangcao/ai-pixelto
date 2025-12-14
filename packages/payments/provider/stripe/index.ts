@@ -2,11 +2,16 @@ import {
 	createPurchase,
 	deletePurchaseBySubscriptionId,
 	getPurchaseBySubscriptionId,
+	invalidateSubscriptionGrantsForPlan,
 	updatePurchase,
 } from "@repo/database";
 import { logger } from "@repo/logs";
 import Stripe from "stripe";
 import { setCustomerIdToEntity } from "../../src/lib/customer";
+import {
+	calculateUpgradeCreditsDiff,
+	getPlanIdByProductId,
+} from "../../src/lib/helper";
 import type {
 	CancelSubscription,
 	CreateCheckoutLink,
@@ -214,16 +219,108 @@ export const webhookHandler: WebhookHandler = async (req) => {
 				break;
 			}
 			case "customer.subscription.updated": {
-				const subscriptionId = event.data.object.id;
+				const subscription = event.data.object as Stripe.Subscription &
+					Record<string, unknown>;
+				const subscriptionId = subscription.id;
+				const newProductId = subscription.items?.data[0].price?.id;
+				// 使用 Stripe 订阅的当前周期结束时间作为积分过期时间
+				const currentPeriodEndUnix =
+					typeof subscription["current_period_end"] === "number"
+						? subscription["current_period_end"]
+						: null;
+				const currentPeriodEnd = currentPeriodEndUnix
+					? new Date(currentPeriodEndUnix * 1000)
+					: null;
 
 				const existingPurchase =
 					await getPurchaseBySubscriptionId(subscriptionId);
 
 				if (existingPurchase) {
+					// 检测是否是计划升降级（productId 变化）
+					const oldProductId = existingPurchase.productId;
+					const isProductChange =
+						oldProductId &&
+						newProductId &&
+						oldProductId !== newProductId;
+
+					if (isProductChange) {
+						const oldPlanId = getPlanIdByProductId(oldProductId);
+						const newPlanId = getPlanIdByProductId(newProductId);
+
+						const ownerInfo = existingPurchase.organizationId
+							? {
+									organizationId:
+										existingPurchase.organizationId,
+								}
+							: { userId: existingPurchase.userId ?? undefined };
+
+						if (oldPlanId) {
+							// 清理旧计划的订阅积分（包括之前的升级差额积分）
+							const result =
+								await invalidateSubscriptionGrantsForPlan({
+									...ownerInfo,
+									planId: oldPlanId,
+								});
+
+							logger.info(
+								"Invalidated old plan credits on plan change",
+								{
+									subscriptionId,
+									oldPlanId,
+									newPlanId,
+									invalidatedCount: result.invalidatedCount,
+									invalidatedAmount: result.invalidatedAmount,
+								},
+							);
+						}
+
+						// 升级时发放差额积分（带幂等性保护）
+						if (oldPlanId && newPlanId) {
+							const creditsDiff = calculateUpgradeCreditsDiff(
+								oldPlanId,
+								newPlanId,
+							);
+
+							if (creditsDiff > 0 && currentPeriodEnd) {
+								// 使用订阅周期结束时间作为过期时间，并用周期结束日期作为 sourceRef 的一部分确保幂等性
+								const periodEndKey = currentPeriodEnd
+									.toISOString()
+									.slice(0, 10);
+								const sourceRef = `upgrade-${oldPlanId}-to-${newPlanId}-${periodEndKey}`;
+
+								// 幂等性检查：避免重复发放
+								const { ensureUpgradeCreditGrant } =
+									await import("@repo/database");
+								const grantResult =
+									await ensureUpgradeCreditGrant({
+										...ownerInfo,
+										amount: creditsDiff,
+										expiresAt: currentPeriodEnd,
+										sourceRef,
+									});
+
+								if (grantResult) {
+									logger.info(
+										"Issued upgrade credit difference",
+										{
+											subscriptionId,
+											oldPlanId,
+											newPlanId,
+											creditsDiff,
+											expiresAt:
+												currentPeriodEnd.toISOString(),
+											isNewGrant: grantResult.isNew,
+										},
+									);
+								}
+							}
+						}
+					}
+
 					await updatePurchase({
 						id: existingPurchase.id,
 						status: event.data.object.status,
-						productId: event.data.object.items?.data[0].price?.id,
+						productId: newProductId,
 					});
 				}
 

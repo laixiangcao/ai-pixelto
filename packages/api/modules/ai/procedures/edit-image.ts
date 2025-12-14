@@ -7,7 +7,7 @@ import {
 	type SpendAllocation,
 	spendCreditsOrThrow,
 } from "@repo/database";
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 import { protectedProcedure } from "../../../orpc/procedures";
 import { verifyOrganizationMembership } from "../../organizations/lib/membership";
 

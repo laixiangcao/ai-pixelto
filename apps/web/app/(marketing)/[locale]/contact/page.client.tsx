@@ -13,7 +13,7 @@ import { Input } from "@ui/components/input";
 import { Label } from "@ui/components/label";
 import { Textarea } from "@ui/components/textarea";
 import { FadeIn } from "@ui/components/FadeIn";
-import { Gamepad2Icon, MailIcon, SendIcon, XIcon } from "lucide-react";
+import { Gamepad2Icon, MailIcon, SendIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

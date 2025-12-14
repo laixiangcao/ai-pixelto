@@ -6,7 +6,7 @@ function cn(...classes: Array<string | undefined | null | false>) {
 
 export function Logo({
 	className,
-	iconClassName,
+	iconClassName: _iconClassName,
 	withText,
 	withLabel,
 }: {
@@ -19,7 +19,7 @@ export function Logo({
 
 	return (
 		<div className={cn("flex items-center gap-3", className)}>
-			<div
+			{/* <div
 				className={cn(
 					"relative size-10 group/logo shrink-0 select-none",
 					iconClassName,
@@ -40,7 +40,7 @@ export function Logo({
 						</style>
 					</div>
 				</div>
-			</div>
+			</div> */}
 
 			{resolvedWithText && (
 				<div className="flex flex-col justify-center">
