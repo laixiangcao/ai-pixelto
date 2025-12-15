@@ -36,20 +36,20 @@ const PRESET_ACTIONS = [
 
 const SAMPLE_IMAGES = [
 	{
-		url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop",
-		label: "Portrait",
+		url: "/images/simple/3d-07-original.webp",
+		label: "demo1",
 	},
 	{
-		url: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=300&h=300&fit=crop",
-		label: "Nature",
+		url: "/images/simple/3d-10-original.webp",
+		label: "demo2",
 	},
 	{
-		url: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=300&h=300&fit=crop",
-		label: "City",
+		url: "/images/simple/cartoon-08-original.webp",
+		label: "demo3",
 	},
 	{
-		url: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&h=300&fit=crop",
-		label: "Animal",
+		url: "/images/simple/christmas-07-original.webp",
+		label: "demo4",
 	},
 ];
 

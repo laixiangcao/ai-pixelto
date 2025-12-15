@@ -909,13 +909,17 @@
 			"inspiration": {
 				"title": "更多 AI 图像灵感",
 				"cta": "查看更多灵感",
+				"subtitle": "探索社区创作，激发你的灵感并开始创作",
+				"tryStyle": "尝试此风格",
 				"tabs": {
-					"latest": "最新",
+					"3d": "3D",
+					"background-transformation": "背景替换",
+					"cartoon": "卡通化",
+					"character-transform": "角色转换",
 					"christmas": "圣诞",
-					"poster": "海报",
-					"packing": "包装",
-					"ai_image": "AI 图像",
-					"brand_identity": "品牌形象"
+					"hairstyle": "发型",
+					"portrait-logo": "人像 Logo",
+					"product-photos": "商品图"
 				}
 			}
 		},

@@ -8,6 +8,8 @@ import { ParticleBackground } from "@marketing/home/components/ParticleBackgroun
 import { Showcase } from "@marketing/home/components/Showcase";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { getInspirationData } from "@marketing/home/lib/inspiration";
+
 export async function generateMetadata({
 	params,
 }: {
@@ -64,7 +66,7 @@ export default async function Home({
 				<Showcase />
 
 				{/* Inspiration Gallery */}
-				<Inspiration />
+				<Inspiration {...(await getInspirationData())} />
 
 				{/* Features - has its own background */}
 				<Features />

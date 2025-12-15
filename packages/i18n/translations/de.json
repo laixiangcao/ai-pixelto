@@ -909,13 +909,17 @@
 			"inspiration": {
 				"title": "Mehr KI-Bildinspiration",
 				"cta": "Mehr Inspiration",
+				"subtitle": "Lass dich von den Kreationen unserer Community inspirieren und starte dein eigenes Projekt",
+				"tryStyle": "Diesen Stil ausprobieren",
 				"tabs": {
-					"latest": "Neueste",
+					"3d": "3D",
+					"background-transformation": "Hintergrund",
+					"cartoon": "Cartoon",
+					"character-transform": "Charakter",
 					"christmas": "Weihnachten",
-					"poster": "Poster",
-					"packing": "Verpackung",
-					"ai_image": "KI-Bild",
-					"brand_identity": "Markenidentität"
+					"hairstyle": "Frisur",
+					"portrait-logo": "Porträt-Logo",
+					"product-photos": "Produktfotos"
 				}
 			}
 		},

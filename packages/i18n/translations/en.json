@@ -909,13 +909,17 @@
 			"inspiration": {
 				"title": "More AI Image Inspiration",
 				"cta": "More Inspiration",
+				"subtitle": "Get inspired by our community creations and start your own",
+				"tryStyle": "Try this style",
 				"tabs": {
-					"latest": "Latest",
+					"3d": "3D",
+					"background-transformation": "Background",
+					"cartoon": "Cartoon",
+					"character-transform": "Character",
 					"christmas": "Christmas",
-					"poster": "Poster",
-					"packing": "Packing",
-					"ai_image": "AI Image",
-					"brand_identity": "Brand Identity"
+					"hairstyle": "Hairstyle",
+					"portrait-logo": "Portrait Logo",
+					"product-photos": "Product"
 				}
 			}
 		},

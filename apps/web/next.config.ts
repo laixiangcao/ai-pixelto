@@ -7,8 +7,12 @@ import nextIntlPlugin from "next-intl/plugin";
 const withNextIntl = nextIntlPlugin("./modules/i18n/request.ts");
 
 const nextConfig: NextConfig = {
+	output: "standalone",
 	transpilePackages: ["@repo/api", "@repo/auth", "@repo/database"],
 	images: {
+		minimumCacheTTL: 60 * 60 * 24 * 30,
+		deviceSizes: [360, 640, 768, 1024, 1280, 1536, 1920, 2560, 3840],
+		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384, 512, 768, 1024],
 		remotePatterns: [
 			{
 				protocol: "https",
