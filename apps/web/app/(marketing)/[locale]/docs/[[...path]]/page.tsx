@@ -82,7 +82,6 @@ export async function generateMetadata(props: {
 	const params = await props.params;
 	const page = docsSource.getPage(params.path, params.locale);
 
-
 	return {
 		title: page ? `${page.data.title} | Documentation` : "Documentation",
 		description: page?.data.description,

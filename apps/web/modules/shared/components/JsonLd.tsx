@@ -19,11 +19,7 @@ export function JsonLd({ data }: JsonLdProps) {
 /**
  * 多个 JSON-LD Schema 组合组件
  */
-export function JsonLdMultiple({
-	schemas,
-}: {
-	schemas: Array<object>;
-}) {
+export function JsonLdMultiple({ schemas }: { schemas: Array<object> }) {
 	return (
 		<>
 			{schemas.map((schema, index) => (

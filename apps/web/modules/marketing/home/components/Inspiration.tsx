@@ -6,7 +6,10 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
-import type { InspirationItem, InspirationTab } from "@marketing/home/lib/inspiration";
+import type {
+	InspirationItem,
+	InspirationTab,
+} from "@marketing/home/lib/inspiration";
 
 export function Inspiration({
 	tabs = [],
@@ -129,7 +132,9 @@ export function Inspiration({
 									aria-hidden="true"
 									className={cn(
 										"absolute inset-0 rounded-full bg-primary shadow-md transition-opacity duration-200",
-										activeTab === tab.id ? "opacity-100" : "opacity-0",
+										activeTab === tab.id
+											? "opacity-100"
+											: "opacity-0",
 									)}
 								/>
 								<span className="relative z-10 capitalize">
@@ -143,14 +148,23 @@ export function Inspiration({
 				{/* Cards Grid */}
 				<div
 					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
-					style={{ contentVisibility: "auto", containIntrinsicSize: "800px" }}
+					style={{
+						contentVisibility: "auto",
+						containIntrinsicSize: "800px",
+					}}
 				>
 					{filteredInspiration.map((item) => (
-						<div key={item.id} className="group cursor-pointer h-full">
+						<div
+							key={item.id}
+							className="group cursor-pointer h-full"
+						>
 							<div className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl hover:shadow-primary/5 dark:hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col">
 								{/* Image Container */}
 								<div className="relative aspect-[2/1] w-full overflow-hidden bg-muted">
-									{renderComparison(item.original, item.edited)}
+									{renderComparison(
+										item.original,
+										item.edited,
+									)}
 								</div>
 							</div>
 						</div>

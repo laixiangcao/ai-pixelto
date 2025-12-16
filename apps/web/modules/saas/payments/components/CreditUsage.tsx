@@ -162,9 +162,7 @@ export function CreditUsage({ organizationId }: { organizationId?: string }) {
 									</CardHeader>
 									<CardContent>
 										<div className="text-2xl font-bold">
-											{format.number(
-												summary.totalSpent,
-											)}
+											{format.number(summary.totalSpent)}
 										</div>
 										<p className="text-xs text-muted-foreground">
 											{t(
@@ -217,7 +215,9 @@ export function CreditUsage({ organizationId }: { organizationId?: string }) {
 											{dailyUsage.map((day) => {
 												const height =
 													maxDailyUsageAmount > 0
-														? (day.amount / maxDailyUsageAmount) * 100
+														? (day.amount /
+																maxDailyUsageAmount) *
+															100
 														: 0;
 												return (
 													<div
@@ -232,7 +232,9 @@ export function CreditUsage({ organizationId }: { organizationId?: string }) {
 															}}
 														/>
 														<span className="text-[10px] text-muted-foreground rotate-45 origin-left">
-															{formatShortDate(day.date)}
+															{formatShortDate(
+																day.date,
+															)}
 														</span>
 													</div>
 												);

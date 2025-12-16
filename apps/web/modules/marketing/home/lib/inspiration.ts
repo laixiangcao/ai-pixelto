@@ -16,12 +16,17 @@ export type InspirationTab = {
 	count: number;
 };
 
- export const getInspirationData = unstable_cache(
+export const getInspirationData = unstable_cache(
 	async () => {
-		const inspirationDir = path.join(process.cwd(), "public/images/inspiration");
+		const inspirationDir = path.join(
+			process.cwd(),
+			"public/images/inspiration",
+		);
 
 		try {
-			const categories = await fs.readdir(inspirationDir, { withFileTypes: true });
+			const categories = await fs.readdir(inspirationDir, {
+				withFileTypes: true,
+			});
 			const categoryNames = categories
 				.filter((category) => category.isDirectory())
 				.map((category) => category.name)
@@ -29,18 +34,26 @@ export type InspirationTab = {
 
 			const results = await Promise.all(
 				categoryNames.map(async (categoryName) => {
-					const categoryPath = path.join(inspirationDir, categoryName);
+					const categoryPath = path.join(
+						inspirationDir,
+						categoryName,
+					);
 					const files = await fs.readdir(categoryPath);
 
 					const imageFiles = files.filter((file) =>
 						/\.(png|jpg|jpeg|webp)$/i.test(file),
 					);
 
-					const pairs = new Map<string, { original?: string; edited?: string }>();
+					const pairs = new Map<
+						string,
+						{ original?: string; edited?: string }
+					>();
 
 					for (const file of imageFiles) {
 						if (file.includes("-original")) {
-							const id = file.replace("-original", "").split(".")[0];
+							const id = file
+								.replace("-original", "")
+								.split(".")[0];
 							const current = pairs.get(id) || {};
 							current.original = `/images/inspiration/${categoryName}/${file}`;
 							pairs.set(id, current);
@@ -48,7 +61,9 @@ export type InspirationTab = {
 						}
 
 						if (file.includes("-edited")) {
-							const id = file.replace("-edited", "").split(".")[0];
+							const id = file
+								.replace("-edited", "")
+								.split(".")[0];
 							const current = pairs.get(id) || {};
 							current.edited = `/images/inspiration/${categoryName}/${file}`;
 							pairs.set(id, current);
@@ -68,7 +83,10 @@ export type InspirationTab = {
 
 					if (categoryItems.length === 0) return null;
 					return {
-						tab: { id: categoryName, count: categoryItems.length } satisfies InspirationTab,
+						tab: {
+							id: categoryName,
+							count: categoryItems.length,
+						} satisfies InspirationTab,
 						items: categoryItems,
 					};
 				}),
@@ -91,4 +109,4 @@ export type InspirationTab = {
 	},
 	["marketing-home-inspiration-data"],
 	{ revalidate: 60 * 60 },
- );
+);

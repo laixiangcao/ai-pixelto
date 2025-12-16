@@ -1,8 +1,10 @@
 import { LocaleLink } from "@i18n/routing";
 import { config } from "@repo/config";
 import { Logo } from "@shared/components/Logo";
+import { useTranslations } from "next-intl";
 
 export function Footer() {
+	const t = useTranslations("footer");
 	return (
 		<footer className="border-t border-border/50 bg-muted/30 py-12 text-sm">
 			<div className="container grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -11,54 +13,53 @@ export function Footer() {
 						<Logo />
 					</div>
 					<p className="text-muted-foreground max-w-xs">
-						Transform your images with the power of AI. Professional
-						results in seconds.
+						{t("description")}
 					</p>
 					<p className="text-xs text-muted-foreground/70">
-						© {new Date().getFullYear()} {config.appName}. All
-						rights reserved.
+						© {new Date().getFullYear()} {config.appName}.{" "}
+						{t("allRightsReserved")}
 					</p>
 				</div>
 
 				<div className="flex flex-col gap-3">
 					<h4 className="font-semibold text-foreground mb-1">
-						Product
+						{t("product.title")}
 					</h4>
 					<LocaleLink
 						href="/blog"
 						className="text-muted-foreground hover:text-primary transition-colors duration-200"
 					>
-						Blog
+						{t("product.blog")}
 					</LocaleLink>
 					<a
 						href="#features"
 						className="text-muted-foreground hover:text-primary transition-colors duration-200"
 					>
-						Features
+						{t("product.features")}
 					</a>
 					<a
 						href="/pricing"
 						className="text-muted-foreground hover:text-primary transition-colors duration-200"
 					>
-						Pricing
+						{t("product.pricing")}
 					</a>
 				</div>
 
 				<div className="flex flex-col gap-3">
 					<h4 className="font-semibold text-foreground mb-1">
-						Legal
+						{t("legal.title")}
 					</h4>
 					<LocaleLink
 						href="/legal/privacy-policy"
 						className="text-muted-foreground hover:text-primary transition-colors duration-200"
 					>
-						Privacy Policy
+						{t("legal.privacyPolicy")}
 					</LocaleLink>
 					<LocaleLink
 						href="/legal/terms"
 						className="text-muted-foreground hover:text-primary transition-colors duration-200"
 					>
-						Terms of Service
+						{t("legal.termsOfService")}
 					</LocaleLink>
 				</div>
 			</div>

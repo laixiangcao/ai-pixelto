@@ -30,5 +30,7 @@ export async function getPostBySlug(
  * @returns 该文章存在的语言版本数组
  */
 export function getPostAvailableLocales(slug: string): string[] {
-	return allPosts.filter((post) => post.path === slug).map((post) => post.locale);
+	return allPosts
+		.filter((post) => post.path === slug)
+		.map((post) => post.locale);
 }

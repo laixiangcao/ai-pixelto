@@ -23,16 +23,43 @@ interface AIImageEditProps {
 }
 
 const PRESET_ACTIONS = [
-	"Change background to sunset beach",
-	"Convert to cartoon style, keep character features",
-	"Transform day scene to night",
-	"Remove objects from background",
-	"Add rain effect and reflections",
-	"Make it look like a cyberpunk city",
-	"Turn into a pencil sketch",
-	"Enhance lighting and colors",
-	"Make it look like an oil painting",
-];
+	{
+		key: "backgroundSunset",
+		prompt: "Change background to sunset beach",
+	},
+	{
+		key: "cartoonStyle",
+		prompt: "Convert to cartoon style, keep character features",
+	},
+	{
+		key: "dayToNight",
+		prompt: "Transform day scene to night",
+	},
+	{
+		key: "removeObjects",
+		prompt: "Remove objects from background",
+	},
+	{
+		key: "rainEffect",
+		prompt: "Add rain effect and reflections",
+	},
+	{
+		key: "cyberpunkCity",
+		prompt: "Make it look like a cyberpunk city",
+	},
+	{
+		key: "pencilSketch",
+		prompt: "Turn into a pencil sketch",
+	},
+	{
+		key: "enhanceLighting",
+		prompt: "Enhance lighting and colors",
+	},
+	{
+		key: "oilPainting",
+		prompt: "Make it look like an oil painting",
+	},
+] as const;
 
 const SAMPLE_IMAGES = [
 	{
@@ -98,7 +125,7 @@ const MODELS = [
 	{
 		id: "gemini-2.5-flash-image",
 		name: "Nano Banana🍌",
-		description: "Abstract artistic flair",
+		descriptionKey: "nanoBanana",
 		cost: 4,
 		active: true,
 		locked: false,
@@ -107,7 +134,7 @@ const MODELS = [
 	{
 		id: "flux-context",
 		name: "Flux Context",
-		description: "Complex scene awareness",
+		descriptionKey: "fluxContext",
 		cost: 24,
 		active: false,
 		locked: true,
@@ -116,13 +143,13 @@ const MODELS = [
 	{
 		id: "seedream",
 		name: "Seedream",
-		description: "Photorealistic detail",
+		descriptionKey: "seedream",
 		cost: 12,
 		active: false,
 		locked: true,
 		Logo: SeedreamLogo,
 	},
-];
+] as const;
 
 export const AIImageEdit: React.FC<AIImageEditProps> = ({
 	onGenerate,
@@ -269,7 +296,7 @@ export const AIImageEdit: React.FC<AIImageEditProps> = ({
 		setPrompt(preset);
 	};
 
-	const handleModelSelect = (model: (typeof MODELS)[0]) => {
+	const handleModelSelect = (model: (typeof MODELS)[number]) => {
 		if (model.active) {
 			setSelectedModel(model.id);
 		} else {
@@ -522,7 +549,7 @@ export const AIImageEdit: React.FC<AIImageEditProps> = ({
 									<div
 										className={`text-[10px] leading-tight truncate w-full pl-0.5 ${model.id === selectedModel ? "text-primary/80 dark:text-primary/60" : "text-muted-foreground"}`}
 									>
-										{model.description}
+										{t(`models.${model.descriptionKey}`)}
 									</div>
 
 									{/* Selected Glow Effect */}
@@ -611,14 +638,16 @@ export const AIImageEdit: React.FC<AIImageEditProps> = ({
 							onScroll={checkScroll}
 							className="flex overflow-x-auto gap-3 pb-1 scrollbar-hide items-center scroll-smooth"
 						>
-							{PRESET_ACTIONS.map((preset, i) => (
+							{PRESET_ACTIONS.map((preset) => (
 								<button
 									type="button"
-									key={i}
-									onClick={() => handlePresetClick(preset)}
+									key={preset.key}
+									onClick={() =>
+										handlePresetClick(preset.prompt)
+									}
 									className="
-                                        group/chip whitespace-nowrap px-3 py-1.5 rounded-md 
-                                        bg-card dark:bg-muted/50 border border-border 
+                                        group/chip whitespace-nowrap px-3 py-1.5 rounded-md
+                                        bg-card dark:bg-muted/50 border border-border
                                         text-muted-foreground text-[11px] font-mono tracking-tight
                                         hover:bg-muted dark:hover:bg-muted hover:text-primary hover:border-primary/30
                                         active:scale-95 transition-all duration-200 flex-shrink-0
@@ -627,7 +656,7 @@ export const AIImageEdit: React.FC<AIImageEditProps> = ({
 									<span className="opacity-50 group-hover/chip:opacity-100 mr-1.5 text-primary">
 										&gt;
 									</span>
-									{preset}
+									{t(`presets.${preset.key}`)}
 								</button>
 							))}
 						</div>

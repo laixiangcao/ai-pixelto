@@ -70,7 +70,9 @@ export function generateSeoMetadata(
 		title,
 		description,
 		// keywords 对 Google 无效，但对百度等搜索引擎可能有用
-		keywords: keywords ? keywords.split(",").map((k) => k.trim()) : undefined,
+		keywords: keywords
+			? keywords.split(",").map((k) => k.trim())
+			: undefined,
 		alternates: {
 			canonical: url,
 			languages,

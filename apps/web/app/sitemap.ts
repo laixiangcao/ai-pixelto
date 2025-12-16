@@ -35,16 +35,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		),
 		// 博客文章（默认语言不带前缀）
 		...posts.map((post) => ({
-			url: new URL(getLocalePath(`/blog/${post.path}`, post.locale), baseUrl)
-				.href,
+			url: new URL(
+				getLocalePath(`/blog/${post.path}`, post.locale),
+				baseUrl,
+			).href,
 			lastModified: post.date ? new Date(post.date) : new Date(),
 			changeFrequency: "monthly" as const,
 			priority: 0.7,
 		})),
 		// 法律页面（默认语言不带前缀）
 		...allLegalPages.map((page) => ({
-			url: new URL(getLocalePath(`/legal/${page.path}`, page.locale), baseUrl)
-				.href,
+			url: new URL(
+				getLocalePath(`/legal/${page.path}`, page.locale),
+				baseUrl,
+			).href,
 			lastModified: new Date(),
 			changeFrequency: "yearly" as const,
 			priority: 0.3,

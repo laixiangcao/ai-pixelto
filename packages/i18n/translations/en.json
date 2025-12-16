@@ -323,17 +323,45 @@
 	},
 	"contact": {
 		"description": "We are here to help you. Please use the form below to get in touch with us.",
+		"title": "Contact us",
+		"getInTouch": {
+			"title": "Get in touch",
+			"description": "We'd love to hear from you. Choose your preferred way to connect with our team."
+		},
+		"methods": {
+			"email": {
+				"label": "Email",
+				"value": "Send us an email"
+			},
+			"discord": {
+				"label": "Discord",
+				"value": "Join our server"
+			},
+			"telegram": {
+				"label": "Telegram",
+				"value": "Join our channel"
+			}
+		},
 		"form": {
 			"email": "Email",
 			"message": "Message",
 			"name": "Name",
+			"placeholders": {
+				"name": "John Doe",
+				"email": "john@example.com",
+				"message": "How can we help you?"
+			},
+			"errors": {
+				"name": "Name is required",
+				"email": "Email is required",
+				"message": "Message is required"
+			},
 			"notifications": {
 				"error": "We are sorry, but we were unable to send your message. Please try again later.",
 				"success": "Your message has been sent successfully. We will get back to you as soon as possible."
 			},
 			"submit": "Send message"
-		},
-		"title": "Contact us"
+		}
 	},
 	"documentation": {
 		"title": "Documentation"
@@ -943,6 +971,54 @@
 			"subtitle": "Explore the limitless possibilities of AI-powered editing.",
 			"original": "Original",
 			"enhanced": "Enhanced",
+			"aiEdit": "AI Edit",
+			"scenarios": {
+				"background": {
+					"label": "Background Replacement",
+					"description": "Separate the subject from the original background and replace it with a new, more creative scene.",
+					"prompts": {
+						"studio": "Place in a professional studio with soft lighting",
+						"cyberpunk": "Transform to a cyberpunk neon city scene",
+						"mountain": "Set against a serene mountain landscape"
+					}
+				},
+				"lighting": {
+					"label": "Lighting Adjustment",
+					"description": "Correct exposure, add dramatic lighting, or change the time of day in seconds.",
+					"prompts": {
+						"goldenHour": "Apply golden hour warm lighting",
+						"rimLighting": "Add dramatic studio rim lighting",
+						"diffusedGlow": "Create soft diffused glow effect"
+					}
+				},
+				"style": {
+					"label": "Style Conversion",
+					"description": "Transform photos into paintings, sketches, 3D renders, or anime style art.",
+					"prompts": {
+						"fashionIllustration": "Convert to fashion illustration style",
+						"oilPainting": "Transform into oil painting artwork",
+						"animeStyle": "Apply anime character style"
+					}
+				},
+				"color": {
+					"label": "Color Change",
+					"description": "Precisely change the color of specific objects in the image.",
+					"prompts": {
+						"orangeTabby": "Change fur color to orange tabby",
+						"blackWhite": "Transform to black and white coat",
+						"calico": "Apply calico pattern coloring"
+					}
+				},
+				"age": {
+					"label": "Age Transformation",
+					"description": "Visualize age progression or regression with realistic AI aging effects.",
+					"prompts": {
+						"younger": "Show younger version at age 25",
+						"older": "Apply aging effect to age 60",
+						"child": "Visualize as a child version"
+					}
+				}
+			},
 			"inspiration": {
 				"title": "More AI Image Inspiration",
 				"cta": "More Inspiration",
@@ -1024,6 +1100,22 @@
 		"title": "AI Magic Editor",
 		"subtitle": "Upload an image and describe how you want to change it. Our AI will handle the rest.",
 		"systemReady": "System Ready",
+		"models": {
+			"nanoBanana": "Abstract artistic flair",
+			"fluxContext": "Complex scene awareness",
+			"seedream": "Photorealistic detail"
+		},
+		"presets": {
+			"backgroundSunset": "Change background to sunset beach",
+			"cartoonStyle": "Convert to cartoon style",
+			"dayToNight": "Transform day scene to night",
+			"removeObjects": "Remove objects from background",
+			"rainEffect": "Add rain effect and reflections",
+			"cyberpunkCity": "Make it cyberpunk city style",
+			"pencilSketch": "Turn into a pencil sketch",
+			"enhanceLighting": "Enhance lighting and colors",
+			"oilPainting": "Make it an oil painting"
+		},
 		"upload": {
 			"title": "Upload Source Image",
 			"dragDrop": "Drag & drop or click to browse system files",
@@ -1111,5 +1203,20 @@
 		"noSpends": "No spending records found",
 		"noGrants": "No credit grants found",
 		"noExpiry": "Never expires"
+	},
+	"footer": {
+		"description": "Transform your images with the power of AI. Professional results in seconds.",
+		"allRightsReserved": "All rights reserved.",
+		"product": {
+			"title": "Product",
+			"blog": "Blog",
+			"features": "Features",
+			"pricing": "Pricing"
+		},
+		"legal": {
+			"title": "Legal",
+			"privacyPolicy": "Privacy Policy",
+			"termsOfService": "Terms of Service"
+		}
 	}
 }

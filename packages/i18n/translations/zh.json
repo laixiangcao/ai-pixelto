@@ -323,17 +323,45 @@
 	},
 	"contact": {
 		"description": "我们随时为您提供帮助。请使用以下表单与我们联系。",
+		"title": "联系我们",
+		"getInTouch": {
+			"title": "联系我们",
+			"description": "我们很乐意听取您的意见。选择您喜欢的方式与我们团队取得联系。"
+		},
+		"methods": {
+			"email": {
+				"label": "邮箱",
+				"value": "发送邮件给我们"
+			},
+			"discord": {
+				"label": "Discord",
+				"value": "加入我们的服务器"
+			},
+			"telegram": {
+				"label": "Telegram",
+				"value": "加入我们的频道"
+			}
+		},
 		"form": {
 			"email": "邮箱",
 			"message": "消息",
 			"name": "姓名",
+			"placeholders": {
+				"name": "张三",
+				"email": "zhangsan@example.com",
+				"message": "我们能为您做些什么？"
+			},
+			"errors": {
+				"name": "请输入姓名",
+				"email": "请输入邮箱",
+				"message": "请输入消息内容"
+			},
 			"notifications": {
 				"error": "抱歉，我们无法发送您的消息，请稍后重试。",
 				"success": "您的消息已成功发送。我们将尽快回复您。"
 			},
 			"submit": "发送消息"
-		},
-		"title": "联系我们"
+		}
 	},
 	"documentation": {
 		"title": "文档"
@@ -943,6 +971,54 @@
 			"subtitle": "探索 AI 驱动编辑的无限可能。",
 			"original": "原图",
 			"enhanced": "增强后",
+			"aiEdit": "AI 编辑",
+			"scenarios": {
+				"background": {
+					"label": "背景替换",
+					"description": "将主体从原背景中分离，替换为更具创意的新场景。",
+					"prompts": {
+						"studio": "放置在柔光专业摄影棚中",
+						"cyberpunk": "转换为赛博朋克霓虹城市场景",
+						"mountain": "置于宁静的山脉风景前"
+					}
+				},
+				"lighting": {
+					"label": "光影调整",
+					"description": "修正曝光、添加戏剧性光效，或秒速切换昼夜时段。",
+					"prompts": {
+						"goldenHour": "应用黄金时段暖光效果",
+						"rimLighting": "添加戏剧性轮廓光",
+						"diffusedGlow": "创建柔和漫射光效"
+					}
+				},
+				"style": {
+					"label": "风格转换",
+					"description": "将照片转换为油画、素描、3D渲染或动漫风格艺术。",
+					"prompts": {
+						"fashionIllustration": "转换为时装插画风格",
+						"oilPainting": "转换为油画艺术作品",
+						"animeStyle": "应用动漫角色风格"
+					}
+				},
+				"color": {
+					"label": "颜色修改",
+					"description": "精确更改图像中特定对象的颜色。",
+					"prompts": {
+						"orangeTabby": "将毛色改为橘猫色",
+						"blackWhite": "转换为黑白相间皮毛",
+						"calico": "应用三花猫图案"
+					}
+				},
+				"age": {
+					"label": "年龄变换",
+					"description": "用逼真的 AI 老化效果呈现年龄渐进或逆转效果。",
+					"prompts": {
+						"younger": "呈现25岁的年轻版本",
+						"older": "应用60岁老化效果",
+						"child": "呈现儿童时期的样子"
+					}
+				}
+			},
 			"inspiration": {
 				"title": "更多 AI 图像灵感",
 				"cta": "查看更多灵感",
@@ -1024,6 +1100,22 @@
 		"title": "AI 魔法编辑器",
 		"subtitle": "上传图片并描述你想如何修改它。剩下的交给我们的 AI。",
 		"systemReady": "系统就绪",
+		"models": {
+			"nanoBanana": "抽象艺术风格",
+			"fluxContext": "复杂场景感知",
+			"seedream": "照片级真实细节"
+		},
+		"presets": {
+			"backgroundSunset": "将背景换成日落海滩",
+			"cartoonStyle": "转换为卡通风格",
+			"dayToNight": "将白天场景变为夜晚",
+			"removeObjects": "移除背景中的物体",
+			"rainEffect": "添加雨天效果和倒影",
+			"cyberpunkCity": "赛博朋克城市风格",
+			"pencilSketch": "转换为铅笔素描",
+			"enhanceLighting": "增强光影和色彩",
+			"oilPainting": "转换为油画风格"
+		},
 		"upload": {
 			"title": "上传源图片",
 			"dragDrop": "拖放或点击浏览系统文件",
@@ -1111,5 +1203,20 @@
 		"noSpends": "暂无消费记录",
 		"noGrants": "暂无获取记录",
 		"noExpiry": "永不过期"
+	},
+	"footer": {
+		"description": "用 AI 的力量改变您的图像。专业级效果，即刻呈现。",
+		"allRightsReserved": "保留所有权利。",
+		"product": {
+			"title": "产品",
+			"blog": "博客",
+			"features": "功能特性",
+			"pricing": "定价"
+		},
+		"legal": {
+			"title": "法律",
+			"privacyPolicy": "隐私政策",
+			"termsOfService": "服务条款"
+		}
 	}
 }

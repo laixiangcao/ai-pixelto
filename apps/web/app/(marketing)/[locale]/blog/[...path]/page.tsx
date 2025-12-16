@@ -7,10 +7,7 @@ import {
 import { getBaseUrl } from "@repo/utils";
 import { JsonLd } from "@shared/components/JsonLd";
 import { getActivePathFromUrlParam } from "@shared/lib/content";
-import {
-	generateAlternates,
-	generateArticleSchema,
-} from "@shared/lib/seo";
+import { generateAlternates, generateArticleSchema } from "@shared/lib/seo";
 import Image from "next/image";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -45,7 +42,11 @@ export async function generateMetadata(props: { params: Promise<Params> }) {
 	return {
 		title: post.title,
 		description: post.excerpt,
-		alternates: generateAlternates(`/blog/${slug}`, locale, availableLocales),
+		alternates: generateAlternates(
+			`/blog/${slug}`,
+			locale,
+			availableLocales,
+		),
 		openGraph: {
 			type: "article",
 			title: post.title,

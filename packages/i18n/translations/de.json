@@ -323,17 +323,45 @@
 	},
 	"contact": {
 		"description": "Wir sind hier, um dir zu helfen. Bitte verwende das untenstehende Formular, um mit uns in Kontakt zu treten.",
+		"title": "Kontakt",
+		"getInTouch": {
+			"title": "Kontakt aufnehmen",
+			"description": "Wir würden gerne von dir hören. Wähle deine bevorzugte Art, um mit unserem Team in Kontakt zu treten."
+		},
+		"methods": {
+			"email": {
+				"label": "E-Mail",
+				"value": "Sende uns eine E-Mail"
+			},
+			"discord": {
+				"label": "Discord",
+				"value": "Tritt unserem Server bei"
+			},
+			"telegram": {
+				"label": "Telegram",
+				"value": "Tritt unserem Kanal bei"
+			}
+		},
 		"form": {
 			"email": "E-Mail",
 			"message": "Nachricht",
 			"name": "Name",
+			"placeholders": {
+				"name": "Max Mustermann",
+				"email": "max@beispiel.de",
+				"message": "Wie können wir dir helfen?"
+			},
+			"errors": {
+				"name": "Name ist erforderlich",
+				"email": "E-Mail ist erforderlich",
+				"message": "Nachricht ist erforderlich"
+			},
 			"notifications": {
 				"error": "Es tut uns leid, aber wir konnten deine Nachricht nicht senden. Bitte versuche es später noch einmal.",
 				"success": "Deine Nachricht wurde erfolgreich abgeschickt. Wir werden uns so schnell wie möglich bei dir melden."
 			},
 			"submit": "Nachricht senden"
-		},
-		"title": "Kontakt"
+		}
 	},
 	"faq": {
 		"description": "Hast du irgendwelche Fragen? \nWir sind für dich da.",
@@ -943,6 +971,54 @@
 			"subtitle": "Entdecke die grenzenlosen Möglichkeiten der KI-gestützten Bearbeitung.",
 			"original": "Original",
 			"enhanced": "Verbessert",
+			"aiEdit": "KI-Bearbeitung",
+			"scenarios": {
+				"background": {
+					"label": "Hintergrundersetzung",
+					"description": "Trenne das Motiv vom ursprünglichen Hintergrund und ersetze es durch eine neue, kreativere Szene.",
+					"prompts": {
+						"studio": "In ein professionelles Studio mit weichem Licht setzen",
+						"cyberpunk": "In eine Cyberpunk-Neon-Stadtszene verwandeln",
+						"mountain": "Vor einer ruhigen Berglandschaft platzieren"
+					}
+				},
+				"lighting": {
+					"label": "Beleuchtungsanpassung",
+					"description": "Korrigiere Belichtung, füge dramatische Beleuchtung hinzu oder ändere die Tageszeit in Sekunden.",
+					"prompts": {
+						"goldenHour": "Warme Goldene-Stunde-Beleuchtung anwenden",
+						"rimLighting": "Dramatische Studio-Randbeleuchtung hinzufügen",
+						"diffusedGlow": "Sanften diffusen Glüheffekt erzeugen"
+					}
+				},
+				"style": {
+					"label": "Stilumwandlung",
+					"description": "Verwandle Fotos in Gemälde, Skizzen, 3D-Renderings oder Anime-Kunst.",
+					"prompts": {
+						"fashionIllustration": "In Mode-Illustrationsstil umwandeln",
+						"oilPainting": "In Ölgemälde-Kunstwerk verwandeln",
+						"animeStyle": "Anime-Charakter-Stil anwenden"
+					}
+				},
+				"color": {
+					"label": "Farbänderung",
+					"description": "Ändere präzise die Farbe bestimmter Objekte im Bild.",
+					"prompts": {
+						"orangeTabby": "Fellfarbe in orange Tabby ändern",
+						"blackWhite": "In schwarz-weißes Fell verwandeln",
+						"calico": "Dreifarbiges Muster anwenden"
+					}
+				},
+				"age": {
+					"label": "Altersveränderung",
+					"description": "Visualisiere Alterungsprogression oder -regression mit realistischen KI-Alterungseffekten.",
+					"prompts": {
+						"younger": "Jüngere Version mit 25 Jahren zeigen",
+						"older": "Alterungseffekt auf 60 Jahre anwenden",
+						"child": "Als Kind visualisieren"
+					}
+				}
+			},
 			"inspiration": {
 				"title": "Mehr KI-Bildinspiration",
 				"cta": "Mehr Inspiration",
@@ -1024,6 +1100,22 @@
 		"title": "KI-Magie-Editor",
 		"subtitle": "Lade ein Bild hoch und beschreibe, wie du es ändern möchtest. Unsere KI erledigt den Rest.",
 		"systemReady": "System bereit",
+		"models": {
+			"nanoBanana": "Abstrakter künstlerischer Stil",
+			"fluxContext": "Komplexe Szenenerkennung",
+			"seedream": "Fotorealistische Details"
+		},
+		"presets": {
+			"backgroundSunset": "Hintergrund in Sonnenuntergangsstrand ändern",
+			"cartoonStyle": "In Cartoon-Stil umwandeln",
+			"dayToNight": "Tagesszene in Nacht verwandeln",
+			"removeObjects": "Objekte aus Hintergrund entfernen",
+			"rainEffect": "Regeneffekt und Reflexionen hinzufügen",
+			"cyberpunkCity": "Cyberpunk-Stadt-Stil anwenden",
+			"pencilSketch": "In Bleistiftskizze umwandeln",
+			"enhanceLighting": "Beleuchtung und Farben verbessern",
+			"oilPainting": "In Ölgemälde umwandeln"
+		},
 		"upload": {
 			"title": "Quellbild hochladen",
 			"dragDrop": "Ziehen & Ablegen oder klicken zum Durchsuchen",
@@ -1111,5 +1203,20 @@
 		"noSpends": "Keine Verbrauchseinträge gefunden",
 		"noGrants": "Keine Gutschriften gefunden",
 		"noExpiry": "Läuft nie ab"
+	},
+	"footer": {
+		"description": "Verwandle deine Bilder mit der Kraft der KI. Professionelle Ergebnisse in Sekunden.",
+		"allRightsReserved": "Alle Rechte vorbehalten.",
+		"product": {
+			"title": "Produkt",
+			"blog": "Blog",
+			"features": "Funktionen",
+			"pricing": "Preise"
+		},
+		"legal": {
+			"title": "Rechtliches",
+			"privacyPolicy": "Datenschutzerklärung",
+			"termsOfService": "Nutzungsbedingungen"
+		}
 	}
 }

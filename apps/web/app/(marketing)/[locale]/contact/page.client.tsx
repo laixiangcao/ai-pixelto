@@ -52,7 +52,8 @@ export default function ContactContent() {
 	const contactMethods = [
 		{
 			icon: MailIcon,
-			label: "Email",
+			labelKey: "methods.email.label",
+			valueKey: "methods.email.value",
 			value: config.contact.email,
 			href: `mailto:${config.contact.email}`,
 			color: "text-blue-500",
@@ -68,19 +69,21 @@ export default function ContactContent() {
 		// },
 		{
 			icon: Gamepad2Icon,
-			label: "Discord",
-			value: "Join our server",
+			labelKey: "methods.discord.label",
+			valueKey: "methods.discord.value",
 			href: config.contact.discord,
 			color: "text-indigo-500",
 			bg: "bg-indigo-500/10",
+			useValueDirectly: false,
 		},
 		{
 			icon: SendIcon,
-			label: "Telegram",
-			value: "Join our channel",
+			labelKey: "methods.telegram.label",
+			valueKey: "methods.telegram.value",
 			href: config.contact.telegram,
 			color: "text-cyan-500",
 			bg: "bg-cyan-500/10",
+			useValueDirectly: false,
 		},
 	].filter((method) => method.href);
 
@@ -111,18 +114,17 @@ export default function ContactContent() {
 						<div className="space-y-8">
 							<div className="space-y-4">
 								<h2 className="text-2xl font-bold tracking-tight">
-									Get in touch
+									{t("getInTouch.title")}
 								</h2>
 								<p className="text-muted-foreground text-lg">
-									We'd love to hear from you. Choose your
-									preferred way to connect with our team.
+									{t("getInTouch.description")}
 								</p>
 							</div>
 
 							<div className="grid gap-4">
 								{contactMethods.map((method) => (
 									<a
-										key={method.label}
+										key={method.labelKey}
 										href={method.href}
 										target="_blank"
 										rel="noopener noreferrer"
@@ -135,10 +137,12 @@ export default function ContactContent() {
 										</div>
 										<div>
 											<h3 className="font-semibold text-lg mb-0.5 group-hover:text-primary transition-colors">
-												{method.label}
+												{t(method.labelKey)}
 											</h3>
 											<p className="text-muted-foreground text-sm group-hover:text-foreground/80 transition-colors">
-												{method.value}
+												{method.useValueDirectly
+													? method.value
+													: t(method.valueKey)}
 											</p>
 										</div>
 									</a>
@@ -164,13 +168,15 @@ export default function ContactContent() {
 											<Input
 												id="name"
 												{...register("name")}
-												placeholder="John Doe"
+												placeholder={t(
+													"form.placeholders.name",
+												)}
 												className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-11"
 											/>
 											{errors.name && (
 												<span className="text-xs text-destructive">
 													{errors.name.message ||
-														"Name is required"}
+														t("form.errors.name")}
 												</span>
 											)}
 										</div>
@@ -183,13 +189,15 @@ export default function ContactContent() {
 												id="email"
 												type="email"
 												{...register("email")}
-												placeholder="john@example.com"
+												placeholder={t(
+													"form.placeholders.email",
+												)}
 												className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors h-11"
 											/>
 											{errors.email && (
 												<span className="text-xs text-destructive">
 													{errors.email.message ||
-														"Email is required"}
+														t("form.errors.email")}
 												</span>
 											)}
 										</div>
@@ -203,13 +211,15 @@ export default function ContactContent() {
 											id="message"
 											rows={5}
 											{...register("message")}
-											placeholder="How can we help you?"
+											placeholder={t(
+												"form.placeholders.message",
+											)}
 											className="bg-background/50 border-border/50 focus:border-primary/50 transition-colors min-h-[150px] resize-none"
 										/>
 										{errors.message && (
 											<span className="text-xs text-destructive">
 												{errors.message.message ||
-													"Message is required"}
+													t("form.errors.message")}
 											</span>
 										)}
 									</div>

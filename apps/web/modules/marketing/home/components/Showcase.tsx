@@ -7,134 +7,129 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 
-// Mock Data for Showcase Scenarios
+// Showcase Scenario Keys for i18n
 const SHOWCASE_SCENARIOS = [
 	{
 		id: "background",
-		label: "Background Replacement",
-		description:
-			"Separate the subject from the original background and replace it with a new, more creative scene.",
+		labelKey: "scenarios.background.label",
+		descriptionKey: "scenarios.background.description",
 		original:
 			"https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=80",
 		variants: [
 			{
 				id: "bg-1",
 				image: "https://images.unsplash.com/photo-1505739998589-00fc191ce01d?w=800&q=80",
-				prompt: "Place in a professional studio with soft lighting",
+				promptKey: "scenarios.background.prompts.studio",
 			},
 			{
 				id: "bg-2",
 				image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=800&q=80",
-				prompt: "Transform to a cyberpunk neon city scene",
+				promptKey: "scenarios.background.prompts.cyberpunk",
 			},
 			{
 				id: "bg-3",
 				image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
-				prompt: "Set against a serene mountain landscape",
+				promptKey: "scenarios.background.prompts.mountain",
 			},
 		],
 	},
 	{
 		id: "lighting",
-		label: "Lighting Adjustment",
-		description:
-			"Correct exposure, add dramatic lighting, or change the time of day in seconds.",
+		labelKey: "scenarios.lighting.label",
+		descriptionKey: "scenarios.lighting.description",
 		original:
 			"https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
 		variants: [
 			{
 				id: "light-1",
 				image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&q=80",
-				prompt: "Apply golden hour warm lighting",
+				promptKey: "scenarios.lighting.prompts.goldenHour",
 			},
 			{
 				id: "light-2",
 				image: "https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=800&q=80",
-				prompt: "Add dramatic studio rim lighting",
+				promptKey: "scenarios.lighting.prompts.rimLighting",
 			},
 			{
 				id: "light-3",
 				image: "https://images.unsplash.com/photo-1492633423870-43d1cd2775eb?w=800&q=80",
-				prompt: "Create soft diffused glow effect",
+				promptKey: "scenarios.lighting.prompts.diffusedGlow",
 			},
 		],
 	},
 	{
 		id: "style",
-		label: "Style Conversion",
-		description:
-			"Transform photos into paintings, sketches, 3D renders, or anime style art.",
+		labelKey: "scenarios.style.label",
+		descriptionKey: "scenarios.style.description",
 		original:
 			"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80",
 		variants: [
 			{
 				id: "style-1",
 				image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&q=80",
-				prompt: "Convert to fashion illustration style",
+				promptKey: "scenarios.style.prompts.fashionIllustration",
 			},
 			{
 				id: "style-2",
 				image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80",
-				prompt: "Transform into oil painting artwork",
+				promptKey: "scenarios.style.prompts.oilPainting",
 			},
 			{
 				id: "style-3",
 				image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80",
-				prompt: "Apply anime character style",
+				promptKey: "scenarios.style.prompts.animeStyle",
 			},
 		],
 	},
 	{
 		id: "color",
-		label: "Color Change",
-		description:
-			"Precisely change the color of specific objects in the image.",
+		labelKey: "scenarios.color.label",
+		descriptionKey: "scenarios.color.description",
 		original:
 			"https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=800&q=80",
 		variants: [
 			{
 				id: "color-1",
 				image: "https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=800&q=80",
-				prompt: "Change fur color to orange tabby",
+				promptKey: "scenarios.color.prompts.orangeTabby",
 			},
 			{
 				id: "color-2",
 				image: "https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?w=800&q=80",
-				prompt: "Transform to black and white coat",
+				promptKey: "scenarios.color.prompts.blackWhite",
 			},
 			{
 				id: "color-3",
 				image: "https://images.unsplash.com/photo-1511044568932-338cba0ad803?w=800&q=80",
-				prompt: "Apply calico pattern coloring",
+				promptKey: "scenarios.color.prompts.calico",
 			},
 		],
 	},
 	{
 		id: "age",
-		label: "Age Transformation",
-		description:
-			"Visualize age progression or regression with realistic AI aging effects.",
+		labelKey: "scenarios.age.label",
+		descriptionKey: "scenarios.age.description",
 		original:
 			"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
 		variants: [
 			{
 				id: "age-1",
 				image: "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=800&q=80",
-				prompt: "Show younger version at age 25",
+				promptKey: "scenarios.age.prompts.younger",
 			},
 			{
 				id: "age-2",
 				image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=800&q=80",
-				prompt: "Apply aging effect to age 60",
+				promptKey: "scenarios.age.prompts.older",
 			},
 			{
 				id: "age-3",
 				image: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=800&q=80",
-				prompt: "Visualize as a child version",
+				promptKey: "scenarios.age.prompts.child",
 			},
 		],
 	},
-];
+] as const;
 
 export function Showcase() {
 	const t = useTranslations("home.showcase");
@@ -230,7 +225,7 @@ export function Showcase() {
 									/>
 								)}
 								<span className="relative z-10">
-									{scenario.label}
+									{t(scenario.labelKey)}
 								</span>
 							</button>
 						))}
@@ -248,7 +243,7 @@ export function Showcase() {
 							transition={{ duration: 0.25 }}
 							className="text-muted-foreground text-base md:text-lg max-w-2xl"
 						>
-							{currentScenario.description}
+							{t(currentScenario.descriptionKey)}
 						</motion.p>
 					</AnimatePresence>
 				</div>
@@ -288,7 +283,7 @@ export function Showcase() {
 							<div className="absolute top-3 left-3 z-10">
 								<div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-semibold uppercase tracking-wide bg-black/70 text-white backdrop-blur-sm">
 									<span className="h-1.5 w-1.5 rounded-full bg-white/60" />
-									<span>Original</span>
+									<span>{t("original")}</span>
 								</div>
 							</div>
 						</div>
@@ -331,7 +326,7 @@ export function Showcase() {
 							<div className="absolute top-3 right-3 z-10">
 								<div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-[10px] font-semibold uppercase tracking-wide bg-gradient-to-r from-primary to-emerald-500 text-white shadow-lg shadow-primary/30">
 									<SparklesIcon className="h-3 w-3" />
-									<span>AI Edit</span>
+									<span>{t("aiEdit")}</span>
 								</div>
 							</div>
 
@@ -359,11 +354,11 @@ export function Showcase() {
 												transition={{ duration: 0.2 }}
 												className="text-white text-sm font-medium text-center flex-1 px-4 line-clamp-1"
 											>
-												{
+												{t(
 													currentScenario.variants[
 														activeVariant
-													].prompt
-												}
+													].promptKey,
+												)}
 											</motion.p>
 										</AnimatePresence>
 
@@ -422,7 +417,7 @@ export function Showcase() {
 								>
 									<Image
 										src={variant.image}
-										alt={variant.prompt}
+										alt={t(variant.promptKey)}
 										fill
 										className="object-cover"
 										sizes="64px"
