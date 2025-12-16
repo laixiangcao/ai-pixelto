@@ -1,3 +1,4 @@
+import { generateSeoMetadata } from "@shared/lib/seo";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
@@ -6,12 +7,15 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "contact" });
+	const t = await getTranslations({ locale, namespace: "seo.contact" });
 
-	return {
+	return generateSeoMetadata({
 		title: t("title"),
 		description: t("description"),
-	};
+		keywords: t("keywords"),
+		path: "/contact",
+		locale,
+	});
 }
 
 export default async function ContactPage({

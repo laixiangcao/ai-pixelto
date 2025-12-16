@@ -1,13 +1,24 @@
 import { PostListItem } from "@marketing/blog/components/PostListItem";
 import { getAllPosts } from "@marketing/blog/utils/lib/posts";
+import { generateSeoMetadata } from "@shared/lib/seo";
 import { FadeIn } from "@ui/components/FadeIn";
 import { getLocale, getTranslations } from "next-intl/server";
 
-export async function generateMetadata() {
-	const t = await getTranslations();
-	return {
-		title: t("blog.title"),
-	};
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+	const t = await getTranslations({ locale, namespace: "seo.blog" });
+
+	return generateSeoMetadata({
+		title: t("title"),
+		description: t("description"),
+		keywords: t("keywords"),
+		path: "/blog",
+		locale,
+	});
 }
 
 export default async function BlogListPage() {

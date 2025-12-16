@@ -7,7 +7,7 @@ import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import { DocsBody, DocsPage } from "fumadocs-ui/page";
 import { notFound } from "next/navigation";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { docsSource } from "../../../../docs-source";
 
 export default async function DocumentationPage(props: {
@@ -75,19 +75,20 @@ export async function generateStaticParams() {
 	}));
 }
 
+// Demo 页面，禁止搜索引擎索引
 export async function generateMetadata(props: {
 	params: Promise<{ path?: string[]; locale: string }>;
 }) {
-	const t = await getTranslations();
 	const params = await props.params;
 	const page = docsSource.getPage(params.path, params.locale);
 
-	if (!page) {
-		notFound();
-	}
 
 	return {
-		title: `${page.data.title} | ${t("documentation.title")}`,
-		description: page.data.description,
+		title: page ? `${page.data.title} | Documentation` : "Documentation",
+		description: page?.data.description,
+		robots: {
+			index: false,
+			follow: false,
+		},
 	};
 }

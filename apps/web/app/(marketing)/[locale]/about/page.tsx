@@ -1,4 +1,5 @@
 import { CTA } from "@marketing/home/components/CTA";
+import { generateSeoMetadata } from "@shared/lib/seo";
 import { FadeIn } from "@ui/components/FadeIn";
 import { HeartIcon, RocketIcon, ShieldCheckIcon } from "lucide-react";
 import Image from "next/image";
@@ -10,12 +11,16 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "about" });
+	const t = await getTranslations({ locale, namespace: "seo.about" });
 
-	return {
+	return generateSeoMetadata({
 		title: t("title"),
 		description: t("description"),
-	};
+		keywords: t("keywords"),
+		path: "/about",
+		locale,
+		image: "/images/blog/about-team-working-together.webp",
+	});
 }
 
 export default async function AboutPage({

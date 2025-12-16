@@ -6,7 +6,7 @@ title: Privacy Policy
 
 ## 1. Introduction
 
-Welcome to Pixelto ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at hello@pixelto.ai.
+Welcome to Pixelto ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about our policy, or our practices with regards to your personal information, please contact us at support@pixelto.com.
 
 ## 2. Information We Collect
 
@@ -26,4 +26,4 @@ We use administrative, technical, and physical security measures to help protect
 
 ## 6. Contact Us
 
-If you have questions or comments about this policy, you may email us at hello@pixelto.ai.
+If you have questions or comments about this policy, you may email us at support@pixelto.com.

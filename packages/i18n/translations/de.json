@@ -1,4 +1,41 @@
 {
+	"seo": {
+		"home": {
+			"title": "Pixelto - Kostenloser KI-Bildgenerator | Text zu Bild KI-Kunst",
+			"description": "Erstellen Sie atemberaubende KI-generierte Bilder aus Textbeschreibungen in Sekunden. Kostenloser KI-Kunstgenerator mit Premium-Gemini-Modellen. Keine Wasserzeichen, kommerzielle Lizenz inklusive.",
+			"keywords": "ki bildgenerator, text zu bild, ki kunst generator, kostenloser ki bildgenerator, ki foto generator"
+		},
+		"pricing": {
+			"title": "Pixelto Preise - KI-Bildgenerator Tarife & Preise",
+			"description": "Wählen Sie aus kostenlosen und Premium KI-Bildgenerierungsplänen. Bis zu 3000 Bilder pro Monat in 4K-Auflösung. Starten Sie kostenlos.",
+			"keywords": "ki bildgenerator preise, pixelto preise, ki kunst generator tarife, kostenloser ki bildgenerator"
+		},
+		"about": {
+			"title": "Über Pixelto - KI-Bildgenerierungsplattform",
+			"description": "Pixelto hat es sich zur Aufgabe gemacht, professionelle Bilderstellung mit KI zu demokratisieren. Erfahren Sie mehr über unsere Technologie und Vision.",
+			"keywords": "pixelto, ki bild unternehmen, ki kunst plattform, bildgenerierung technologie"
+		},
+		"contact": {
+			"title": "Kontakt Pixelto - KI-Bildgenerator Support",
+			"description": "Kontaktieren Sie das Pixelto-Team. Wir helfen bei Fragen zu unserem KI-Bildgenerator, Preisen oder technischem Support.",
+			"keywords": "pixelto kontakt, ki bildgenerator support, pixelto hilfe"
+		},
+		"blog": {
+			"title": "KI-Bildgenerierung Blog - Tipps, Tutorials & News",
+			"description": "Entdecken Sie KI-Bildgenerierungstipps, kreative Tutorials und Branchennews. Lernen Sie, wie Sie atemberaubende KI-Kunst erstellen.",
+			"keywords": "ki bild tipps, ki kunst tutorial, text zu bild anleitung"
+		},
+		"changelog": {
+			"title": "Pixelto Changelog - Produkt-Updates & Neue Funktionen",
+			"description": "Bleiben Sie über die neuesten Pixelto-Funktionen und Verbesserungen informiert. Sehen Sie, was es Neues in unserem KI-Bildgenerator gibt.",
+			"keywords": "pixelto updates, ki bildgenerator changelog, neue funktionen"
+		},
+		"docs": {
+			"title": "Pixelto Dokumentation - KI-Bildgenerator Anleitung",
+			"description": "Vollständige Anleitung zur Verwendung des Pixelto KI-Bildgenerators. Erfahren Sie mehr über Funktionen, API-Integration und Best Practices.",
+			"keywords": "pixelto docs, ki bildgenerator anleitung, pixelto tutorial"
+		}
+	},
 	"about": {
 		"title": "Über Pixelto",
 		"description": "Wir haben es uns zur Aufgabe gemacht, professionelle Bildbearbeitung mit der Kraft der künstlichen Intelligenz zu demokratisieren.",

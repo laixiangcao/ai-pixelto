@@ -1,7 +1,24 @@
 import { ChangelogSection } from "@marketing/changelog/components/ChangelogSection";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-export default async function PricingPage() {
+// Demo 页面，禁止搜索引擎索引
+export async function generateMetadata() {
+	return {
+		title: "Changelog",
+		robots: {
+			index: false,
+			follow: false,
+		},
+	};
+}
+
+export default async function ChangelogPage({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+	setRequestLocale(locale);
 	const t = await getTranslations();
 
 	return (

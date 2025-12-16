@@ -1,6 +1,7 @@
 import { CTA } from "@marketing/home/components/CTA";
 import { FaqSection } from "@marketing/home/components/FaqSection";
 import { PricingSection } from "@marketing/home/components/PricingSection";
+import { generateSeoMetadata } from "@shared/lib/seo";
 import { FadeIn } from "@ui/components/FadeIn";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -10,12 +11,15 @@ export async function generateMetadata({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const t = await getTranslations({ locale, namespace: "pricing" });
+	const t = await getTranslations({ locale, namespace: "seo.pricing" });
 
-	return {
+	return generateSeoMetadata({
 		title: t("title"),
 		description: t("description"),
-	};
+		keywords: t("keywords"),
+		path: "/pricing",
+		locale,
+	});
 }
 
 export default async function PricingPage({

@@ -1,4 +1,41 @@
 {
+	"seo": {
+		"home": {
+			"title": "Pixelto - 免费AI图像生成器 | 文字转图片AI绘画工具",
+			"description": "几秒钟内从文字描述创建精美的AI生成图像。由高级Gemini模型驱动的免费AI艺术生成器。无水印，包含商业授权。",
+			"keywords": "ai图像生成器, 文字转图片, ai绘画, 免费ai图片生成, ai作图, 人工智能绘画, ai图片生成器"
+		},
+		"pricing": {
+			"title": "Pixelto价格 - AI图像生成器套餐与定价",
+			"description": "选择免费或高级AI图像生成套餐。每月最多3000张图片，支持4K分辨率。免费开始使用，随时升级。",
+			"keywords": "ai图像生成器价格, pixelto定价, ai绘画套餐, 免费ai图片生成器"
+		},
+		"about": {
+			"title": "关于Pixelto - AI图像生成平台",
+			"description": "Pixelto致力于利用AI技术让专业图像创作变得触手可及。了解我们的技术、团队和创意工具的未来愿景。",
+			"keywords": "pixelto, ai图像公司, ai艺术平台, 图像生成技术"
+		},
+		"contact": {
+			"title": "联系Pixelto - AI图像生成器支持",
+			"description": "联系Pixelto团队。我们随时为您解答关于AI图像生成器、定价或技术支持的问题。",
+			"keywords": "pixelto联系, ai图像生成器支持, pixelto帮助"
+		},
+		"blog": {
+			"title": "AI图像生成博客 - 技巧、教程与资讯",
+			"description": "发现AI图像生成技巧、创意教程和行业资讯。学习如何使用Pixelto创建精美的AI艺术作品。",
+			"keywords": "ai图像技巧, ai绘画教程, 文字转图片指南"
+		},
+		"changelog": {
+			"title": "Pixelto更新日志 - 产品更新与新功能",
+			"description": "了解最新的Pixelto功能、改进和错误修复。查看我们AI图像生成器的最新动态。",
+			"keywords": "pixelto更新, ai图像生成器更新日志, 新功能"
+		},
+		"docs": {
+			"title": "Pixelto文档 - AI图像生成器使用指南",
+			"description": "完整的Pixelto AI图像生成器使用指南。了解功能、API集成和最佳实践。",
+			"keywords": "pixelto文档, ai图像生成器指南, pixelto教程"
+		}
+	},
 	"about": {
 		"title": "关于 Pixelto",
 		"description": "我们的使命是利用人工智能的力量，让专业图像编辑变得触手可及。",

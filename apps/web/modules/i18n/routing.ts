@@ -8,7 +8,9 @@ export const routing = defineRouting({
 	localeCookie: {
 		name: config.i18n.localeCookieName,
 	},
-	localePrefix: config.i18n.enabled ? "always" : "never",
+	// "as-needed": 默认语言不显示前缀（如 /pricing），其他语言显示（如 /de/pricing）
+	// 这是 SEO 最佳实践，避免默认语言 URL 冗余
+	localePrefix: config.i18n.enabled ? "as-needed" : "never",
 	localeDetection: config.i18n.enabled,
 });
 

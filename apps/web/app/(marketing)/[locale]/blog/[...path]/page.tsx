@@ -1,8 +1,16 @@
 import { LocaleLink, localeRedirect } from "@i18n/routing";
 import { PostContent } from "@marketing/blog/components/PostContent";
-import { getPostBySlug } from "@marketing/blog/utils/lib/posts";
+import {
+	getPostAvailableLocales,
+	getPostBySlug,
+} from "@marketing/blog/utils/lib/posts";
 import { getBaseUrl } from "@repo/utils";
+import { JsonLd } from "@shared/components/JsonLd";
 import { getActivePathFromUrlParam } from "@shared/lib/content";
+import {
+	generateAlternates,
+	generateArticleSchema,
+} from "@shared/lib/seo";
 import Image from "next/image";
 import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -20,19 +28,46 @@ export async function generateMetadata(props: { params: Promise<Params> }) {
 	const slug = getActivePathFromUrlParam(path);
 	const post = await getPostBySlug(slug, { locale });
 
+	if (!post) {
+		return { title: "Blog Post" };
+	}
+
+	const baseUrl = getBaseUrl();
+	const imageUrl = post.image
+		? post.image.startsWith("http")
+			? post.image
+			: `${baseUrl}${post.image}`
+		: undefined;
+
+	// 获取该文章实际可用的语言版本，避免 Google 认为是重复内容
+	const availableLocales = getPostAvailableLocales(slug);
+
 	return {
-		title: post?.title,
-		description: post?.excerpt,
+		title: post.title,
+		description: post.excerpt,
+		alternates: generateAlternates(`/blog/${slug}`, locale, availableLocales),
 		openGraph: {
-			title: post?.title,
-			description: post?.excerpt,
-			images: post?.image
+			type: "article",
+			title: post.title,
+			description: post.excerpt,
+			publishedTime: post.date,
+			authors: post.authorName ? [post.authorName] : undefined,
+			images: imageUrl
 				? [
-						post.image.startsWith("http")
-							? post.image
-							: new URL(post.image, getBaseUrl()).toString(),
+						{
+							url: imageUrl,
+							width: 1200,
+							height: 630,
+							alt: post.title,
+						},
 					]
 				: [],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: post.title,
+			description: post.excerpt,
+			images: imageUrl ? [imageUrl] : [],
 		},
 	};
 }
@@ -50,10 +85,21 @@ export default async function BlogPostPage(props: { params: Promise<Params> }) {
 		return localeRedirect({ href: "/blog", locale });
 	}
 
-	const { title, date, authorName, authorImage, tags, image, body } = post;
+	const { title, date, authorName, authorImage, tags, image, body, excerpt } =
+		post;
+
+	// Article Schema JSON-LD
+	const articleSchema = generateArticleSchema({
+		title,
+		description: excerpt || title,
+		image: image || undefined,
+		publishedAt: date,
+		author: authorName || undefined,
+	});
 
 	return (
 		<div className="container max-w-6xl pt-32 pb-24">
+			<JsonLd data={articleSchema} />
 			<div className="mx-auto max-w-2xl">
 				<div className="mb-12">
 					<LocaleLink href="/blog">

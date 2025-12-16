@@ -22,4 +22,4 @@ You may not access or use the Site for any purpose other than that for which we 
 
 ## 5. Contact Us
 
-In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: hello@pixelto.ai
+In order to resolve a complaint regarding the Site or to receive further information regarding use of the Site, please contact us at: support@pixelto.com

@@ -1,4 +1,41 @@
 {
+	"seo": {
+		"home": {
+			"title": "Pixelto - Free AI Image Generator | Text to Image AI Art Creator",
+			"description": "Create stunning AI-generated images from text prompts in seconds. Free AI art generator powered by premium Gemini models. No watermarks, commercial license included.",
+			"keywords": "ai image generator, text to image, ai art generator, free ai image creator, ai photo generator, text to image ai, ai picture generator"
+		},
+		"pricing": {
+			"title": "Pixelto Pricing - AI Image Generator Plans & Pricing",
+			"description": "Choose from free and premium AI image generation plans. Get up to 3000 images per month with 4K resolution. Start free, upgrade anytime.",
+			"keywords": "ai image generator pricing, pixelto pricing, ai art generator plans, free ai image generator, ai image subscription"
+		},
+		"about": {
+			"title": "About Pixelto - AI Image Generation Platform",
+			"description": "Pixelto is on a mission to democratize professional image creation with AI. Learn about our technology, team, and vision for the future of creative tools.",
+			"keywords": "pixelto, ai image company, ai art platform, image generation technology"
+		},
+		"contact": {
+			"title": "Contact Pixelto - AI Image Generator Support",
+			"description": "Get in touch with the Pixelto team. We're here to help with questions about our AI image generator, pricing, or technical support.",
+			"keywords": "pixelto contact, ai image generator support, pixelto help"
+		},
+		"blog": {
+			"title": "AI Image Generation Blog - Tips, Tutorials & News",
+			"description": "Discover AI image generation tips, creative tutorials, and industry news. Learn how to create stunning AI art with Pixelto.",
+			"keywords": "ai image tips, ai art tutorial, text to image guide, ai generation news"
+		},
+		"changelog": {
+			"title": "Pixelto Changelog - Product Updates & New Features",
+			"description": "Stay updated with the latest Pixelto features, improvements, and bug fixes. See what's new in our AI image generator.",
+			"keywords": "pixelto updates, ai image generator changelog, new features"
+		},
+		"docs": {
+			"title": "Pixelto Documentation - AI Image Generator Guide",
+			"description": "Complete guide to using Pixelto AI image generator. Learn about features, API integration, and best practices.",
+			"keywords": "pixelto docs, ai image generator guide, pixelto tutorial, api documentation"
+		}
+	},
 	"about": {
 		"title": "About Pixelto",
 		"description": "We are on a mission to democratize professional image editing with the power of Artificial Intelligence.",

@@ -4,6 +4,7 @@ import {
 	getActivePathFromUrlParam,
 	getLocalizedDocumentWithFallback,
 } from "@shared/lib/content";
+import { generateAlternates } from "@shared/lib/seo";
 import { allLegalPages } from "content-collections";
 import { getLocale } from "next-intl/server";
 
@@ -25,10 +26,24 @@ export async function generateMetadata(props: { params: Promise<Params> }) {
 		locale,
 	);
 
+	if (!page) {
+		return { title: "Legal" };
+	}
+
+	// 获取该法律页面实际可用的语言版本
+	const availableLocales = allLegalPages
+		.filter((p) => p.path === activePath)
+		.map((p) => p.locale);
+
 	return {
-		title: page?.title,
+		title: page.title,
+		alternates: generateAlternates(
+			`/legal/${activePath}`,
+			locale,
+			availableLocales,
+		),
 		openGraph: {
-			title: page?.title,
+			title: page.title,
 		},
 	};
 }
