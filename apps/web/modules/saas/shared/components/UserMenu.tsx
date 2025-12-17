@@ -57,15 +57,23 @@ export function UserMenu({ showUserName }: { showUserName?: boolean }) {
 		},
 	];
 
+	const handleLogoutRedirect = async () => {
+		await clearCache();
+		window.location.href = new URL(
+			config.auth.redirectAfterLogout,
+			window.location.origin,
+		).toString();
+	};
+
 	const onLogout = () => {
 		authClient.signOut({
 			fetchOptions: {
-				onSuccess: async () => {
-					await clearCache();
-					window.location.href = new URL(
-						config.auth.redirectAfterLogout,
-						window.location.origin,
-					).toString();
+				onSuccess: handleLogoutRedirect,
+				onError: async (ctx) => {
+					// 当 session 已失效时（如服务重启后），仍然执行登出重定向
+					if (ctx.error.code === "FAILED_TO_GET_SESSION") {
+						await handleLogoutRedirect();
+					}
 				},
 			},
 		});

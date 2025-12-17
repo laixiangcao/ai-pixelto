@@ -1,7 +1,17 @@
-import React from "react";
+import { Img } from "@react-email/components";
 
 function cn(...classes: Array<string | undefined | null | false>) {
 	return classes.filter(Boolean).join(" ");
+}
+
+function getBaseUrl() {
+	if (process.env.NEXT_PUBLIC_SITE_URL) {
+		return process.env.NEXT_PUBLIC_SITE_URL;
+	}
+	if (process.env.NEXT_PUBLIC_VERCEL_URL) {
+		return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+	}
+	return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
 export function Logo({
@@ -16,32 +26,28 @@ export function Logo({
 	withLabel?: boolean;
 }) {
 	const resolvedWithText = withText ?? withLabel ?? true;
+	const logoUrl = new URL("/images/logo-light.webp", getBaseUrl()).toString();
 
 	return (
 		<div className={cn("flex items-center gap-3", className)}>
-			{/* <div
-				className={cn(
-					"relative size-10 group/logo shrink-0 select-none",
-					iconClassName,
-				)}
+			<div
+				className="shrink-0"
+				style={{
+					overflow: "hidden",
+					borderRadius: "12px",
+					border: "1px solid #e3ebf6",
+					backgroundColor: "#ffffff",
+					boxShadow: "0 2px 4px rgba(0, 0, 0, 0.12)",
+				}}
 			>
-				<div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-purple-600 blur-md transition-opacity rounded-lg opacity-0 group-hover/logo:opacity-30" />
-
-				<div className="bg-white w-full h-full rounded-lg border border-slate-200 relative z-10 shadow-sm flex items-center justify-center overflow-hidden text-slate-900 transition-transform duration-300 group-hover/logo:scale-105">
-					<div className="relative font-black text-2xl leading-none flex items-center justify-center w-full h-full">
-						<span className="text-slate-900 relative z-10">P</span>
-						<div className="absolute inset-0 overflow-hidden">
-							<div className="absolute top-1/2 left-1/3 w-1 h-1 bg-slate-900 animate-[drop_2s_infinite]" />
-							<div className="absolute top-1/2 right-1/4 w-1 h-1 bg-slate-900 animate-[drop_2.5s_infinite_0.5s]" />
-							<div className="absolute top-2/3 right-1/3 w-1 h-1 bg-slate-900 animate-[drop_1.8s_infinite_1s]" />
-						</div>
-						<style>
-							{"@keyframes drop { 0% { transform: translateY(0); opacity:1; } 100% { transform: translateY(20px); opacity:0; } }"}
-						</style>
-					</div>
-				</div>
-			</div> */}
-
+				<Img
+					src={logoUrl}
+					alt="Pixelto"
+					width={40}
+					height={40}
+					className="block"
+				/>
+			</div>
 			{resolvedWithText && (
 				<div className="flex flex-col justify-center">
 					<span className="mb-0.5 mt-0.5 whitespace-nowrap text-xl font-bold leading-none tracking-tight text-slate-900">

@@ -1,0 +1,161 @@
+[
+	{
+		"style": "style-transfer",
+		"items": [
+			{
+				"img": "style-transfer-street-fashion-original.webp",
+				"desc": "Original: full-body street fashion shot on a crosswalk in overcast daylight.",
+				"prompt": "Full-body street fashion shot of an adult man wearing a long coat and sneakers, walking across a crosswalk, overcast daylight, realistic textures, crisp fabric details, 35mm lens look, editorial photography, 4:3 composition, photorealistic. No text, no watermark.",
+				"isOriginal": true
+			},
+			{
+				"img": "style-transfer-street-fashion-anime-film.webp",
+				"desc": "Transform style to Japanese anime film look with clean linework and soft shading.",
+				"prompt": "Transform the image into Japanese anime film style: clean linework, soft shading, cinematic color grading, detailed background, subtle film grain. Keep the same pose, composition, clothing design, and scene layout, 4:3 composition. No text, no watermark."
+			},
+			{
+				"img": "style-transfer-street-fashion-stylized-3d.webp",
+				"desc": "Transform style to stylized 3D cinematic render with soft bloom and GI.",
+				"prompt": "Transform the image into stylized 3D cinematic render: high-quality global illumination, soft bloom, realistic-yet-stylized materials, premium render look. Keep the same pose, composition, clothing silhouette, and scene layout, 4:3 composition. No text, no watermark."
+			},
+			{
+				"img": "style-transfer-street-fashion-oil-painting.webp",
+				"desc": "Transform style to modern realistic oil painting with visible brush strokes.",
+				"prompt": "Transform the image into modern realistic oil painting: visible brush strokes, rich pigment, gallery-like lighting feel, preserve facial likeness and outfit structure. Keep the same composition and scene layout, 4:3 composition. No text, no watermark."
+			}
+		]
+	},
+	{
+		"style": "lighting-adjustment",
+		"items": [
+			{
+				"img": "lighting-adjustment-studio-portrait-original.webp",
+				"desc": "Original: half-body studio portrait with neutral gray background.",
+				"prompt": "Half-body studio portrait of an adult woman, neutral gray backdrop, natural skin texture, clean styling, soft key light, gentle shadows, sharp eyes, 50mm portrait look, editorial photography, 4:3 composition, photorealistic. No text, no watermark.",
+				"isOriginal": true
+			},
+			{
+				"img": "lighting-adjustment-studio-portrait-cinematic-rim.webp",
+				"desc": "Adjust lighting to cinematic side/back rim light with moody contrast.",
+				"prompt": "Adjust lighting to cinematic side/back rim light: subtle rim highlight on hair and shoulders, deeper shadows on the far cheek, gentle haze, moody contrast. Keep the subject identity, background, pose, camera angle, and framing unchanged, 4:3 composition, photorealistic. No text, no watermark."
+			},
+			{
+				"img": "lighting-adjustment-studio-portrait-beauty-butterfly.webp",
+				"desc": "Adjust lighting to high-end beauty butterfly lighting with clean catchlights.",
+				"prompt": "Adjust lighting to high-end beauty butterfly lighting: soft key light above camera, clean catchlights, smooth cheek highlights, minimal shadow under the nose, polished but natural retouch. Keep everything else unchanged, 4:3 composition, photorealistic. No text, no watermark."
+			},
+			{
+				"img": "lighting-adjustment-studio-portrait-neon-ambient.webp",
+				"desc": "Adjust lighting to neon ambient magenta/cyan glow while keeping the same studio.",
+				"prompt": "Adjust lighting to neon ambient look: subtle magenta and cyan edge glow, soft reflections on skin, gentle cinematic bokeh hints, while keeping the same studio setting and composition. Keep subject identity and pose unchanged, 4:3 composition, photorealistic. No text, no watermark."
+			}
+		]
+	},
+	{
+		"style": "color-change",
+		"items": [
+			{
+				"img": "color-change-handbag-original.webp",
+				"desc": "Original: studio portrait holding a structured black leather handbag.",
+				"prompt": "Half-body studio portrait of an adult woman holding a structured black leather handbag, clean studio background, soft key light, realistic leather texture, sharp stitching details, luxury product-photography vibe, 4:3 composition, photorealistic. No text, no watermark.",
+				"isOriginal": true
+			},
+			{
+				"img": "color-change-handbag-cherry-red.webp",
+				"desc": "Change handbag color to deep cherry red while preserving leather texture.",
+				"prompt": "Change only the handbag color from black to deep cherry red while preserving leather texture, stitching, highlights, and shadows. Keep the subject, pose, background, and lighting unchanged, 4:3 composition, photorealistic. No text, no watermark."
+			},
+			{
+				"img": "color-change-handbag-ivory-white.webp",
+				"desc": "Change handbag color to ivory white with realistic highlights and shadows.",
+				"prompt": "Change only the handbag color to ivory white while keeping realistic specular highlights and natural shadows (avoid plastic look). Keep everything else unchanged, 4:3 composition, photorealistic. No text, no watermark."
+			},
+			{
+				"img": "color-change-handbag-metallic-silver.webp",
+				"desc": "Change handbag finish to metallic silver leather while keeping everything else unchanged.",
+				"prompt": "Change only the handbag finish to metallic silver leather, maintain realistic reflections and micro-texture (no over-gloss). Keep subject, background, pose, and lighting unchanged, 4:3 composition, photorealistic. No text, no watermark."
+			}
+		]
+	},
+	{
+		"style": "background-swap",
+		"items": [
+			{
+				"img": "background-swap-city-cycling-original.webp",
+				"desc": "Original: female mountain biker riding on a modern city road.",
+				"prompt": "A stylish adult female mountain biker riding a matte-black MTB on a clean modern city road, mid-action, dynamic posture, helmet and modern riding jersey, crisp subject focus, slight motion blur on wheels, editorial sports photography, realistic skin texture, 35mm lens look, shallow depth of field, 4:3 composition, ultra-detailed, photorealistic. No text, no watermark.",
+				"isOriginal": true
+			},
+			{
+				"img": "background-swap-city-cycling-mountain-trail.webp",
+				"desc": "Change background to a winding mountain trail through pine forest.",
+				"prompt": "Replace the background with a winding mountain trail through a pine forest, golden hour light, dust particles in the air, cinematic depth. Keep the same cyclist identity, face, outfit, bike, pose, camera angle, framing, and focal length. Match lighting and shadows to the new scene, 4:3 composition, photorealistic. No text, no watermark."
+			},
+			{
+				"img": "background-swap-city-cycling-summit-offroad.webp",
+				"desc": "Change background to a rugged rocky summit singletrack with dramatic sky.",
+				"prompt": "Replace the background with a rugged rocky summit singletrack, dramatic clouds, wide open horizon, high-contrast sun rays, epic outdoor atmosphere. Keep the same cyclist identity, face, outfit, bike, pose, camera angle, framing, and focal length. Match lighting and shadows; keep textures realistic, 4:3 composition, photorealistic. No text, no watermark."
+			},
+			{
+				"img": "background-swap-city-cycling-snow-trail.webp",
+				"desc": "Change background to a snowy trail with cold ambient light and snow flurries.",
+				"prompt": "Replace the background with a snowy trail, fine snow flurries, cold blue ambient light, subtle fog, visible breath. Keep the same cyclist identity, face, outfit, bike, pose, camera angle, framing, and focal length. Match cold lighting on skin and bike reflections naturally, 4:3 composition, photorealistic. No text, no watermark."
+			}
+		]
+	},
+	{
+		"style": "age-transformation",
+		"items": [
+			{
+				"img": "age-transformation-male-denim-30-original.webp",
+				"desc": "Original: portrait of a handsome man in his 30s with short beard, denim shirt.",
+				"prompt": "Portrait of a handsome man in his 30s, short beard, wearing a denim shirt, looking at camera, neutral expression, realistic photography, 4:3 composition, photorealistic. No text, no watermark.",
+				"isOriginal": true
+			},
+			{
+				"img": "age-transformation-male-denim-child-7.webp",
+				"desc": "Child: transform into a 7 year old boy wearing a denim shirt.",
+				"prompt": "Portrait of a 7 year old boy, wearing a denim shirt, looking at camera, cute face, realistic photography, 4:3 composition, photorealistic. Keep the same framing, camera angle, background, and lighting style. No text, no watermark."
+			},
+			{
+				"img": "age-transformation-male-denim-middle-aged-55.webp",
+				"desc": "Middle Aged: transform into a 55 year old man with greying beard, denim shirt.",
+				"prompt": "Portrait of a 55 year old man, greying beard, wearing a denim shirt, looking at camera, realistic photography, 4:3 composition, photorealistic. Keep the same framing, camera angle, background, and lighting style. No text, no watermark."
+			},
+			{
+				"img": "age-transformation-male-denim-elderly-80.webp",
+				"desc": "Elderly: transform into an 80 year old man with white beard and deep wrinkles, denim shirt.",
+				"prompt": "Portrait of an 80 year old man, white beard, deep wrinkles, wearing a denim shirt, looking at camera, realistic photography, 4:3 composition, photorealistic. Keep the same framing, camera angle, background, and lighting style. No text, no watermark."
+			}
+		]
+	},
+	{
+		"style": "seasonal-theme",
+		"items": [
+			{
+				"img": "seasonal-theme-family-sofa-original.webp",
+				"desc": "Original: cozy family portrait on a simple beige sofa in a minimal living room.",
+				"prompt": "Cozy family portrait: young couple with toddler child, casual home clothes, sitting together on simple beige sofa, natural window light, warm candid moment, genuine smiles, clean minimal living room background, 4:3 composition, realistic photography. No text, no watermark.",
+				"isOriginal": true
+			},
+			{
+				"img": "seasonal-theme-family-sofa-christmas.webp",
+				"desc": "Christmas family card: festive sweaters, Christmas tree lights, presents, cozy fireplace glow.",
+				"uiPrompt": "Christmas family card",
+				"prompt": "Family in matching festive red Christmas sweaters, beautifully decorated Christmas tree with warm lights behind, wrapped presents, snow falling outside window, cozy fireplace glow, holiday magic atmosphere. Keep the same family identity, pose, sofa, camera angle, and framing. Match lighting and shadows to the new scene, 4:3 composition, realistic photography. No text, no watermark."
+			},
+			{
+				"img": "seasonal-theme-family-sofa-halloween.webp",
+				"desc": "Halloween costume fun: parents as vampires, child as tiny pumpkin, cute spooky decorations.",
+				"uiPrompt": "Halloween costume fun",
+				"prompt": "Family in creative Halloween costumes: parents as vampires, child as tiny pumpkin, spooky but cute decorations, candy scattered around, purple and orange lighting, playful haunted house backdrop. Keep the same family identity, pose, sofa, camera angle, and framing. Match lighting and shadows to the new scene, 4:3 composition, realistic photography. No text, no watermark."
+			},
+			{
+				"img": "seasonal-theme-family-sofa-chinese-new-year.webp",
+				"desc": "Chinese New Year celebration: qipao/tang suit, red and gold decor, lanterns, lucky couplets.",
+				"uiPrompt": "Chinese New Year celebration",
+				"prompt": "Family in elegant traditional Chinese clothing (旗袍/唐装), red and gold decorations, Chinese lanterns, lucky couplets on wall, festive table setting, warm prosperous atmosphere. Keep the same family identity, pose, sofa, camera angle, and framing. Match lighting and shadows to the new scene, 4:3 composition, realistic photography. No text, no watermark."
+			}
+		]
+	}
+]

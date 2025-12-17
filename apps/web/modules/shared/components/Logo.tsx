@@ -1,4 +1,5 @@
 import { cn } from "@ui/lib";
+import Image from "next/image";
 
 export function Logo({
 	className,
@@ -25,12 +26,28 @@ export function Logo({
 					<div className="absolute inset-0 bg-gradient-to-br from-white/70 via-white/15 to-transparent dark:from-white/10 dark:via-white/5 dark:to-transparent opacity-55 mix-blend-overlay pointer-events-none transition-opacity duration-300 group-hover/logo:opacity-80" />
 					{/* Fixed Logo: Digital Decay */}
 					<div className="relative font-display font-black text-2xl leading-none flex items-center justify-center w-full h-full">
-						<span className="text-foreground relative z-10 drop-shadow-sm">
+						{/* <span className="text-foreground relative z-10 drop-shadow-sm">
 							P
-						</span>
+						</span> */}
+						<Image
+							src="/images/logo-light.webp"
+							alt="Pixelto"
+							width={40}
+							height={40}
+							sizes="40px"
+							className="block hover:scale-105 transition-transform duration-700 dark:hidden"
+						/>
+						<Image
+							src="/images/logo-dark.webp"
+							alt="Pixelto"
+							width={40}
+							height={40}
+							sizes="40px"
+							className="hidden hover:scale-105 transition-transform duration-700 dark:block"
+						/>
 						<div className="absolute inset-0 overflow-hidden pointer-events-none">
-							<div className="absolute top-1/2 left-[35%] w-1 h-1 bg-primary/80 animate-[drop_2s_infinite]" />
-							<div className="absolute top-1/2 right-[30%] w-[3px] h-[3px] bg-emerald-400 animate-[drop_2.5s_infinite_0.4s]" />
+							<div className="absolute top-1/2 left-[35%] w-[3px] h-[3px] bg-primary/80 animate-[drop_2s_infinite]" />
+							<div className="absolute top-1/2 right-[30%] w-[2px] h-[2px] bg-emerald-400 animate-[drop_2.5s_infinite_0.4s]" />
 							<div className="absolute top-2/3 right-[40%] w-[2px] h-[2px] bg-teal-400 animate-[drop_1.8s_infinite_0.8s]" />
 						</div>
 						<style>

@@ -7,11 +7,22 @@
 
 ## 目录
 
+**Part 1：SEO 基础与策略**
 1. [SEO 关键知识 · 快速精通](#一seo-关键知识--快速精通)
 2. [新站快速突破 1000+ PV 方案](#二新站快速突破-1000-pv-方案)
+
+**Part 2：AI 工具站专项**
 3. [AI 生图工具站 SEO 特别指南](#三ai-生图工具站-seo-特别指南)
-4. [维护检查清单](#四维护检查清单)
-5. [附录](#五附录)
+4. [图片 SEO 优化指南](#四图片-seo-优化指南)
+
+**Part 3：多语言与推广**
+5. [多语言 SEO 实践](#五多语言-seo-实践)
+6. [外链建设指南](#六外链建设指南)
+
+**Part 4：运维与资源**
+7. [维护检查清单](#七维护检查清单)
+8. [附录](#八附录)
+9. [相关文档](#九相关文档)
 
 ---
 
@@ -395,7 +406,134 @@ Free users get [X] generations per day. Upgrade to Pro for unlimited generations
 
 ---
 
-## 四、维护检查清单
+## 四、图片 SEO 优化指南
+
+### 4.1 文件命名规范
+
+| ✅ 正确示例 | ❌ 错误示例 |
+|------------|------------|
+| `ai-wallpaper-generator-4k-preview.webp` | `IMG_20241216.jpg` |
+| `anime-style-portrait-example.png` | `image1.png` |
+| `before-after-background-removal.webp` | `screenshot.png` |
+
+**命名规则**：
+- 使用小写字母和连字符
+- 包含描述性关键词
+- 避免中文、空格、下划线
+
+### 4.2 Alt 文本最佳实践
+
+```html
+<!-- ✅ 好的 alt 文本 -->
+<img alt="AI generated 4K mountain landscape wallpaper with sunset colors" />
+
+<!-- ❌ 差的 alt 文本 -->
+<img alt="image" />
+<img alt="wallpaper1" />
+<img alt="" />
+```
+
+**Alt 文本公式**：`[内容描述] + [风格/场景] + [关键词]`
+
+### 4.3 图片格式与性能
+
+| 格式 | 适用场景 | 压缩建议 |
+|------|---------|---------|
+| **WebP** | 主推格式，兼容性好 | 质量 80-85% |
+| **AVIF** | 现代浏览器，最佳压缩 | 质量 70-75% |
+| **PNG** | 需要透明背景 | 使用 TinyPNG 压缩 |
+| **JPG** | 照片类，不需透明 | 质量 80% |
+
+### 4.4 懒加载与 LCP 优化
+
+```tsx
+// 首屏图片：priority 加载
+<Image src="/hero.webp" priority alt="..." />
+
+// 非首屏图片：懒加载（Next.js 默认）
+<Image src="/gallery-item.webp" alt="..." />
+```
+
+**LCP 优化要点**：
+- 首屏主图使用 `priority` 属性
+- 预加载关键图片资源
+- 使用 CDN 加速图片分发
+
+---
+
+## 五、多语言 SEO 实践
+
+### 5.1 hreflang 配置
+
+项目已在 `@shared/lib/seo.ts` 中实现自动 hreflang 生成：
+
+```typescript
+// 自动生成的 hreflang 配置
+alternates: {
+  canonical: "https://pixelto.com/pricing",
+  languages: {
+    "en": "https://pixelto.com/pricing",
+    "de": "https://pixelto.com/de/pricing",
+    "zh": "https://pixelto.com/zh/pricing",
+    "x-default": "https://pixelto.com/pricing"
+  }
+}
+```
+
+### 5.2 多语言内容策略
+
+| 内容类型 | 策略 | 优先级 |
+|---------|------|--------|
+| 工具页面 | 完整翻译 + 本地化 | ⭐⭐⭐⭐⭐ |
+| 博客文章 | 选择性翻译热门文章 | ⭐⭐⭐ |
+| 法律页面 | 必须完整翻译 | ⭐⭐⭐⭐⭐ |
+| Prompt 库 | 英文优先，按需翻译 | ⭐⭐ |
+
+### 5.3 翻译质量要求
+
+- **禁止**：机器翻译直接使用
+- **必须**：人工校对所有公开内容
+- **建议**：使用 native speaker 审核关键页面
+- **注意**：关键词需按目标语言重新研究
+
+---
+
+## 六、外链建设指南
+
+### 6.1 白帽外链获取渠道
+
+| 渠道 | 难度 | 效果 | 操作方式 |
+|------|------|------|---------|
+| **Product Hunt** | 中 | ⭐⭐⭐⭐ | 产品发布获取关注 |
+| **GitHub** | 低 | ⭐⭐⭐ | 开源相关工具/库 |
+| **Reddit** | 中 | ⭐⭐⭐ | 在相关 subreddit 分享价值内容 |
+| **Quora/知乎** | 低 | ⭐⭐ | 回答相关问题并引用 |
+| **Guest Post** | 高 | ⭐⭐⭐⭐⭐ | 向行业博客投稿 |
+| **工具目录** | 低 | ⭐⭐⭐ | 提交到 AI 工具聚合站 |
+
+### 6.2 AI 工具目录提交清单
+
+```markdown
+- [ ] https://www.futuretools.io/
+- [ ] https://theresanaiforthat.com/
+- [ ] https://www.aitools.fyi/
+- [ ] https://topai.tools/
+- [ ] https://www.toolify.ai/
+- [ ] https://alternativeto.net/
+```
+
+### 6.3 社交媒体分发
+
+| 平台 | 内容类型 | 频率 |
+|------|---------|------|
+| Twitter/X | 生成示例、技巧、更新 | 每日 1-3 条 |
+| Discord | 社区互动、用户支持 | 持续维护 |
+| YouTube | 教程视频、功能演示 | 每周 1-2 条 |
+| TikTok | 短视频展示效果 | 每周 3-5 条 |
+
+---
+
+## 七、维护检查清单
 
 ### 每周检查
 
@@ -425,7 +563,7 @@ Free users get [X] generations per day. Upgrade to Pro for unlimited generations
 
 ---
 
-## 五、附录
+## 八、附录
 
 ### A. 英文长尾词清单
 
@@ -479,8 +617,18 @@ picsart.com
 
 ---
 
+## 九、相关文档
+
+| 文档 | 说明 |
+|------|------|
+| [seo-keyword-strategy.md](./seo-keyword-strategy.md) | 关键词扩展与新页面规划指南 |
+| [seo-site-audit.md](./seo-site-audit.md) | 现有站点 SEO 审计与改善计划 |
+
+---
+
 ## 更新日志
 
 | 日期 | 更新内容 |
 |------|----------|
-| 2024-12-16 | 重构文档，分离运营指南与技术设计 |
+| 2024-12-16 | 重构文档结构，新增图片 SEO、多语言 SEO、外链建设章节 |
+| 2024-12-16 | 初始版本，分离运营指南与技术设计 |

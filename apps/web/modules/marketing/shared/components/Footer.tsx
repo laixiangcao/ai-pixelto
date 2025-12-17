@@ -32,7 +32,7 @@ export function Footer() {
 						{t("product.blog")}
 					</LocaleLink>
 					<a
-						href="#features"
+						href="/#features"
 						className="text-muted-foreground hover:text-primary transition-colors duration-200"
 					>
 						{t("product.features")}

@@ -230,7 +230,7 @@ export const AIImageEditor: React.FC = () => {
 	return (
 		<section
 			id="editor"
-			className="w-full flex flex-col items-center mt-20 md:mt-32 scroll-mt-24"
+			className="w-full flex flex-col items-center mt-20 md:mt-24 scroll-mt-24"
 		>
 			<div
 				className={`

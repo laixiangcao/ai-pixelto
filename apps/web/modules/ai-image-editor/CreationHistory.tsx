@@ -37,14 +37,6 @@ const HistoryCard = ({
 	onDelete?: () => void;
 }) => {
 	const t = useTranslations("editor");
-	const [showResult, setShowResult] = useState(true);
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setShowResult((prev) => !prev);
-		}, 3000); // Toggle every 3 seconds
-		return () => clearInterval(interval);
-	}, []);
 
 	return (
 		<div className="relative flex-shrink-0 w-72 h-48 group">
@@ -66,13 +58,13 @@ const HistoryCard = ({
 						/>
 					)}
 
-					{/* Result Image Layer (Fades in/out) */}
+					{/* Result Image Layer - CSS animation for crossfade */}
 					{item.resultImage && (
 						// biome-ignore lint/performance/noImgElement: We need instant display for history
 						<img
 							src={item.resultImage}
 							alt="Edited"
-							className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${showResult ? "opacity-100" : "opacity-0"}`}
+							className="absolute inset-0 w-full h-full object-cover animate-history-crossfade"
 						/>
 					)}
 
@@ -80,24 +72,11 @@ const HistoryCard = ({
 					<div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
 				</div>
 
-				{/* Status Badge (Top Left) - Minimalist design */}
+				{/* Status Badge (Top Left) - Shows "AI Edit" */}
 				<div className="absolute top-2.5 left-2.5 z-10">
-					<div
-						className={`
-							inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wide
-							${
-								showResult
-									? "bg-black/60 text-white backdrop-blur-sm"
-									: "bg-black/40 text-white/70 backdrop-blur-sm"
-							}
-						`}
-					>
-						<span
-							className={`h-1.5 w-1.5 rounded-full ${showResult ? "bg-primary" : "bg-white/60"}`}
-						/>
-						{showResult
-							? t("history.edited")
-							: t("history.original")}
+					<div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wide bg-black/60 text-white backdrop-blur-sm">
+						<span className="h-1.5 w-1.5 rounded-full bg-primary" />
+						{t("history.edited")}
 					</div>
 				</div>
 
@@ -249,6 +228,14 @@ export const CreationHistory: React.FC<CreationHistoryProps> = ({
         .scrollbar-hide {
             -ms-overflow-style: none;
             scrollbar-width: none;
+        }
+        @keyframes history-crossfade {
+            0%, 45% { opacity: 1; }
+            50%, 95% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .animate-history-crossfade {
+            animation: history-crossfade 6s ease-in-out infinite;
         }
       `}</style>
 		</div>

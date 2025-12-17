@@ -366,10 +366,6 @@
 	"documentation": {
 		"title": "Documentation"
 	},
-	"faq": {
-		"description": "Do you have any questions? We have got you covered.",
-		"title": "Frequently asked questions"
-	},
 	"mail": {
 		"common": {
 			"openLinkInBrowser": "If you want to open the link in a different browser than your default one, copy and paste this link:",
@@ -637,7 +633,35 @@
 		"currentPlan": "Current Plan",
 		"upgrade": "Upgrade",
 		"downgrade": "Downgrade",
-		"managePlan": "Manage Plan"
+		"managePlan": "Manage Plan",
+		"faq": {
+			"title": "Pricing & Payment FAQ",
+			"subtitle": "Common questions about plans, billing, and payments.",
+			"q1": {
+				"question": "What payment methods do you accept?",
+				"answer": "We accept all major credit and debit cards (Visa, Mastercard, American Express) through our secure payment processor Stripe. We also support Apple Pay and Google Pay where available."
+			},
+			"q2": {
+				"question": "Can I cancel my subscription anytime?",
+				"answer": "Yes, you can cancel your subscription at any time from your account settings. Your access will continue until the end of your current billing period, and you won't be charged again."
+			},
+			"q3": {
+				"question": "Can I try before I buy?",
+				"answer": "Absolutely! Free users receive daily credits that reset every 24 hours, allowing you to experience all our core AI editing features before deciding to upgrade. No credit card required to start."
+			},
+			"q4": {
+				"question": "What happens when I run out of credits?",
+				"answer": "When you use all your monthly credits, you can either wait for your next billing cycle when credits reset, or upgrade to a higher plan for more credits. Free users receive daily credits that reset every 24 hours."
+			},
+			"q5": {
+				"question": "Can I upgrade or downgrade my plan?",
+				"answer": "Absolutely! You can change your plan at any time. When upgrading, you'll be charged the prorated difference. When downgrading, the change takes effect at your next billing cycle."
+			},
+			"q6": {
+				"question": "Is my payment information secure?",
+				"answer": "Yes, all payments are processed securely through Stripe, a PCI-DSS Level 1 certified payment processor. We never store your full credit card details on our servers."
+			}
+		}
 	},
 	"settings": {
 		"account": {
@@ -973,49 +997,58 @@
 			"enhanced": "Enhanced",
 			"aiEdit": "AI Edit",
 			"scenarios": {
-				"background": {
-					"label": "Background Replacement",
-					"description": "Separate the subject from the original background and replace it with a new, more creative scene.",
+				"background-swap": {
+					"label": "Background Swap",
+					"description": "Seamlessly replace backgrounds while keeping the subject perfectly intact.",
 					"prompts": {
-						"studio": "Place in a professional studio with soft lighting",
-						"cyberpunk": "Transform to a cyberpunk neon city scene",
-						"mountain": "Set against a serene mountain landscape"
+						"0": "Mountain trail through pine forest",
+						"1": "Rocky summit with dramatic sky",
+						"2": "Snowy trail with cold ambient light"
 					}
 				},
-				"lighting": {
+				"lighting-adjustment": {
 					"label": "Lighting Adjustment",
-					"description": "Correct exposure, add dramatic lighting, or change the time of day in seconds.",
+					"description": "Transform the mood with professional lighting effects in seconds.",
 					"prompts": {
-						"goldenHour": "Apply golden hour warm lighting",
-						"rimLighting": "Add dramatic studio rim lighting",
-						"diffusedGlow": "Create soft diffused glow effect"
+						"0": "Cinematic rim light with moody contrast",
+						"1": "Beauty butterfly lighting",
+						"2": "Neon ambient magenta/cyan glow"
 					}
 				},
-				"style": {
-					"label": "Style Conversion",
-					"description": "Transform photos into paintings, sketches, 3D renders, or anime style art.",
+				"style-transfer": {
+					"label": "Style Transfer",
+					"description": "Transform photos into stunning artistic styles while preserving composition.",
 					"prompts": {
-						"fashionIllustration": "Convert to fashion illustration style",
-						"oilPainting": "Transform into oil painting artwork",
-						"animeStyle": "Apply anime character style"
+						"0": "Japanese anime film style",
+						"1": "Stylized 3D cinematic render",
+						"2": "Modern realistic oil painting"
 					}
 				},
-				"color": {
+				"color-change": {
 					"label": "Color Change",
-					"description": "Precisely change the color of specific objects in the image.",
+					"description": "Precisely change colors of specific objects while preserving texture and detail.",
 					"prompts": {
-						"orangeTabby": "Change fur color to orange tabby",
-						"blackWhite": "Transform to black and white coat",
-						"calico": "Apply calico pattern coloring"
+						"0": "Deep cherry red leather",
+						"1": "Ivory white with realistic shadows",
+						"2": "Metallic silver finish"
 					}
 				},
-				"age": {
+				"age-transformation": {
 					"label": "Age Transformation",
-					"description": "Visualize age progression or regression with realistic AI aging effects.",
+					"description": "Visualize age progression or regression with realistic AI effects.",
 					"prompts": {
-						"younger": "Show younger version at age 25",
-						"older": "Apply aging effect to age 60",
-						"child": "Visualize as a child version"
+						"0": "Transform to 7 year old child",
+						"1": "Transform to 55 year old",
+						"2": "Transform to 80 year old elderly"
+					}
+				},
+				"seasonal-theme": {
+					"label": "Seasonal Theme",
+					"description": "Transform photos into festive holiday scenes with themed decorations.",
+					"prompts": {
+						"0": "Christmas family card",
+						"1": "Halloween costume fun",
+						"2": "Chinese New Year celebration"
 					}
 				}
 			},
@@ -1069,20 +1102,28 @@
 			"title": "Frequently Asked Questions",
 			"subtitle": "Find answers to the most common questions about Pixelto AI.",
 			"q1": {
-				"question": "What is Pixelto AI?",
-				"answer": "Pixelto AI is an advanced image editing platform powered by artificial intelligence, designed to help you transform your images with ease and precision."
+				"question": "What is Pixelto AI and what can it do?",
+				"answer": "Pixelto AI is a powerful AI image editing platform that transforms your photos using natural language instructions. You can change backgrounds, apply artistic styles, remove objects, enhance lighting, and much more - all by simply describing what you want in plain English."
 			},
 			"q2": {
-				"question": "How does the AI editor work?",
-				"answer": "Simply upload your image and describe the changes you want to make using natural language. Our AI models will then process your request and generate the edited image."
+				"question": "How do I edit images with AI?",
+				"answer": "It's simple: 1) Upload your image (JPG or PNG), 2) Describe the changes you want in the text box (e.g., 'change background to sunset beach' or 'make it look like an oil painting'), 3) Click Generate and wait a few seconds for your edited image. You can then download the result or continue editing."
 			},
 			"q3": {
-				"question": "What file formats are supported?",
-				"answer": "We currently support JPG, PNG, and WebP formats for both upload and download."
+				"question": "What types of edits can the AI perform?",
+				"answer": "Our AI can handle a wide range of edits including: background replacement, style transfer (cartoon, anime, oil painting, etc.), object removal, lighting enhancement, color adjustments, day-to-night conversion, adding weather effects, and creative transformations like turning photos into sketches or cyberpunk scenes."
 			},
 			"q4": {
-				"question": "Is there a free trial available?",
-				"answer": "Yes, we offer a generous free tier that allows you to try out most of our core features without any cost."
+				"question": "Is Pixelto free to use?",
+				"answer": "Yes! We offer a free tier with daily credits that lets you experience our core AI editing features. For users who need more generations or higher resolution exports, we offer affordable Pro and Ultra plans with additional benefits."
+			},
+			"q5": {
+				"question": "Can I use AI-generated images for commercial purposes?",
+				"answer": "Absolutely. Images you create with Pixelto can be used for personal and commercial projects. However, please avoid using prompts that include brand names, copyrighted characters, or real person likenesses. See our Terms of Service for full details."
+			},
+			"q6": {
+				"question": "What image formats and sizes are supported?",
+				"answer": "We support JPG, PNG, and WebP formats for upload. You can download your edited images in these formats as well. Free users can export at standard resolution, while Pro and Ultra subscribers get access to 4K high-resolution exports."
 			}
 		},
 		"cta": {

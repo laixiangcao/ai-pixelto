@@ -363,10 +363,6 @@
 			"submit": "Nachricht senden"
 		}
 	},
-	"faq": {
-		"description": "Hast du irgendwelche Fragen? \nWir sind für dich da.",
-		"title": "Häufig gestellte Fragen"
-	},
 	"mail": {
 		"common": {
 			"openLinkInBrowser": "Wenn du den Link in einem anderen Browser als deinem Standardbrowser öffnen möchtest, kopiere diesen und füge ihn in die Adresszeile deines Browsers ein:",
@@ -634,7 +630,35 @@
 		"currentPlan": "Aktueller Plan",
 		"upgrade": "Upgraden",
 		"downgrade": "Downgraden",
-		"managePlan": "Plan verwalten"
+		"managePlan": "Plan verwalten",
+		"faq": {
+			"title": "Preise & Zahlung FAQ",
+			"subtitle": "Häufige Fragen zu Plänen, Abrechnung und Zahlungen.",
+			"q1": {
+				"question": "Welche Zahlungsmethoden akzeptieren Sie?",
+				"answer": "Wir akzeptieren alle gängigen Kredit- und Debitkarten (Visa, Mastercard, American Express) über unseren sicheren Zahlungsanbieter Stripe. Wo verfügbar, unterstützen wir auch Apple Pay und Google Pay."
+			},
+			"q2": {
+				"question": "Kann ich mein Abonnement jederzeit kündigen?",
+				"answer": "Ja, du kannst dein Abonnement jederzeit in deinen Kontoeinstellungen kündigen. Dein Zugang bleibt bis zum Ende deines aktuellen Abrechnungszeitraums bestehen, und dir werden keine weiteren Kosten berechnet."
+			},
+			"q3": {
+				"question": "Kann ich vor dem Kauf testen?",
+				"answer": "Absolut! Kostenlose Nutzer erhalten tägliche Credits, die alle 24 Stunden zurückgesetzt werden, sodass du alle unsere KI-Bearbeitungsfunktionen ausprobieren kannst, bevor du dich für ein Upgrade entscheidest. Keine Kreditkarte erforderlich."
+			},
+			"q4": {
+				"question": "Was passiert, wenn meine Credits aufgebraucht sind?",
+				"answer": "Wenn du alle deine monatlichen Credits verbraucht hast, kannst du entweder auf deinen nächsten Abrechnungszyklus warten, wenn die Credits zurückgesetzt werden, oder auf einen höheren Plan upgraden. Kostenlose Nutzer erhalten tägliche Credits, die alle 24 Stunden zurückgesetzt werden."
+			},
+			"q5": {
+				"question": "Kann ich meinen Plan upgraden oder downgraden?",
+				"answer": "Absolut! Du kannst deinen Plan jederzeit ändern. Beim Upgrade wird dir die anteilige Differenz berechnet. Beim Downgrade tritt die Änderung mit deinem nächsten Abrechnungszyklus in Kraft."
+			},
+			"q6": {
+				"question": "Sind meine Zahlungsinformationen sicher?",
+				"answer": "Ja, alle Zahlungen werden sicher über Stripe abgewickelt, einen PCI-DSS Level 1 zertifizierten Zahlungsanbieter. Wir speichern niemals deine vollständigen Kreditkartendaten auf unseren Servern."
+			}
+		}
 	},
 	"settings": {
 		"account": {
@@ -973,49 +997,58 @@
 			"enhanced": "Verbessert",
 			"aiEdit": "KI-Bearbeitung",
 			"scenarios": {
-				"background": {
-					"label": "Hintergrundersetzung",
-					"description": "Trenne das Motiv vom ursprünglichen Hintergrund und ersetze es durch eine neue, kreativere Szene.",
+				"background-swap": {
+					"label": "Hintergrundtausch",
+					"description": "Ersetze Hintergründe nahtlos, während das Motiv perfekt erhalten bleibt.",
 					"prompts": {
-						"studio": "In ein professionelles Studio mit weichem Licht setzen",
-						"cyberpunk": "In eine Cyberpunk-Neon-Stadtszene verwandeln",
-						"mountain": "Vor einer ruhigen Berglandschaft platzieren"
+						"0": "Bergpfad durch Kiefernwald",
+						"1": "Felsiger Gipfel mit dramatischem Himmel",
+						"2": "Schneepfad mit kaltem Umgebungslicht"
 					}
 				},
-				"lighting": {
+				"lighting-adjustment": {
 					"label": "Beleuchtungsanpassung",
-					"description": "Korrigiere Belichtung, füge dramatische Beleuchtung hinzu oder ändere die Tageszeit in Sekunden.",
+					"description": "Verwandle die Stimmung mit professionellen Lichteffekten in Sekunden.",
 					"prompts": {
-						"goldenHour": "Warme Goldene-Stunde-Beleuchtung anwenden",
-						"rimLighting": "Dramatische Studio-Randbeleuchtung hinzufügen",
-						"diffusedGlow": "Sanften diffusen Glüheffekt erzeugen"
+						"0": "Filmisches Randlicht mit stimmungsvollem Kontrast",
+						"1": "Beauty-Schmetterlings-Beleuchtung",
+						"2": "Neon-Ambiente in Magenta/Cyan"
 					}
 				},
-				"style": {
-					"label": "Stilumwandlung",
-					"description": "Verwandle Fotos in Gemälde, Skizzen, 3D-Renderings oder Anime-Kunst.",
+				"style-transfer": {
+					"label": "Stiltransfer",
+					"description": "Verwandle Fotos in atemberaubende künstlerische Stile bei erhaltener Komposition.",
 					"prompts": {
-						"fashionIllustration": "In Mode-Illustrationsstil umwandeln",
-						"oilPainting": "In Ölgemälde-Kunstwerk verwandeln",
-						"animeStyle": "Anime-Charakter-Stil anwenden"
+						"0": "Japanischer Anime-Filmstil",
+						"1": "Stilisiertes 3D-Kino-Rendering",
+						"2": "Modernes realistisches Ölgemälde"
 					}
 				},
-				"color": {
+				"color-change": {
 					"label": "Farbänderung",
-					"description": "Ändere präzise die Farbe bestimmter Objekte im Bild.",
+					"description": "Ändere präzise Farben bestimmter Objekte bei erhaltener Textur und Detail.",
 					"prompts": {
-						"orangeTabby": "Fellfarbe in orange Tabby ändern",
-						"blackWhite": "In schwarz-weißes Fell verwandeln",
-						"calico": "Dreifarbiges Muster anwenden"
+						"0": "Tiefes Kirschrot-Leder",
+						"1": "Elfenbeinweiß mit realistischen Schatten",
+						"2": "Metallisch-silbernes Finish"
 					}
 				},
-				"age": {
+				"age-transformation": {
 					"label": "Altersveränderung",
-					"description": "Visualisiere Alterungsprogression oder -regression mit realistischen KI-Alterungseffekten.",
+					"description": "Visualisiere Alterungsprogression oder -regression mit realistischen KI-Effekten.",
 					"prompts": {
-						"younger": "Jüngere Version mit 25 Jahren zeigen",
-						"older": "Alterungseffekt auf 60 Jahre anwenden",
-						"child": "Als Kind visualisieren"
+						"0": "Verwandlung in 7-jähriges Kind",
+						"1": "Verwandlung in 55-Jährigen",
+						"2": "Verwandlung in 80-jährigen Senior"
+					}
+				},
+				"seasonal-theme": {
+					"label": "Saisonales Thema",
+					"description": "Verwandle Fotos in festliche Feiertagsszenen mit thematischer Dekoration.",
+					"prompts": {
+						"0": "Weihnachts-Familienkarte",
+						"1": "Halloween-Kostümspaß",
+						"2": "Chinesisches Neujahrsfest"
 					}
 				}
 			},
@@ -1069,20 +1102,28 @@
 			"title": "Häufig gestellte Fragen",
 			"subtitle": "Finde Antworten auf die häufigsten Fragen zu Pixelto AI.",
 			"q1": {
-				"question": "Was ist Pixelto AI?",
-				"answer": "Pixelto AI ist eine fortschrittliche Bildbearbeitungsplattform, die von künstlicher Intelligenz angetrieben wird und dir hilft, deine Bilder mit Leichtigkeit und Präzision zu transformieren."
+				"question": "Was ist Pixelto AI und was kann es?",
+				"answer": "Pixelto AI ist eine leistungsstarke KI-Bildbearbeitungsplattform, die deine Fotos mit natürlichsprachlichen Anweisungen transformiert. Du kannst Hintergründe ändern, künstlerische Stile anwenden, Objekte entfernen, Beleuchtung verbessern und vieles mehr - einfach indem du beschreibst, was du möchtest."
 			},
 			"q2": {
-				"question": "Wie funktioniert der KI-Editor?",
-				"answer": "Lade einfach dein Bild hoch und beschreibe die gewünschten Änderungen in natürlicher Sprache. Unsere KI-Modelle verarbeiten dann deine Anfrage und generieren das bearbeitete Bild."
+				"question": "Wie bearbeite ich Bilder mit KI?",
+				"answer": "Ganz einfach: 1) Lade dein Bild hoch (JPG oder PNG), 2) Beschreibe die gewünschten Änderungen im Textfeld (z.B. 'Hintergrund zu Sonnenuntergang am Strand ändern' oder 'als Ölgemälde darstellen'), 3) Klicke auf Generieren und warte einige Sekunden. Du kannst das Ergebnis herunterladen oder weiter bearbeiten."
 			},
 			"q3": {
-				"question": "Welche Dateiformate werden unterstützt?",
-				"answer": "Wir unterstützen derzeit JPG, PNG und WebP-Formate für Upload und Download."
+				"question": "Welche Arten von Bearbeitungen kann die KI durchführen?",
+				"answer": "Unsere KI kann eine Vielzahl von Bearbeitungen durchführen: Hintergrundersetzung, Stiltransfer (Cartoon, Anime, Ölgemälde usw.), Objektentfernung, Beleuchtungsverbesserung, Farbanpassungen, Tag-zu-Nacht-Umwandlung, Wettereffekte hinzufügen und kreative Transformationen wie Fotos in Skizzen oder Cyberpunk-Szenen verwandeln."
 			},
 			"q4": {
-				"question": "Gibt es eine kostenlose Testversion?",
-				"answer": "Ja, wir bieten eine großzügige kostenlose Stufe an, mit der du die meisten unserer Kernfunktionen ohne Kosten ausprobieren kannst."
+				"question": "Ist Pixelto kostenlos nutzbar?",
+				"answer": "Ja! Wir bieten eine kostenlose Stufe mit täglichen Credits, mit der du unsere KI-Bearbeitungsfunktionen erleben kannst. Für Nutzer, die mehr Generierungen oder höhere Auflösungen benötigen, bieten wir erschwingliche Pro- und Ultra-Pläne mit zusätzlichen Vorteilen."
+			},
+			"q5": {
+				"question": "Kann ich KI-generierte Bilder kommerziell nutzen?",
+				"answer": "Absolut. Bilder, die du mit Pixelto erstellst, können für persönliche und kommerzielle Projekte verwendet werden. Bitte vermeide jedoch Prompts, die Markennamen, urheberrechtlich geschützte Charaktere oder echte Personen enthalten. Siehe unsere Nutzungsbedingungen für vollständige Details."
+			},
+			"q6": {
+				"question": "Welche Bildformate und Größen werden unterstützt?",
+				"answer": "Wir unterstützen JPG, PNG und WebP-Formate zum Hochladen. Du kannst deine bearbeiteten Bilder auch in diesen Formaten herunterladen. Kostenlose Nutzer können in Standardauflösung exportieren, während Pro- und Ultra-Abonnenten Zugang zu 4K-Hochauflösungsexporten haben."
 			}
 		},
 		"cta": {

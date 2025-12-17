@@ -6,6 +6,8 @@ import { Hero } from "@marketing/home/components/Hero";
 import { Inspiration } from "@marketing/home/components/Inspiration";
 import { ParticleBackground } from "@marketing/home/components/ParticleBackground";
 import { Showcase } from "@marketing/home/components/Showcase";
+import { getInspirationData } from "@marketing/home/lib/inspiration";
+import { getShowcaseData } from "@marketing/home/lib/showcase";
 import { JsonLdMultiple } from "@shared/components/JsonLd";
 import {
 	generateOrganizationSchema,
@@ -14,7 +16,16 @@ import {
 } from "@shared/lib/seo";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
-import { getInspirationData } from "@marketing/home/lib/inspiration";
+function getHomeFaqItems(t: (key: string) => string) {
+	return [
+		{ id: "item-1", question: t("q1.question"), answer: t("q1.answer") },
+		{ id: "item-2", question: t("q2.question"), answer: t("q2.answer") },
+		{ id: "item-3", question: t("q3.question"), answer: t("q3.answer") },
+		{ id: "item-4", question: t("q4.question"), answer: t("q4.answer") },
+		{ id: "item-5", question: t("q5.question"), answer: t("q5.answer") },
+		{ id: "item-6", question: t("q6.question"), answer: t("q6.answer") },
+	];
+}
 
 export async function generateMetadata({
 	params,
@@ -42,6 +53,9 @@ export default async function Home({
 	const { locale } = await params;
 	setRequestLocale(locale);
 
+	const tFaq = await getTranslations({ locale, namespace: "home.faq" });
+	const faqItems = getHomeFaqItems(tFaq);
+
 	// JSON-LD 结构化数据
 	const schemas = [
 		generateOrganizationSchema(),
@@ -62,7 +76,7 @@ export default async function Home({
 				<AIImageEditor />
 
 				{/* Showcase */}
-				<Showcase />
+				<Showcase data={getShowcaseData()} />
 
 				{/* Inspiration Gallery */}
 				<Inspiration {...(await getInspirationData())} />
@@ -71,7 +85,11 @@ export default async function Home({
 				<Features />
 
 				{/* FAQ */}
-				<FaqSection />
+				<FaqSection
+					title={tFaq("title")}
+					subtitle={tFaq("subtitle")}
+					items={faqItems}
+				/>
 
 				{/* CTA - Final call to action */}
 				<CTA />
