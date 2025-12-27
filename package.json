@@ -8,7 +8,15 @@
 		"lint": "biome lint . ",
 		"check": "biome check",
 		"clean": "turbo clean",
-		"format": "biome format . --write"
+		"format": "biome format . --write",
+		"docker:build": "docker build -t mobikok-registry.us-east-1.cr.aliyuncs.com/kk_hiveapp/pixelto:latest .",
+		"docker:buildx": "docker buildx build --platform linux/amd64 -t mobikok-registry.us-east-1.cr.aliyuncs.com/kk_hiveapp/pixelto:latest --load .",
+		"docker:push": "docker push mobikok-registry.us-east-1.cr.aliyuncs.com/kk_hiveapp/pixelto:latest",
+		"docker:run": "docker run --rm -p 3000:3000 --env-file .env.local mobikok-registry.us-east-1.cr.aliyuncs.com/kk_hiveapp/pixelto:latest",
+		"docker:compose:up": "docker compose up -d",
+		"docker:compose:down": "docker compose down",
+		"db:migrate:deploy": "pnpm --filter @repo/database migrate:deploy",
+		"db:migrate:status": "pnpm --filter @repo/database migrate:status"
 	},
 	"engines": {
 		"node": ">=20"

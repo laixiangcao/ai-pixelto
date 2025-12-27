@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  # Next.js 应用
+  web:
+    image: mobikok-registry.us-east-1.cr.aliyuncs.com/kk_hiveapp/pixelto:latest
+    container_name: pixelto-web
+    restart: unless-stopped
+    ports:
+      - "3801:3000"
+    env_file:
+      - .env.production
+    environment:
+      # 仅覆盖敏感字段（优先级高于 env_file）
+      - DATABASE_URL=${DATABASE_URL}
+      - DIRECT_URL=${DIRECT_URL}
+      - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET}
+      - GITHUB_CLIENT_SECRET=${GITHUB_CLIENT_SECRET}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - PLUNK_API_KEY=${PLUNK_API_KEY}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - POSTMARK_SERVER_TOKEN=${POSTMARK_SERVER_TOKEN}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - LEMONSQUEEZY_API_KEY=${LEMONSQUEEZY_API_KEY}
+      - LEMONSQUEEZY_WEBHOOK_SECRET=${LEMONSQUEEZY_WEBHOOK_SECRET}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - CREEM_API_KEY=${CREEM_API_KEY}
+      - CREEM_WEBHOOK_SECRET=${CREEM_WEBHOOK_SECRET}
+      - POLAR_ACCESS_TOKEN=${POLAR_ACCESS_TOKEN}
+      - POLAR_WEBHOOK_SECRET=${POLAR_WEBHOOK_SECRET}
+      - DODO_PAYMENTS_API_KEY=${DODO_PAYMENTS_API_KEY}
+      - DODO_PAYMENTS_WEBHOOK_SECRET=${DODO_PAYMENTS_WEBHOOK_SECRET}
+      - S3_ACCESS_KEY_ID=${S3_ACCESS_KEY_ID}
+      - S3_SECRET_ACCESS_KEY=${S3_SECRET_ACCESS_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - POLLINATIONS_API_TOKEN=${POLLINATIONS_API_TOKEN}
+      - CLOUDFLARE_TURNSTILE_SECRET_KEY=${CLOUDFLARE_TURNSTILE_SECRET_KEY}
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: pixelto-network

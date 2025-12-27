@@ -3,7 +3,7 @@
 import { usePlanData } from "@saas/payments/hooks/plan-data";
 import { usePurchases } from "@saas/payments/hooks/purchases";
 import { SettingsItem } from "@saas/shared/components/SettingsItem";
-import { BadgeCheckIcon, CheckIcon } from "lucide-react";
+import { BadgeCheckIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { CustomerPortalButton } from "../../settings/components/CustomerPortalButton";
 import { SubscriptionStatusBadge } from "../../settings/components/SubscriptionStatusBadge";
@@ -17,7 +17,7 @@ export function ActivePlan({
 	const t = useTranslations();
 	const format = useFormatter();
 	const { planData } = usePlanData();
-	const { activePlan } = usePurchases(organizationId);
+	const { activePlan } = usePurchases({ organizationId });
 
 	if (!activePlan) {
 		return null;
@@ -46,20 +46,6 @@ export function ActivePlan({
 							/>
 						)}
 					</div>
-
-					{!!activePlanData.features?.length && (
-						<ul className="mt-2 grid list-none gap-2 text-sm">
-							{activePlanData.features.map((feature, key) => (
-								<li
-									key={key}
-									className="flex items-center justify-start"
-								>
-									<CheckIcon className="mr-2 size-4 text-primary" />
-									<span>{feature}</span>
-								</li>
-							))}
-						</ul>
-					)}
 
 					{price && (
 						<strong

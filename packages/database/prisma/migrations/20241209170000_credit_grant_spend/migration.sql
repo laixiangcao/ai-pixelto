@@ -3,14 +3,6 @@
 -- Legacy cleanup
 DROP TABLE IF EXISTS "credit_transaction";
 
--- Ensure enum exists (shadow DB may be empty)
-DO $$
-BEGIN
-    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'CreditType') THEN
-        CREATE TYPE "CreditType" AS ENUM ('DAILY_FREE', 'PURCHASED', 'SUBSCRIPTION', 'PROMOTIONAL');
-    END IF;
-END$$;
-
 -- Create tables
 CREATE TABLE "credit_grant" (
     "id" TEXT NOT NULL,

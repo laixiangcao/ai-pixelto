@@ -10,7 +10,7 @@ export function ActivePlanBadge({
 	organizationId?: string;
 }) {
 	const { planData } = usePlanData();
-	const { activePlan } = usePurchases(organizationId);
+	const { activePlan } = usePurchases({ organizationId });
 
 	if (!activePlan) {
 		return null;
